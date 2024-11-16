@@ -126,7 +126,7 @@ def test_page():
 
 @app.route("/tasks")
 def tasks_page():
-    sqlReq = \
+    sqlReq =\
         f"""
             SELECT * FROM Tasks
             """
