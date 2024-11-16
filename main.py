@@ -98,7 +98,7 @@ def authorization_page(Failed=False):
             return redirect(url_for('personal_user_page', id=person_id))
 
 
-@app.route("/<id>")
+@app.route("/users/<id>")
 def personal_user_page(id):
     sqlReq = f"""
     SELECT * from Users
