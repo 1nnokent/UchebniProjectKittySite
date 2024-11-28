@@ -98,11 +98,11 @@
   </header>
 
   <div class="container">
-    {% for i in range(Tasks | length) %}
+    {% for elem in Tasks %}
       <div class="task-card">
-        <h5 class="task-title">Задание {{i + 1}}. Тип {{Tasks[i][1]}}</h5>
-        <p class="task-question">{{Tasks[i][3]|safe}}</p>
-        <input class="form-control" id="answer_{{ Tasks[i][4] }} ">
+        <h5 class="task-title">Задание {{elem[1]}}</h5>
+        <p class="task-question">{{elem[3]|safe}}</p>
+        <p class="task-answer">Ответ: {{elem[4]}}</p>
       </div>
     {% endfor %}
   </div>

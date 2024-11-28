@@ -4,27 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="Поставил url_for в ser.html - теперь страница грузится нормально">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="Изменил все html файлы под формат url_for">
+      <change afterPath="$PROJECT_DIR$/templates/tasks_answer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/404_error_not_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/404_error_not_found.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authorization.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization_failed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authorization_failed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization_user_not_found_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authorization_user_not_found_error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blank.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blank.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration_end.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration_end.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration_user_exists_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration_user_exists_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tasks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,21 +43,24 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2osv7F8bRFeRKqDdfOv7QvDlHH1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MyWonderfulSite1-3" />
@@ -114,11 +114,20 @@
       <option name="project" value="LOCAL" />
       <updated>1731740993453</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Изменил все html файлы под формат url_for">
+      <option name="closed" value="true" />
+      <created>1731747511914</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731747511914</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Поставил url_for в ser.html - теперь страница грузится нормально" />
-    <option name="LAST_COMMIT_MESSAGE" value="Поставил url_for в ser.html - теперь страница грузится нормально" />
+    <MESSAGE value="Изменил все html файлы под формат url_for" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил все html файлы под формат url_for" />
   </component>
 </project>

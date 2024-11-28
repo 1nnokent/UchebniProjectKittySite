@@ -129,7 +129,7 @@ def tasks_page():
     sqlReq =\
         f"""
             SELECT * FROM Tasks
-            """
+        """
     Tasks = cursor.execute(sqlReq).fetchall()
     print(Tasks)
     return render_template("tasks.html", Tasks=Tasks)
