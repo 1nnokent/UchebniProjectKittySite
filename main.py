@@ -47,7 +47,7 @@ def registration_page():
         does_exist = cursor.execute(f"""SELECT * FROM Users WHERE Login = "{info["Login"]}" """).fetchall()
 
         if len(does_exist):
-            return render_template("registration_user_exists_error.html")
+            return render_template("error_pages/registration_user_exists_error.html")
             pass #если пользователь уже есть
         else:
             photo = request.files['file']
@@ -71,9 +71,9 @@ def registration_page():
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(Failed=False):
     if request.method == 'GET' and not Failed:
-        return render_template("authorization.html")
+        return render_template("user_account_pages/authorization.html")
     if request.method == 'POST' and Failed:
-        return render_template("authorization_failed.html")
+        return render_template("user_account_pages/authorization_failed.html")
     if request.method == 'POST':
         info = request.form.to_dict()
         sqlReq = f"""
@@ -107,11 +107,11 @@ def personal_user_page(id):
     info = cursor.execute(sqlReq).fetchall()
     print(info)
     if info == []:
-        return render_template("authorization_user_not_found_error.html")
+        return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = toKwargsUser(cursor.execute(sqlReq).fetchall())
         print(kwargs)
-        return render_template("user.html", **kwargs)
+        return render_template("user_account_pages/user.html", **kwargs)
 
 
 @app.route("/test")
@@ -122,7 +122,7 @@ def test_page():
         """
     Tasks = cursor.execute(sqlReq).fetchall()
     print(Tasks)
-    return render_template("404_error_not_found.html", Tasks=Tasks)
+    return render_template("error_pages/error_404_not_found.html", Tasks=Tasks)
 
 @app.route("/tasks")
 def tasks_page():

@@ -6,36 +6,37 @@ connect = sq.connect('DataBase.sqlite', check_same_thread=False)
 
 cursor = connect.cursor()
 
-Amount = cursor.execute("SELECT COUNT (*) FROM Tasks").fetchall()[0][0]
-#No = int(input())
-#Type = int(input())
-No = 5
-Type = -1
-file = open("costil.txt", "r", encoding="UTF-8")
-FileText = file.read()
-Text = ""
-prev = 0
-last = 0
-i = 0
-while i < len(FileText):
-    if FileText[i] == '\n':
-        last = i
-        while FileText[i] == '\n':
-            i += 1
-        Text += FileText[prev:last]
-        Text += '<br>'
-        prev = i
-    i += 1
+def insert_task(task_type, task_class, task_text, task_answer, task_difficulty):
+    amount = cursor.execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    text = ""
+    prev = 0
+    last = 0
+    i = 0
+    while i < len(task_text):
+        if task_text[i] == '\n':
+            last = i
+            while task_text[i] == '\n':
+                i += 1
+            text += task_text[prev:last]
+            text += '<br>'
+            prev = i
+        i += 1
 
-Text += FileText[prev:len(FileText)]
+    text += task_text[prev:len(task_text)]
 
-Answer = int(input())
+    sql_req = f"""
+    INSERT INTO problems
+    VALUES ({amount}, {task_type}, {task_class}, "{text}", "{task_answer}", {task_difficulty})
+    """
 
-sqlReq = f"""
-INSERT INTO Tasks
-VALUES ({Amount}, {No}, {Type}, "{Text}", {Answer})
-"""
+    print(sqlReq)
+    cursor.execute(sqlReq) #|safe
+    connect.commit()
 
-print(sqlReq)
-cursor.execute(sqlReq) #|safe
-connect.commit()
+def insert_task_file(task_type, task_class, filename, task_answer, task_difficulty):
+    file = open(filename, "r", encoding="UTF-8")
+    file_text = file.read()
+    insert_task(task_type, task_class, file_text, task_answer, task_difficulty)
+
+
+insert_task_file(8, 0, "costil.txt", 13000, 1)

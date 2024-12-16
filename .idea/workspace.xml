@@ -3,15 +3,36 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="Изменил все html файлы под формат url_for">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/costil.txt" beforeDir="false" afterPath="$PROJECT_DIR$/costil.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insertIntoDatabase.py" beforeDir="false" afterPath="$PROJECT_DIR$/insertIntoDatabase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/404_error_not_found.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/authorization.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/authorization_failed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/authorization_user_not_found_error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration_user_exists_error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,12 +72,20 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "Python.insertIntoDatabase.executor": "Run",
     "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/PycharmProjects/PythonProject",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "last_opened_file_path": "D:/PycharmProjects/UchebniProjectKittySite",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -120,12 +149,24 @@
       <option name="project" value="LOCAL" />
       <updated>1731747511914</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы">
+      <option name="closed" value="true" />
+      <created>1732949078752</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732949078752</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Поставил url_for в ser.html - теперь страница грузится нормально" />
     <MESSAGE value="Изменил все html файлы под формат url_for" />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменил все html файлы под формат url_for" />
+    <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
   </component>
 </project>

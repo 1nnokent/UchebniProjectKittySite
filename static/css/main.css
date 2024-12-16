@@ -1094,9 +1094,28 @@ section,
   white-space: nowrap;
   color: var(--contrast-color);
   background-color: var(--nav-hover-color);
+  border: none
 }
 
 .btn-primary:hover {
+  background: color-mix(in srgb, var(--accent-color), black 20%);
+}
+
+.a-primary {
+  padding: 10px 15px;
+  margin-left: 2px;
+  font-size: 16px;
+  font-family: var(--nav-font);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  color: var(--contrast-color);
+  background-color: var(--nav-hover-color);
+}
+
+.a-primary:hover {
   background: color-mix(in srgb, var(--accent-color), black 20%);
 }
 
