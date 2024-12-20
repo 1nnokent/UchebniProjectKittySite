@@ -94,20 +94,16 @@
   </header>
 
   <div class="profile-container">
-    <img src="{{ url_for('static', filename=PhotoID) }}" alt="Фото пользователя">
+    <img src="{{ url_for('static', filename=photo_directory) }}" alt="Фото пользователя">
     <ul class="info-list">
-      <li>{{ FirstName }} {{ SecondName }}</li>
-      <li>{{ EmailAddress }}</li>
-      <li>{{ PhoneNumber }}</li>
-      <li>{{ SiteAddress }}</li>
-      <li>{{ BirthdayDate }}</li>
-      <li>{{ CatType }}</li>
+      <li><h3>{{ first_name }} {{ second_name }}</h3></li>
+      <li><h4>{{ email }}</h4></li>
+      <li><h4>{{ birth_date }}</h4></li>
+      <li><h5>С нами с: {{ registration_time }}</h5></li>
+      <li><h5>Школа: {{ school_id }}</h5></li>
+      <li><h5>Город: {{ city_id }}</h5></li>
+      <li><h5>Класс: {{ class }}</h5></li>
     </ul>
-    <div class="about-section">
-      <p>
-        {{ About }}
-      </p>
-    </div>
   </div>
 
   <!-- JS Files -->

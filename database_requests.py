@@ -13,8 +13,23 @@ if __name__ == "__main__":
 
 def user_select_to_dict(tuple_info):
     dict = {}
-    with tuple_info[0] as t:
-        dict['user_id'] = t[0]
+    dict['user_id'] = tuple_info[0][0]
+    dict['role_id'] = tuple_info[0][1]
+    dict['registration_time'] = tuple_info[0][2]
+    dict['first_name'] = tuple_info[0][3]
+    dict['second_name'] = tuple_info[0][4]
+    dict['third_name'] = tuple_info[0][5]
+    dict['login'] = tuple_info[0][6]
+    dict['password'] = tuple_info[0][7]
+    dict['email'] = tuple_info[0][8]
+    dict['birth_date'] = tuple_info[0][9]
+    dict['school_id'] = tuple_info[0][10]
+    dict['city_id'] = tuple_info[0][11]
+    dict['class'] = tuple_info[0][12]
+    if tuple_info[0][13] != -1:
+        dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[0][13]) + '_avatar.jpg'
+    else:
+        dict['photo_directory'] = '/img/profile-pictures/profile_default_avatar.jpg'
 
     return dict
 
@@ -57,7 +72,7 @@ def insert_user(info):
     does_exist = len(cursor.execute(f"""SELECT * FROM users WHERE login = "{info['login']}" """).fetchall())
 
     if does_exist:
-        return 0
+        return 1
     else:
         photo = request.files['file']
         has_photo = not (request.files['file'].filename == '')
@@ -80,7 +95,7 @@ def insert_user(info):
         cursor.execute(sql_req)
         connect.commit()
 
-        return 1
+        return 0
 
 def get_password_with_login(login):
     sql_req = f"""

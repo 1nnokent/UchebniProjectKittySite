@@ -18,7 +18,7 @@ def registration_page():
         if code == 0:
             return render_template("/user_account_pages/registration_end.html")
         elif code == 1:
-            return render_template("error_pages/registration_user_exists_error.html") #если пользователь уже есть
+            return render_template("/error_pages/error_registration_user_exists.html") #если пользователь уже есть
         else:
             pass
 
@@ -50,7 +50,7 @@ def personal_user_page(id):
     if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
-        kwargs = cursor.execute(sql_req).fetchall()
+        kwargs = database_requests.user_select_to_dict(info)
         print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
@@ -78,7 +78,7 @@ def test_page():
 def problems_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
     print(problems)
-    return render_template("problems.html", problems=problems)
+    return render_template("problem_list.html", problems=problems)
 
 
 if __name__ == "__main__":
