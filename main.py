@@ -1,30 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3 as sq
+from config import database
+import database_requests
 
 app = Flask(__name__, template_folder="templates")
-connect = sq.connect('DataBase.sqlite', check_same_thread=False)
-
-cursor = connect.cursor()
-
-def toKwargsUser(tuple):
-    dict = {}
-    dict['UserID'] = tuple[0][0]
-    dict['Login'] = tuple[0][1]
-    dict['Password'] = tuple[0][2]
-    dict['FirstName'] = tuple[0][3]
-    dict['SecondName'] = tuple[0][4]
-    dict['EmailAddress'] = tuple[0][5]
-    dict['PhoneNumber'] = tuple[0][6]
-    dict['SiteAddress'] = tuple[0][7]
-    dict['BirthdayDate'] = tuple[0][8]
-    dict['CatType'] = tuple[0][9]
-    dict['About'] = tuple[0][10]
-    if tuple[0][11] == -1:
-        dict['PhotoID'] = "/img/profile-pictures/profile_default.jpg"
-    else:
-        dict['PhotoID'] = ("/img/profile-pictures/profile_") + str(tuple[0][0]) + ".jpg"
-    dict['CertifiedKitty'] = tuple[0][12]
-    return dict
 
 @app.route('/')
 def first_page():
@@ -33,106 +12,73 @@ def first_page():
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
     if request.method == "GET":
-        return render_template("registration.html")
+        return render_template("/user_account_pages/registration.html")
     elif request.method == "POST":
-        info = request.form.to_dict()
-        print(info)
-
-        currentId = int(cursor.execute("""
-        SELECT COUNT(*) FROM Users
-        """).fetchall()[0][0])
-        certifiedKitty = False
-        if info.get('CertifiedKitty') == 'on':
-            certifiedKitty = True
-        does_exist = cursor.execute(f"""SELECT * FROM Users WHERE Login = "{info["Login"]}" """).fetchall()
-
-        if len(does_exist):
-            return render_template("error_pages/registration_user_exists_error.html")
-            pass #если пользователь уже есть
+        code = database_requests.insert_user(request.form.to_dict())
+        if code == 0:
+            return render_template("/user_account_pages/registration_end.html")
+        elif code == 1:
+            return render_template("error_pages/registration_user_exists_error.html") #если пользователь уже есть
         else:
-            photo = request.files['file']
-            hasPhoto = not (request.files['file'].filename == '')
-            photoId = -1
-            if hasPhoto:
-                photoId = currentId
-            sqlReq = f"""
-                        INSERT INTO Users 
-                        VALUES ({currentId}, "{info['Login']}", "{info['Password']}", "{info['FirstName']}", "{info['SecondName']}", "{info['EmailAddress']}", "{info['PhoneNumber']}", 
-                        "{info['SiteAddress']}", "{info['BirthdayDate']}", "{info['CatType']}", "{info['About']}", {photoId}, {certifiedKitty})
-                        """
-            path = "static/img/profile-pictures/profile_" + str(currentId) + ".jpg"
-            photo.save(path)
-            cursor.execute(sqlReq)
-            connect.commit()
-
-            return render_template("registration_end.html")
-
+            pass
 
 @app.route("/authorization", methods=["POST", "GET"])
-def authorization_page(Failed=False):
-    if request.method == 'GET' and not Failed:
+def authorization_page(failed=False):
+    if request.method == 'GET' and not failed:
         return render_template("user_account_pages/authorization.html")
-    if request.method == 'POST' and Failed:
+    if request.method == 'POST' and failed:
         return render_template("user_account_pages/authorization_failed.html")
     if request.method == 'POST':
         info = request.form.to_dict()
-        sqlReq = f"""
-        SELECT Password FROM Users
-        WHERE Users.Login = "{info["Login"]}"
-        """
-        password_input = cursor.execute(sqlReq).fetchall()
+        password_input = database_requests.get_password_with_login(info["login"])
         print(info)
         print(password_input)
-        if password_input == []:
-            return authorization_page(Failed=True)
+        if not password_input:
+            return authorization_page(failed=True)
             pass #Отобразить "Неправильный логин или пароль" [неправильный логин]
         elif password_input[0][0] != info['Password']:
-            return authorization_page(Failed=True)
+            return authorization_page(failed=True)
             pass #Отобразить "Неправильный логин или пароль" [неправильный пароль]
         else:
-            sqlReq = f"""
-            SELECT UserID FROM Users
-            WHERE Users.Login = "{info["Login"]}"
-            """
-            person_id = cursor.execute(sqlReq).fetchall()[0][0]
+            person_id = database_requests.get_user_id_with_login(info['login'])
             return redirect(url_for('personal_user_page', id=person_id))
-
 
 @app.route("/users/<id>")
 def personal_user_page(id):
-    sqlReq = f"""
-    SELECT * from Users
-    WHERE UserID = "{ id }"
-    """
-    info = cursor.execute(sqlReq).fetchall()
+    info = database_requests.get_user_info_with_user_id(id)
     print(info)
-    if info == []:
+    if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
-        kwargs = toKwargsUser(cursor.execute(sqlReq).fetchall())
+        kwargs = cursor.execute(sql_req).fetchall()
         print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
+@app.route("/problems/add", methods=['POST', 'GET'])
+def add_problem():
+    if request.method == 'GET':
+        return render_template("add_problem.html")
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        print(info)
+        if not (1 <= int(info['problem_type']) <= 27):
+            return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
+
+        database_requests.insert_problem(int(info['problem_type']), info['problem_class'], info['problem_source'],
+                                         info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
+        return render_template('problem_added.html')
 
 @app.route("/test")
 def test_page():
-    sqlReq =\
-        f"""
-        SELECT * FROM Tasks
-        """
-    Tasks = cursor.execute(sqlReq).fetchall()
-    print(Tasks)
-    return render_template("error_pages/error_404_not_found.html", Tasks=Tasks)
+    problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
+    print(problems)
+    return render_template("error_pages/error_404_not_found.html", problems=problems)
 
-@app.route("/tasks")
-def tasks_page():
-    sqlReq =\
-        f"""
-            SELECT * FROM Tasks
-        """
-    Tasks = cursor.execute(sqlReq).fetchall()
-    print(Tasks)
-    return render_template("tasks.html", Tasks=Tasks)
+@app.route("/problems/list")
+def problems_page():
+    problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
+    print(problems)
+    return render_template("problems.html", problems=problems)
 
 
 if __name__ == "__main__":

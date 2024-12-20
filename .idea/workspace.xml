@@ -9,22 +9,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц">
+      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/add_problem.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/problem_added.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/costil.txt" beforeDir="false" afterPath="$PROJECT_DIR$/costil.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insertIntoDatabase.py" beforeDir="false" afterPath="$PROJECT_DIR$/insertIntoDatabase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insertIntoDatabase.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/404_error_not_found.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization_failed.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authorization_user_not_found_error.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration_user_exists_error.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blank.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blank.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration_end.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problems.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tasks_answer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problems_answer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +36,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
@@ -69,25 +69,25 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.insertIntoDatabase.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/PycharmProjects/UchebniProjectKittySite",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.insertIntoDatabase.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/PythonProject1&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MyWonderfulSite1-3" />
@@ -157,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732949078752</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц">
+      <option name="closed" value="true" />
+      <created>1734354908341</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734354908341</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +175,7 @@
     <MESSAGE value="Поставил url_for в ser.html - теперь страница грузится нормально" />
     <MESSAGE value="Изменил все html файлы под формат url_for" />
     <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
+    <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
+    <option name="LAST_COMMIT_MESSAGE" value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
   </component>
 </project>
