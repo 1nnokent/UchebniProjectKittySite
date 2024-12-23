@@ -9,19 +9,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="-исправлены ошибки отображения страниц /registration и /authorization">
       <change afterPath="$PROJECT_DIR$/templates/problem_list.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/templates/variant_demo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase.laccdb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/img/profile-pictures/profile_default.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/problems.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734691955779</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="-исправлены ошибки отображения страниц /registration и /authorization">
+      <option name="closed" value="true" />
+      <created>1734696389518</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1734696389518</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +190,7 @@
     <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
     <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
     <MESSAGE value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />
+    <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
+    <option name="LAST_COMMIT_MESSAGE" value="-исправлены ошибки отображения страниц /registration и /authorization" />
   </component>
 </project>

@@ -72,7 +72,16 @@ def add_problem():
 def test_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
     print(problems)
-    return render_template("error_pages/error_404_not_found.html", problems=problems)
+    return render_template("test.html", problems=problems)
+
+@app.route("/variants/<id>", methods=['GET', 'POST'])
+def variant_page(id):
+    if request.method == 'GET':
+        problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
+        return render_template("variant_demo.html", problems=problems)
+    elif request.method == 'POST':
+        print(request.form.to_dict())
+
 
 @app.route("/problems/list")
 def problems_page():
