@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Кошьки inc.</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            overflow-y: scroll;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Изменил на center для выравнивания по центру */
+            margin-top: 10%;
+        }
+
+        .problem-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .problem-author {
+            font-size: 1.35rem;
+            font-weight: 420;
+            margin-bottom: 10px;
+        }
+
+        .problem-question {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .problem-answer {
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between; /* выравнивание элементов в строке */
+            align-items: center;
+        }
+
+        .show-answer {
+            margin-left: 10px; /* дополнительное расстояние между элементами */
+        }
+        .button-container {
+            display: flex; /* Используем flexbox для выравнивания */
+            justify-content: center; /* Центрируем по горизонтали */
+            align-items: center; /* Центрируем по вертикали */
+            height: 7vh; /* Задаем высоту контейнера на весь экран */
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="/" class="logo d-flex align-items-center">
+                <h1 class="sitename">Кошьки.</h1>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/">Домой</a></li>
+                    <li><a href="/problems/list">Задачи</a></li>
+                    <li class="dropdown"><a href="#"><span>Личный кабинет</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="/registration">Зарегистрироваться</a></li>
+                            <li><a href="/authorization">Авторизоваться</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+            {% for i in range(problems | length) %}
+            <div class="problem-card">
+                <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}</h5>
+                <h6 class="problem-author">{{problems[i][3]}}</h6>
+                <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][4]|safe}}</p>
+                <div class="input-group">
+                    <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="answer_{{problems[i][0]}}">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="button-container">
+            <input id="checkbox1" type="checkbox" name="show_answers">
+            <label for="checkbox1" style="white-space: pre;"> Показать правильные ответы</label>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn-primary">Завершить работу</button>
+        </div>
+    </form>
+
+    <!-- JS Files -->
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

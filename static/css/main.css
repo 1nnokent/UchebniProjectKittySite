@@ -1095,6 +1095,59 @@ section,
   color: var(--contrast-color);
   background-color: var(--nav-hover-color);
   border: none
+  transition: background-color 0.3s;
+}
+.answer-container {
+    display: flex;
+    align-items: center; /* Центрирование по вертикали */
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px; /* Уменьшено для более узкой кнопки */
+    width: 150px; /* Фиксированная ширина кнопки */
+    text-align: center;
+    border: none;
+    outline: none;
+    transition: background-color 0.4s; /* Анимация для фона */
+    margin-right: 10px; /* Расстояние между кнопкой и текстом */
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.answer {
+    position: relative; /* Для позиционирования панели */
+    display: inline-block; /* Чтобы кнопка и панель были в одной строке */
+}
+
+.panel {
+    position: absolute; /* Позиционирование панели */
+    left: 100%; /* Сдвиг панели вправо от кнопки */
+    top: 60%; /* Устанавливаем верхнюю границу панели на 50% высоты родительского элемента */
+    transform: translateY(-50%); /* Сдвиг панели вверх на половину её высоты */
+    padding: 0 18px;
+    display: none; /* Скрыто по умолчанию */
+    white-space: nowrap; /* Запрет на перенос строк */
+    z-index: 1; /* Убедитесь, что панель отображается поверх других элементов */
+}
+
+.problem-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 60%; /* Уменьшил ширину до 3/5 экрана */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
