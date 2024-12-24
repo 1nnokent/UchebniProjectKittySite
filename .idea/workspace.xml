@@ -9,11 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="+">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/variant_demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_demo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735038210739</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="+">
+      <option name="closed" value="true" />
+      <created>1735043421941</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1735043421941</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +216,7 @@
     <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
     <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
     <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
+    <MESSAGE value="+" />
+    <option name="LAST_COMMIT_MESSAGE" value="+" />
   </component>
 </project>

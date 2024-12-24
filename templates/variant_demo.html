@@ -82,8 +82,12 @@
         </div>
     </header>
 
+
     <form method="post" enctype="multipart/form-data">
         <div class="container">
+            {% if amount_right != -1 %}
+                <p class="problem-question">Решено правильно: {{amount_right}}/{{problems | length}}</p>
+            {% endif %}
             {% for i in range(problems | length) %}
             <div class="problem-card
                         {% if answers[i] == 0 %}incorrect

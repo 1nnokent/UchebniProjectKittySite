@@ -83,8 +83,13 @@ def variant_page(variant_id):
     problems = database_requests.sql_execute(sql_req).fetchall()
     answers_default = (-1,) * len(problems)
     print(problems)
+    kwargs = dict()
     if request.method == 'GET':
-        return render_template("variant_demo.html", problems=problems, answers=answers_default, show_answers=False)
+        kwargs['problems'] = problems
+        kwargs['answers'] = answers_default
+        kwargs['show_answers'] = False
+        kwargs['amount_right'] = -1
+        return render_template("variant_demo.html", **kwargs)
     elif request.method == 'POST':
         given_answers = []
         tmp = request.form.to_dict()
@@ -103,7 +108,14 @@ def variant_page(variant_id):
                 WHERE problem_id = { problems[i][0] }""").fetchall()[0][0]))
         database_requests.insert_answers_to_variant_from_user(tmp, variant_id, -1, -1)
         answers = tuple(answers)
-        return render_template("variant_demo.html", problems=problems, answers=answers, show_answers=tmp['show_answers'])
+        kwargs['problems'] = problems
+        kwargs['answers'] = answers
+        kwargs['show_answers'] = tmp['show_answers']
+        kwargs['amount_right'] = 0
+        for elem in answers:
+            if elem == 1:
+                kwargs['amount_right'] += 1
+        return render_template("variant_demo.html", **kwargs)
 
 
 @app.route("/problems/list")
