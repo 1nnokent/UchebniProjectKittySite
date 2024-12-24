@@ -97,6 +97,29 @@ def insert_user(info):
 
         return 0
 
+def insert_answers_to_variant_from_user(answers, variant_id, user_id, assignment_id):
+    completion_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
+    sql_req_1 = f"""
+    INSERT INTO user_variant
+    VALUES ({user_id}, {variant_id}, "{completion_time}", {assignment_id})
+    """
+    problems = sql_execute(f"""SELECT problem_id FROM variant_problem WHERE variant_id = {variant_id}""").fetchall()
+    print(answers)
+    print(problems)
+    for i in range(len(problems)):
+        sql_req_2 = f"""
+            INSERT INTO user_problem 
+            VALUES ({user_id}, {problems[i][0]}, "{answers[str(problems[i][0])]}", "{completion_time}", {variant_id}, {assignment_id},
+                    {(answers[str(problems[i][0])] == sql_execute(f"""SELECT problem_answer FROM problems 
+                    WHERE problem_id = { problems[i][0] }""").fetchall()[0][0])})
+            """
+        print(sql_req_2)
+        cursor.execute(sql_req_2)
+
+    cursor.execute(sql_req_1)
+    connect.commit()
+
+
 def get_password_with_login(login):
     sql_req = f"""
     SELECT password FROM users

@@ -74,9 +74,13 @@ def test_page():
     print(problems)
     return render_template("test.html", problems=problems)
 
-@app.route("/variants/<id>", methods=['GET', 'POST'])
-def variant_page(id):
-    problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
+@app.route("/variants/<variant_id>", methods=['GET', 'POST'])
+def variant_page(variant_id):
+    sql_req = f"""SELECT * FROM
+                  problems INNER JOIN variant_problem
+                  ON variant_problem.problem_id = problems.problem_id
+                  WHERE variant_problem.variant_id = {variant_id}"""
+    problems = database_requests.sql_execute(sql_req).fetchall()
     answers_default = (-1,) * len(problems)
     print(problems)
     if request.method == 'GET':
@@ -97,6 +101,7 @@ def variant_page(id):
             else:
                 answers.append(int(given_answers[i] == database_requests.sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = { problems[i][0] }""").fetchall()[0][0]))
+        database_requests.insert_answers_to_variant_from_user(tmp, variant_id, -1, -1)
         answers = tuple(answers)
         return render_template("variant_demo.html", problems=problems, answers=answers, show_answers=tmp['show_answers'])
 
