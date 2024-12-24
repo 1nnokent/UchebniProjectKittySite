@@ -25,6 +25,8 @@
   --accent-color: #1bbca3; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --incorrect-answer-color: #f76d5e;
+  --correct-answer-color: #acf273;
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -1124,6 +1126,29 @@ section,
     display: inline-block; /* Чтобы кнопка и панель были в одной строке */
 }
 
+.problem-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.problem-author {
+    font-size: 1.35rem;
+    font-weight: 420;
+    margin-bottom: 10px;
+}
+
+.problem-question {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.problem-answer {
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
 .panel {
     position: absolute; /* Позиционирование панели */
     left: 100%; /* Сдвиг панели вправо от кнопки */
@@ -1136,13 +1161,24 @@ section,
 }
 
 .problem-card {
-    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
     width: 60%; /* Уменьшил ширину до 3/5 экрана */
     transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.problem-card.default {
+    background-color: #ffffff;
+}
+
+.problem-card.incorrect {
+    background-color: var(--incorrect-answer-color);
+}
+
+.problem-card.correct {
+    background-color: var(--correct-answer-color);
 }
 
 .problem-card:hover {

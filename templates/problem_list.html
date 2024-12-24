@@ -42,36 +42,6 @@
             margin-top: 10%;
         }
 
-        .problem-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .problem-title {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .problem-author {
-            font-size: 1.35rem;
-            font-weight: 420;
-            margin-bottom: 10px;
-        }
-
-        .problem-question {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #555;
-            white-space: pre-wrap;
-            max-width: 100%;
-        }
-
-        .problem-answer {
-            font-size: 1.2rem;
-            color: #007bff;
-        }
-
         .input-group {
             display: flex;
             justify-content: space-between; /* выравнивание элементов в строке */
@@ -108,14 +78,14 @@
 
     <div class="container">
         {% for i in range(problems | length) %}
-        <div class="problem-card">
+        <div class="problem-card default">
             <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}</h5>
             <h6 class="problem-author">{{problems[i][3]}}</h6>
             <p class="problem-question">{{problems[i][4]|safe}}</p>
             <div class="answer">
                 <button class="accordion">Показать ответ</button>
                 <div class="panel">
-                    <p class="problem-question">{{problems[i][5]}}</p>
+                    <p class="problem-question">Ответ: {{problems[i][5]}}</p>
                 </div>
             </div>
         </div>

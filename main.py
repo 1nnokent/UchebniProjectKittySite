@@ -76,11 +76,29 @@ def test_page():
 
 @app.route("/variants/<id>", methods=['GET', 'POST'])
 def variant_page(id):
+    problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
+    answers_default = (-1,) * len(problems)
+    print(problems)
     if request.method == 'GET':
-        problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
-        return render_template("variant_demo.html", problems=problems)
+        return render_template("variant_demo.html", problems=problems, answers=answers_default, show_answers=False)
     elif request.method == 'POST':
-        print(request.form.to_dict())
+        given_answers = []
+        tmp = request.form.to_dict()
+        if not (tmp.__contains__('show_answers')):
+            tmp['show_answers'] = False
+        else:
+            tmp['show_answers'] = True
+        for key in tmp:
+            given_answers.append(tmp[key])
+        answers = []
+        for i in range(len(problems)):
+            if (given_answers[i] == ''):
+                answers.append(-1)
+            else:
+                answers.append(int(given_answers[i] == database_requests.sql_execute(f"""SELECT problem_answer FROM problems 
+                WHERE problem_id = { problems[i][0] }""").fetchall()[0][0]))
+        answers = tuple(answers)
+        return render_template("variant_demo.html", problems=problems, answers=answers, show_answers=tmp['show_answers'])
 
 
 @app.route("/problems/list")
