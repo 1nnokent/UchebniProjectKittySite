@@ -23,21 +23,21 @@ def registration_page():
             pass
 
 @app.route("/authorization", methods=["POST", "GET"])
-def authorization_page(failed=False):
+def authorization_page(failed=False, problem=None):
     if request.method == 'GET' and not failed:
         return render_template("user_account_pages/authorization.html")
     if request.method == 'POST' and failed:
-        return render_template("user_account_pages/authorization_failed.html")
+        return render_template("user_account_pages/authorization_failed.html", problem=problem)
     if request.method == 'POST':
         info = request.form.to_dict()
         password_input = database_requests.get_password_with_login(info["login"])
         print(info)
         print(password_input)
         if not password_input:
-            return authorization_page(failed=True)
+            return authorization_page(failed=True, problem="Пользователя с данным логином не существует")
             pass #Отобразить "Неправильный логин или пароль" [неправильный логин]
         elif password_input[0][0] != info['Password']:
-            return authorization_page(failed=True)
+            return authorization_page(failed=True, problem="Введен неверный пароль")
             pass #Отобразить "Неправильный логин или пароль" [неправильный пароль]
         else:
             person_id = database_requests.get_user_id_with_login(info['login'])
@@ -72,7 +72,11 @@ def add_problem():
 def test_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
     print(problems)
-    return render_template("test.html", problems=problems)
+    return render_template("test.html", problems=problems, user=[0, "aowje"])
+
+@app.route("/blank")
+def blank_page():
+    return render_template("blank.html")
 
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
