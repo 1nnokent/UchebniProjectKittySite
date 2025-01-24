@@ -9,9 +9,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="+">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/variant_demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_demo.html" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="изменил blank.html, добавил стиль в main.css для .body">
+      <change afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/authorization_failed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/authorization_failed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +77,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/PythonProject1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/UchebniProjectKittySite&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -120,6 +127,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1731670929884</updated>
+      <workItem from="1736575650118" duration="193000" />
+      <workItem from="1736577064199" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="Поставил url_for в ser.html - теперь страница грузится нормально">
       <option name="closed" value="true" />
@@ -201,7 +210,39 @@
       <option name="project" value="LOCAL" />
       <updated>1735043421941</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="основная часть завершена; проверить на баги и доработать внешний вид">
+      <option name="closed" value="true" />
+      <created>1735043896844</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1735043896844</updated>
+    </task>
+    <task id="LOCAL-00012" summary="основная часть завершена; проверить на баги и доработать внешний вид">
+      <option name="closed" value="true" />
+      <created>1735043905781</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735043905781</updated>
+    </task>
+    <task id="LOCAL-00013" summary="добавлена вкладка &quot;Учебные материалы&quot; в test.html">
+      <option name="closed" value="true" />
+      <created>1736512807602</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736512807602</updated>
+    </task>
+    <task id="LOCAL-00014" summary="изменил blank.html, добавил стиль в main.css для .body">
+      <option name="closed" value="true" />
+      <created>1737716218069</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1737716218069</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +258,9 @@
     <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
     <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
     <MESSAGE value="+" />
-    <option name="LAST_COMMIT_MESSAGE" value="+" />
+    <MESSAGE value="основная часть завершена; проверить на баги и доработать внешний вид" />
+    <MESSAGE value="добавлена вкладка &quot;Учебные материалы&quot; в test.html" />
+    <MESSAGE value="изменил blank.html, добавил стиль в main.css для .body" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменил blank.html, добавил стиль в main.css для .body" />
   </component>
 </project>
