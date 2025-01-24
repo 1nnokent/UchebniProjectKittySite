@@ -46,6 +46,19 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
     }
 
+    .statistics-container {
+      display: flex;
+      flex-direction: column; /* Вертикальное расположение */
+      align-items: center; /* Центрирование по горизонтали */
+      justify-content: center; /* Центрирование по вертикали */
+      max-width: 1200px; /* Максимальная ширина контейнера */
+      margin: 10% auto 0; /* Центрирование контейнера и отступ сверху */
+      padding: 20px; /* Отступ внутри контейнера */
+      background-color: #e9ecef; /* Цвет фона для контейнера */
+      border-radius: 10px; /* Скругленные углы */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    }
+
     img {
       max-width: 300px; /* Ограничение ширины изображения */
       height: auto; /* Автоматическая настройка высоты */
@@ -68,6 +81,22 @@
       text-align: center; /* Центрируем текст */
       margin-top: 20px; /* Отступ сверху */
     }
+
+    .col-green {
+        background-color: #4CAF50; /* ярко-зеленый */
+    }
+
+    .col-light-green {
+        background-color: #8BC34A; /* светло-зеленый */
+    }
+
+    .col-yellow {
+        background-color: #FFEB3B; /* желтый */
+    }
+
+    .col-red {
+        background-color: #F44336; /* красный */
+    }
   </style>
 </head>
 
@@ -87,8 +116,77 @@
     </ul>
   </div>
 
+
+  <div class="statistics-container">
+    <h2 style="text-transform: uppercase;">Статистика</h2>
+    <table class="table table-bordered" style="margin-top: 10px;">
+        <thead>
+            <tr>
+                <th>№ Задания</th>
+                {% for task in range(1, 27) %}
+                <th>{{ task }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Количество попыток</td>
+                {% for attempt in number_of_attempts %}
+                    <td>{{ number_of_attempts[attempt] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Успешные попытки</td>
+                {% for right_attempt in number_of_right_attempts %}
+                    <td>{{ number_of_right_attempts[right_attempt] }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
   <!-- JS Files -->
   <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    console.log("Скрипт запущен.");
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Скрипт запущен2.");
+        const attempts = {{ number_of_attempts|tojson }}; // Словарь с количеством попыток
+        const rightAttempts = {{ number_of_right_attempts|tojson }}; // Словарь с успешными попытками
+        const columns = document.querySelectorAll('.table tbody tr'); // Получаем все строки таблицы
+
+        // Предположим, что у нас есть некий способ определения количества столбцов
+        const numberOfColumns = Object.keys(attempts).length; // Количество столбцов, равное количеству ключей в словаре
+
+        for (let colIndex = 1; colIndex <= numberOfColumns; colIndex++) {
+            const totalAttempts = attempts[colIndex] || 0; // Получаем общее количество попыток
+            const successfulAttempts = rightAttempts[colIndex] || 0; // Получаем количество успешных попыток
+
+            if (totalAttempts > 0) {
+                const successRate = (successfulAttempts / totalAttempts) * 100;
+                let columnClass;
+
+                if (successRate >= 85) {
+                    columnClass = 'col-green';
+                } else if (successRate >= 75) {
+                    columnClass = 'col-light-green';
+                } else if (successRate >= 65) {
+                    columnClass = 'col-yellow';
+                } else {
+                    columnClass = 'col-red';
+                }
+
+                // Применяем класс к каждой ячейке в столбце
+                columns.forEach(row => {
+                    const cell = row.cells[colIndex]; // Получаем ячейку по индексу столбца
+                    if (cell) {
+                        cell.classList.add(columnClass); // Добавляем соответствующий класс
+                    }
+                });
+            }
+        }
+    });
+  </script>
 </body>
 
 </html>
