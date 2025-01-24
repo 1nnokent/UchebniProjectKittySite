@@ -66,6 +66,7 @@ def insert_problem_file(problem_type, problem_class, problem_source, filename, p
     insert_problem(problem_type, problem_source, problem_class, file_text, problem_answer, problem_difficulty)
 
 def insert_user(info):
+    print(info)
     current_id = int(cursor.execute("""
             SELECT COUNT(*) FROM users
             """).fetchall()[0][0])
@@ -90,7 +91,8 @@ def insert_user(info):
         sql_req = f"""
                             INSERT INTO users 
                             VALUES ({current_id}, {role_id}, "{registration_time}", "{info['first_name']}", "{info['second_name']}", "{info['third_name']}", "{info['login']}", 
-                            "{info['password']}", "{info['email']}", "{info['birth_date']}", {school_id}, {city_id}, "{info['class']}", {photo_id})
+                            "{info['password']}", "{info['email']}", "{info['url']}", "{info['tel']}", {info['love_range']}, 
+                            "{info['birth_date']}", {school_id}, {city_id}, "{info['class']}", {photo_id})
                             """
         cursor.execute(sql_req)
         connect.commit()
