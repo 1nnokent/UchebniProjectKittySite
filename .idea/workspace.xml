@@ -9,16 +9,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="изменил blank.html, добавил стиль в main.css для .body">
-      <change afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="изменения в бдшке (не знаю, какие)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_problem.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_problem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/after_variant_completion.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_variant_completion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problem_added.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problem_added.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problem_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problem_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problems_answer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problems_answer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/authorization.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/authorization.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user_account_pages/authorization_failed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/authorization_failed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user_account_pages/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/registration_end.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/registration_end.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/variant_demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_demo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +245,31 @@
       <option name="project" value="LOCAL" />
       <updated>1737716218069</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="-">
+      <option name="closed" value="true" />
+      <created>1737717460849</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1737717460849</updated>
+    </task>
+    <task id="LOCAL-00016" summary="-">
+      <option name="closed" value="true" />
+      <created>1737717519423</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1737717519423</updated>
+    </task>
+    <task id="LOCAL-00017" summary="изменения в бдшке (не знаю, какие)">
+      <option name="closed" value="true" />
+      <created>1737717618723</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1737717618723</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +288,8 @@
     <MESSAGE value="основная часть завершена; проверить на баги и доработать внешний вид" />
     <MESSAGE value="добавлена вкладка &quot;Учебные материалы&quot; в test.html" />
     <MESSAGE value="изменил blank.html, добавил стиль в main.css для .body" />
-    <option name="LAST_COMMIT_MESSAGE" value="изменил blank.html, добавил стиль в main.css для .body" />
+    <MESSAGE value="-" />
+    <MESSAGE value="изменения в бдшке (не знаю, какие)" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменения в бдшке (не знаю, какие)" />
   </component>
 </project>

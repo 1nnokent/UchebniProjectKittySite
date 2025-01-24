@@ -66,26 +66,7 @@
 </head>
 
 <body>
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <a href="/" class="logo d-flex align-items-center">
-        <h1 class="sitename">Кошьки.</h1>
-      </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="/">Домой</a></li>
-          <li><a href="/problems/list">Задачи</a></li>
-          <li class="dropdown"><a href="#"><span>Личный кабинет</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="/registration">Зарегистрироваться</a></li>
-              <li><a href="/authorization">Авторизоваться</a></li>
-            </ul>
-          </li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-    </div>
-  </header>
+  {% include 'header.html' %}
 
   <div class="container">
     <form class="login_form" method="post">
