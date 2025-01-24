@@ -31,27 +31,23 @@ def authorization_page(failed=False, problem=None):
     if request.method == 'POST':
         info = request.form.to_dict()
         password_input = database_requests.get_password_with_login(info["login"])
-        print(info)
-        print(password_input)
         if not password_input:
             return authorization_page(failed=True, problem="Пользователя с данным логином не существует")
-            pass #Отобразить "Неправильный логин или пароль" [неправильный логин]
+            #Отобразить "Неправильный логин или пароль" [неправильный логин]
         elif password_input[0][0] != info['Password']:
             return authorization_page(failed=True, problem="Введен неверный пароль")
-            pass #Отобразить "Неправильный логин или пароль" [неправильный пароль]
+            #Отобразить "Неправильный логин или пароль" [неправильный пароль]
         else:
             person_id = database_requests.get_user_id_with_login(info['login'])
             return redirect(url_for('personal_user_page', id=person_id))
 
-@app.route("/users/<id>")
-def personal_user_page(id):
-    info = database_requests.get_user_info_with_user_id(id)
-    print(info)
+@app.route("/users/<user_id>")
+def personal_user_page(user_id):
+    info = database_requests.get_user_info_with_user_id(user_id)
     if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = database_requests.user_select_to_dict(info)
-        print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
@@ -60,7 +56,6 @@ def add_problem():
         return render_template("add_problem.html")
     if request.method == 'POST':
         info = request.form.to_dict()
-        print(info)
         if not (1 <= int(info['problem_type']) <= 27):
             return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
 
@@ -71,7 +66,6 @@ def add_problem():
 @app.route("/test")
 def test_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    print(problems)
     return render_template("test.html", problems=problems, user=[0, "aowje"])
 
 @app.route("/blank")
@@ -80,54 +74,18 @@ def blank_page():
 
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
-    sql_req = f"""SELECT * FROM
-                  problems INNER JOIN variant_problem
-                  ON variant_problem.problem_id = problems.problem_id
-                  WHERE variant_problem.variant_id = {variant_id}"""
-    problems = database_requests.sql_execute(sql_req).fetchall()
-    answers_default = (-1,) * len(problems)
-    print(problems)
-    kwargs = dict()
     if request.method == 'GET':
-        kwargs['problems'] = problems
-        kwargs['answers'] = answers_default
-        kwargs['show_answers'] = False
-        kwargs['amount_right'] = -1
-        return render_template("variant_demo.html", **kwargs)
+        kwargs = database_requests.variant_page_default_kwargs(variant_id)
+        return render_template("variant_page.html", **kwargs)
     elif request.method == 'POST':
-        given_answers = []
-        tmp = request.form.to_dict()
-        if not (tmp.__contains__('show_answers')):
-            tmp['show_answers'] = False
-        else:
-            tmp['show_answers'] = True
-        for key in tmp:
-            given_answers.append(tmp[key])
-        answers = []
-        for i in range(len(problems)):
-            if (given_answers[i] == ''):
-                answers.append(-1)
-            else:
-                answers.append(int(given_answers[i] == database_requests.sql_execute(f"""SELECT problem_answer FROM problems 
-                WHERE problem_id = { problems[i][0] }""").fetchall()[0][0]))
-        database_requests.insert_answers_to_variant_from_user(tmp, variant_id, -1, -1)
-        answers = tuple(answers)
-        kwargs['problems'] = problems
-        kwargs['answers'] = answers
-        kwargs['show_answers'] = tmp['show_answers']
-        kwargs['amount_right'] = 0
-        for elem in answers:
-            if elem == 1:
-                kwargs['amount_right'] += 1
-        return render_template("variant_demo.html", **kwargs)
-
+        kwargs = database_requests.variant_page_feedback_kwargs(variant_id)
+        database_requests.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
+        return render_template("variant_page.html", **kwargs)
 
 @app.route("/problems/list")
 def problems_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    print(problems)
     return render_template("problem_list.html", problems=problems)
-
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")

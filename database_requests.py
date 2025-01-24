@@ -11,6 +11,9 @@ if __name__ == "__main__":
     connect = sq.connect(database, check_same_thread=False)
     cursor = connect.cursor()
 
+def sql_execute(sql_request):
+    return cursor.execute(sql_request)
+
 def user_select_to_dict(tuple_info):
     dict = {}
     dict['user_id'] = tuple_info[0][0]
@@ -34,7 +37,7 @@ def user_select_to_dict(tuple_info):
     return dict
 
 def insert_problem(problem_type, problem_class, problem_source, problem_statement, problem_answer, problem_difficulty):
-    amount = cursor.execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    amount = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
     text = ""
     prev = 0
     last = 0
@@ -57,7 +60,7 @@ def insert_problem(problem_type, problem_class, problem_source, problem_statemen
     """
 
     print(sql_req)
-    cursor.execute(sql_req) #|safe
+    sql_execute(sql_req) #|safe
     connect.commit()
 
 def insert_problem_file(problem_type, problem_class, problem_source, filename, problem_answer, problem_difficulty):
@@ -67,10 +70,10 @@ def insert_problem_file(problem_type, problem_class, problem_source, filename, p
 
 def insert_user(info):
     print(info)
-    current_id = int(cursor.execute("""
+    current_id = int(sql_execute("""
             SELECT COUNT(*) FROM users
             """).fetchall()[0][0])
-    does_exist = len(cursor.execute(f"""SELECT * FROM users WHERE login = "{info['login']}" """).fetchall())
+    does_exist = len(sql_execute(f"""SELECT * FROM users WHERE login = "{info['login']}" """).fetchall())
 
     if does_exist:
         return 1
@@ -83,9 +86,9 @@ def insert_user(info):
             path = "static/img/profile-pictures/profile_" + str(photo_id) + "_avatar.jpg"
             photo.save(path)
 
-        role_id = cursor.execute(f"""SELECT role_id FROM roles WHERE role_name = '{info['role']}' """).fetchall()[0][0]
-        school_id = cursor.execute(f"""SELECT school_id FROM schools WHERE school_name = '{info['school']}' """).fetchall()[0][0]
-        city_id = cursor.execute(f"""SELECT city_id FROM cities WHERE city_name = '{info['city']}' """).fetchall()[0][0]
+        role_id = sql_execute(f"""SELECT role_id FROM roles WHERE role_name = '{info['role']}' """).fetchall()[0][0]
+        school_id = sql_execute(f"""SELECT school_id FROM schools WHERE school_name = '{info['school']}' """).fetchall()[0][0]
+        city_id = sql_execute(f"""SELECT city_id FROM cities WHERE city_name = '{info['city']}' """).fetchall()[0][0]
         print(role_id, school_id, city_id)
         registration_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
         sql_req = f"""
@@ -94,12 +97,80 @@ def insert_user(info):
                             "{info['password']}", "{info['email']}", "{info['url']}", "{info['tel']}", {info['love_range']}, 
                             "{info['birth_date']}", {school_id}, {city_id}, "{info['class']}", {photo_id})
                             """
-        cursor.execute(sql_req)
+        sql_execute(sql_req)
         connect.commit()
 
         return 0
 
-def insert_answers_to_variant_from_user(answers, variant_id, user_id, assignment_id):
+def get_password_with_login(login):
+    sql_req = f"""
+    SELECT password FROM users
+    WHERE users.login = "{login}"
+    """
+    return sql_execute(sql_req).fetchall()
+
+def get_user_id_with_login(login):
+    sql_req = f"""
+    SELECT user_id FROM users
+    WHERE users.login = "{login}"
+    """
+    return sql_execute(sql_req).fetchall()[0][0]
+
+def get_user_info_with_user_id(id):
+    sql_req = f"""
+        SELECT * from users
+        WHERE user_id = "{id}"
+        """
+    return sql_execute(sql_req).fetchall()
+
+def variant_page_default_kwargs(variant_id):
+    sql_req = f"""SELECT * FROM
+                      problems INNER JOIN variant_problem
+                      ON variant_problem.problem_id = problems.problem_id
+                      WHERE variant_problem.variant_id = {variant_id}"""
+    problems = sql_execute(sql_req).fetchall()
+    answers_default = ((-1, -1)) * len(problems)
+    kwargs = dict()
+    kwargs['problems'] = problems
+    kwargs['answers'] = answers_default
+    kwargs['show_answers'] = False
+    kwargs['amount_right'] = -1
+    return kwargs
+
+def variant_page_feedback_kwargs(variant_id):
+    sql_req = f"""SELECT * FROM
+                      problems INNER JOIN variant_problem
+                      ON variant_problem.problem_id = problems.problem_id
+                      WHERE variant_problem.variant_id = {variant_id}"""
+    problems = sql_execute(sql_req).fetchall()
+    kwargs = dict()
+    given_answers = []
+    tmp = request.form.to_dict()
+
+    if not (tmp.__contains__('show_answers')):
+        tmp['show_answers'] = False
+
+    for key in tmp:
+        given_answers.append(tmp[key])
+
+    answers = []
+    for i in range(len(problems)):
+        if given_answers[i] == '':
+            answers.append((-1, -1))
+        else:
+            answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
+                WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
+    answers = tuple(answers)
+    kwargs['problems'] = problems
+    kwargs['answers'] = answers
+    kwargs['show_answers'] = tmp['show_answers']
+    kwargs['amount_right'] = 0
+    for elem in answers:
+        if elem == 1:
+            kwargs['amount_right'] += 1
+    return kwargs
+
+def insert_variant_answers(answers, variant_id, user_id, assignment_id):
     completion_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
     sql_req_1 = f"""
     INSERT INTO user_variant
@@ -108,43 +179,18 @@ def insert_answers_to_variant_from_user(answers, variant_id, user_id, assignment
     problems = sql_execute(f"""SELECT problem_id FROM variant_problem WHERE variant_id = {variant_id}""").fetchall()
     print(answers)
     print(problems)
-    for i in range(len(problems)):
+    for problem in problems:
         sql_req_2 = f"""
             INSERT INTO user_problem 
-            VALUES ({user_id}, {problems[i][0]}, "{answers[str(problems[i][0])]}", "{completion_time}", {variant_id}, {assignment_id},
-                    {(answers[str(problems[i][0])] == sql_execute(f"""SELECT problem_answer FROM problems 
-                    WHERE problem_id = { problems[i][0] }""").fetchall()[0][0])})
+            VALUES ({user_id}, {problem[0]}, "{answers[str(problem[0])]}", "{completion_time}", {variant_id}, {assignment_id},
+                    {(answers[str(problem[0])] == sql_execute(f"""SELECT problem_answer FROM problems 
+                    WHERE problem_id = { problem[0] }""").fetchall()[0][0])})
             """
         print(sql_req_2)
-        cursor.execute(sql_req_2)
+        sql_execute(sql_req_2)
 
-    cursor.execute(sql_req_1)
+    sql_execute(sql_req_1)
     connect.commit()
-
-
-def get_password_with_login(login):
-    sql_req = f"""
-    SELECT password FROM users
-    WHERE users.login = "{login}"
-    """
-    return cursor.execute(sql_req).fetchall()
-
-def get_user_id_with_login(login):
-    sql_req = f"""
-    SELECT user_id FROM users
-    WHERE users.login = "{login}"
-    """
-    return cursor.execute(sql_req).fetchall()[0][0]
-
-def get_user_info_with_user_id(id):
-    sql_req = f"""
-        SELECT * from users
-        WHERE user_id = "{id}"
-        """
-    return cursor.execute(sql_req).fetchall()
-
-def sql_execute(sql_request):
-    return cursor.execute(sql_request)
 
 if __name__ == "__main__":
     print("         ТИП   КЛАСС   ОТВЕТ   СЛОЖОСТЬ", "ВВЕДИТЕ: ", sep='\n', end="")
