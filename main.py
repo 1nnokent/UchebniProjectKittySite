@@ -39,7 +39,7 @@ def authorization_page(failed=False, problem=None):
             #Отобразить "Неправильный логин или пароль" [неправильный пароль]
         else:
             person_id = database_requests.get_user_id_with_login(info['login'])
-            return redirect(url_for('personal_user_page', id=person_id))
+            return redirect(url_for('personal_user_page', user_id=person_id))
 
 @app.route("/users/<user_id>")
 def personal_user_page(user_id):
@@ -48,7 +48,8 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = database_requests.user_select_to_dict(info)
-        return render_template("user_account_pages/user.html", **kwargs)
+        print('!!!!!!!')
+        return render_template("templates/user_account_pages/user.html", **kwargs)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
 def add_problem():
