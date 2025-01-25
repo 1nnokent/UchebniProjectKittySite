@@ -48,8 +48,7 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = database_requests.user_select_to_dict(info)
-        print('!!!!!!!')
-        return render_template("templates/user_account_pages/user.html", **kwargs)
+        return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
 def add_problem():
