@@ -53,7 +53,7 @@
             border-radius: 8px;
             margin: 10px;
             padding: 15px;
-            width: calc(30% - 20px); /* Три в ряд - 30%;  2 - 50%; 1 - 100% */
+            width: calc(100% - 20px); /* Три в ряд - 30%;  2 - 50%; 1 - 100% */
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: box-shadow 0.3s ease;
@@ -104,87 +104,86 @@
 </head>
 <body>
      {% include 'header.html' %}
-     <div class="filter-container">
+    <div class="filter-container">
       <select id="filter-select">
           <option value="all">Все</option>
           <option value="video">Видео</option>
           <option value="presentation">Презентация</option>
-          <option value="other">Конспект</option>
+          <option value="other">Другое</option>
       </select>
     </div>
-    <div class="container" id="lectures-container">
-        <!-- Сюда будут добавляться элементы -->
-    </div>
-
-    <script>
-        const lecturesContainer = document.getElementById('lectures-container');
-
-        function addMaterial(material) {
-            let materialId = material[0];
-            let materialType = material[1];
-            let materialName = material[2];
-            let materialDescription = material[3];
-            let materialStatement = material[4];
-
-            let card = document.createElement('div');
-            card.classList.add('lecture-card');
-            let typeName;
-            switch(materialType){
-                case 0:
-                    typeName = "video";
-                    break;
-                case 1:
-                    typeName = "presentation";
-                    break;
-                case 2:
-                    typeName = "other";
-                    break;
-            }
-            card.setAttribute("data-type", typeName);
-            let html = `<h3>${materialName}</h3>`;
-            let playerHtml = ``;
-            if (materialType === 0) { // видосик
-                playerHtml = `
-                <div class="video-player">
-                    <div class="video-container">
-                    <iframe width="560" height="315" src="${materialStatement}" frameborder="0" allowfullscreen></iframe>
-                    </div>
+    <div class="container">
+      <div class="lecture-card" data-type="video">
+          <h3>Лекция 1: Введение в Python</h3>
+          <p>Описание лекции 1. Программирование на Python.</p>
+          <div class="video-player hidden">
+              <div class="video-container">
+                  <iframe width="560" height="315" src="https://rutube.ru/play/embed/9852193" frameborder="0" allowfullscreen></iframe>
+              </div>
+          </div>
+      </div>
+      <div class="lecture-card" data-type="presentation">
+          <h3>Презентация 1: Структуры данных</h3>
+          <p>Описание презентации о структурах данных.</p>
+            <div class="video-player hidden">
+                <p>Презентация будет загружена здесь...</p>
+            </div>
+      </div>
+      <div class="lecture-card" data-type="other">
+          <h3>Статья 1: Алгоритмы сортировки</h3>
+          <p>Описание статьи про алгоритмы сортировки.</p>
+            <div class="video-player hidden">
+                <p>Текст статьи будет здесь...</p>
+            </div>
+      </div>
+      <div class="lecture-card" data-type="video">
+          <h3>Лекция 2: Основы JavaScript</h3>
+           <p>Описание лекции 2. Программирование на JavaScript.</p>
+           <div class="video-player hidden">
+               <div class="video-container">
+                   <iframe width="560" height="315" src="https://vk.com/video_ext.php?oid=266841072&id=456239802&hash=47d0f2c61b409f16" frameborder="0" allowfullscreen></iframe>
                 </div>
-                `;
+            </div>
+      </div>
+      <div class="lecture-card" data-type="presentation">
+          <h3>Презентация 2: Веб-дизайн</h3>
+          <p>Описание презентации о веб-дизайне.</p>
+            <div class="video-player hidden">
+                <p>Презентация будет загружена здесь...</p>
+            </div>
+       </div>
+      <div class="lecture-card" data-type="other">
+            <h3>Документ 1: ТЗ по проекту</h3>
+            <p>Описание ТЗ.</p>
+            <div class="video-player hidden">
+                <p>Текст ТЗ будет здесь...</p>
+            </div>
+       </div>
+      <div class="lecture-card" data-type="video">
+             <h3>Лекция 3: Машинное обучение</h3>
+             <p>Описание лекции 3. Введение в машинное обучение.</p>
+             <div class="video-player hidden">
+                 <div class="video-container">
+                    <iframe width="560" height="315" src="https://rutube.ru/play/embed/6605673" frameborder="0" allowfullscreen></iframe>
+                 </div>
+            </div>
+        </div>
+      <div class="lecture-card" data-type="presentation">
+        <h3>Презентация 3: Архитектура</h3>
+         <p>Описание презентации об архитектуре.</p>
+         <div class="video-player hidden">
+             <p>Презентация будет загружена здесь...</p>
+         </div>
+      </div>
+    </div>
+    <script>
+        document.querySelectorAll('.lecture-card').forEach(card => {
+          card.addEventListener('click', () => {
+              card.querySelector('.video-player').classList.toggle('hidden');
+            });
+        });
 
-            }
-             else { // не видосик
-                if (materialDescription) {
-                  html += `<p>${materialDescription}</p>`;
-                }
-                 playerHtml = `
-                  <div class="video-player">
-                       <p>${materialStatement}</p>
-                    </div>
-                `;
-            }
-
-
-            card.innerHTML = html+playerHtml;
-            lecturesContainer.appendChild(card);
-        }
-
-
-     const materialsFromDB = [
-            [1, 0, "Лекция 1: Введение в Python", null, "https://rutube.ru/play/embed/9852193"],
-            [2, 1, "Презентация 1: Структуры данных", "Описание презентации о структурах данных.", "Презентация будет загружена здесь..."],
-            [3, 2, "Статья 1: Алгоритмы сортировки", "Описание статьи про алгоритмы сортировки.", "Текст статьи будет здесь..."],
-            [4, 0, "Лекция 2: Основы JavaScript", null, "https://vk.com/video_ext.php?oid=266841072&id=456239802&hash=47d0f2c61b409f16"],
-            [5, 1, "Презентация 2: Веб-дизайн", "Описание презентации о веб-дизайне.", "Презентация будет загружена здесь..."],
-            [6, 2, "Документ 1: ТЗ по проекту", "Описание ТЗ.", "Текст ТЗ будет здесь..."],
-            [7, 0, "Лекция 3: Машинное обучение", null, "https://rutube.ru/play/embed/6605673"],
-            [8, 1, "Презентация 3: Архитектура", "Описание презентации об архитектуре.", "Презентация будет загружена здесь..."]
-       ];
-
-
-       materialsFromDB.forEach(material => addMaterial(material));+
-
-    document.getElementById('filter-select').addEventListener('change', function() {
+        document.getElementById('filter-select').addEventListener('change', function() {
            let selectedType = this.value;
            document.querySelectorAll('.lecture-card').forEach(card => {
                 if (selectedType === 'all' || card.dataset.type === selectedType) {
@@ -194,8 +193,6 @@
                 }
             });
         });
-
-
     </script>
 </body>
 </html>
