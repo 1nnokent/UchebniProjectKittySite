@@ -9,12 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="заменил громоздкие хедеры на {include header.html}">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/variant_demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +40,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/1nnokent/UchebniProjectKittySite&quot;,
-    &quot;accountId&quot;: &quot;b2792309-9bf5-4fa1-a298-051c29bd6a30&quot;
+    &quot;url&quot;: &quot;https://github.com/1nnokent/UchebniProjectKittySite.git&quot;,
+    &quot;accountId&quot;: &quot;b0a9d1e5-0571-460b-b17a-ca1a854d3853&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -73,7 +70,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/UchebniProjectKittySite&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/arthurmardanshin/PycharmProjects/UchebniProjectKittySite2&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -89,6 +86,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -111,7 +109,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-fb887030ada0-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.21565.199" />
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
@@ -270,11 +268,30 @@
       <option name="project" value="LOCAL" />
       <updated>1737718040681</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение">
+      <option name="closed" value="true" />
+      <created>1737745783568</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1737745783568</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Поставил url_for в ser.html - теперь страница грузится нормально" />
@@ -292,6 +309,7 @@
     <MESSAGE value="-" />
     <MESSAGE value="изменения в бдшке (не знаю, какие)" />
     <MESSAGE value="заменил громоздкие хедеры на {include header.html}" />
-    <option name="LAST_COMMIT_MESSAGE" value="заменил громоздкие хедеры на {include header.html}" />
+    <MESSAGE value="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение" />
+    <option name="LAST_COMMIT_MESSAGE" value="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение" />
   </component>
 </project>

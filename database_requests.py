@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, render_template, request
 import sqlite3 as sq
 from config import database
@@ -29,6 +31,11 @@ def user_select_to_dict(tuple_info):
     dict['school_id'] = tuple_info[0][10]
     dict['city_id'] = tuple_info[0][11]
     dict['class'] = tuple_info[0][12]
+    dict['number_of_attempts'] = {}
+    dict['number_of_right_attempts'] = {}
+    for task in range(1, 27):
+        dict['number_of_attempts'][task] = random.randint(1, 25)
+        dict['number_of_right_attempts'][task] = random.randint(1, dict['number_of_attempts'][task])
     if tuple_info[0][13] != -1:
         dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[0][13]) + '_avatar.jpg'
     else:
