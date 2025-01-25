@@ -66,7 +66,7 @@ def add_problem():
 @app.route("/test")
 def test_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    return render_template("test.html", problems=problems, user=[0, "aowje"])
+    return render_template("test1.html", problems=problems, user=[0, "aowje"])
 
 @app.route("/blank")
 def blank_page():

@@ -175,7 +175,7 @@ def variant_page_feedback_kwargs(variant_id):
     kwargs['show_answers'] = tmp['show_answers']
     kwargs['amount_right'] = 0
     for elem in answers:
-        if elem == 1:
+        if elem[1] == 1:
             kwargs['amount_right'] += 1
     return kwargs
 
