@@ -39,7 +39,7 @@ def authorization_page(failed=False, problem=None):
             #Отобразить "Неправильный логин или пароль" [неправильный пароль]
         else:
             person_id = database_requests.get_user_id_with_login(info['login'])
-            return redirect(url_for('personal_user_page', id=person_id))
+            return redirect(url_for('personal_user_page', user_id=person_id))
 
 @app.route("/users/<user_id>")
 def personal_user_page(user_id):
@@ -66,7 +66,7 @@ def add_problem():
 @app.route("/test")
 def test_page():
     problems = database_requests.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    return render_template("test.html", problems=problems, user=[0, "aowje"])
+    return render_template("test1.html", problems=problems, user=[0, "aowje"])
 
 @app.route("/blank")
 def blank_page():
