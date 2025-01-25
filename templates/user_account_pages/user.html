@@ -82,19 +82,19 @@
       margin-top: 20px; /* Отступ сверху */
     }
 
-    .col-green {
+    table .col-green {
         background-color: #4CAF50; /* ярко-зеленый */
     }
 
-    .col-light-green {
+    table .col-light-green {
         background-color: #8BC34A; /* светло-зеленый */
     }
 
-    .col-yellow {
+    table .col-yellow {
         background-color: #FFEB3B; /* желтый */
     }
 
-    .col-red {
+    table .col-red {
         background-color: #F44336; /* красный */
     }
   </style>
@@ -123,7 +123,7 @@
         <thead>
             <tr>
                 <th>№ Задания</th>
-                {% for task in range(1, 27) %}
+                {% for task in range(1, 28) %}
                 <th>{{ task }}</th>
                 {% endfor %}
             </tr>
@@ -131,14 +131,18 @@
         <tbody>
             <tr>
                 <td>Количество попыток</td>
-                {% for attempt in number_of_attempts %}
-                    <td>{{ number_of_attempts[attempt] }}</td>
+                {% for task in range(1, 28) %}
+                <td class="{% if ratio[task] >= 0.85 %}col-green{% elif ratio[task] >= 0.75 %}col-light-green{% elif ratio[task] >= 0.65 %}col-yellow{% else %}col-red{% endif %}">
+                    {{ number_of_attempts[task] }}
+                </td>
                 {% endfor %}
             </tr>
             <tr>
                 <td>Успешные попытки</td>
-                {% for right_attempt in number_of_right_attempts %}
-                    <td>{{ number_of_right_attempts[right_attempt] }}</td>
+                {% for task in range(1, 28) %}
+                <td class="{% if ratio[task] >= 0.85 %}col-green{% elif ratio[task] >= 0.75 %}col-light-green{% elif ratio[task] >= 0.65 %}col-yellow{% else %}col-red{% endif %}">
+                    {{ number_of_right_attempts[task] }}
+                </td>
                 {% endfor %}
             </tr>
         </tbody>

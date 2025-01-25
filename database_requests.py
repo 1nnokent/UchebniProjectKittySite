@@ -33,9 +33,11 @@ def user_select_to_dict(tuple_info):
     dict['class'] = tuple_info[0][12]
     dict['number_of_attempts'] = {}
     dict['number_of_right_attempts'] = {}
-    for task in range(1, 27):
+    dict['ratio'] = {}
+    for task in range(1, 28):
         dict['number_of_attempts'][task] = random.randint(1, 25)
         dict['number_of_right_attempts'][task] = random.randint(1, dict['number_of_attempts'][task])
+        dict['ratio'][task] = dict['number_of_right_attempts'][task] / dict['number_of_attempts'][task]
     if tuple_info[0][13] != -1:
         dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[0][13]) + '_avatar.jpg'
     else:

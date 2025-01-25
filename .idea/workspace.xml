@@ -9,9 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_account_pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_account_pages/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737745783568</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="написал правильнф">
+      <option name="closed" value="true" />
+      <created>1737785725759</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1737785725759</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,6 +319,8 @@
     <MESSAGE value="изменения в бдшке (не знаю, какие)" />
     <MESSAGE value="заменил громоздкие хедеры на {include header.html}" />
     <MESSAGE value="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение" />
-    <option name="LAST_COMMIT_MESSAGE" value="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение" />
+    <MESSAGE value="написал правильный путь до файла user" />
+    <MESSAGE value="написал правильный путь до файла user" />
+    <option name="LAST_COMMIT_MESSAGE" value="написал правильный путь до файла user" />
   </component>
 </project>
