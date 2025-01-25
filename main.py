@@ -9,6 +9,10 @@ app = Flask(__name__, template_folder="templates")
 def first_page():
     return render_template("index.html")
 
+@app.route('/forum')
+def forum():
+    return render_template("forum.html")
+
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
     if request.method == "GET":
