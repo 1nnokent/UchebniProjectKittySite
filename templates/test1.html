@@ -27,79 +27,109 @@
     <!-- Main CSS File -->
     <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
     <title>Страница Лекций</title>
-  <style>
+    <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            padding-top: 100px;
+            background-color: #f0f0f0; /* Светло-серый фон */
+            color: #333;
+            padding-top: 60px;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
+
+
         .container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
+            max-width: 1200px;
+            margin-left: 15%;
+            margin-right: 15%;
         }
+
         .lecture-card {
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             margin: 10px;
-            padding: 15px;
-            width: calc(30% - 20px); /* Три в ряд - 30%;  2 - 50%; 1 - 100% */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: box-shadow 0.3s ease;
-            box-sizing: border-box;
+            padding: 20px;
+            width: calc(30% - 20px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+             box-sizing: border-box;
         }
+
         .lecture-card:hover {
-             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .lecture-card h3 {
-            margin-bottom: 10px;
+             transform: translateY(-3px); /* эффект "поднятия" при наведении */
+             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+         }
+         .lecture-card h3 {
+            margin-bottom: 15px;
             color: #333;
-            font-weight: 600;
+            font-weight: 700;
+             border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+
         }
+
         .lecture-card p {
             color: #555;
-            font-size: 0.9em;
+            font-size: 0.95em;
+             line-height: 1.6;
         }
+
         .video-player {
-            margin-top: 10px;
+            margin-top: 15px;
+            border: 1px solid #eee; /* Рамка вокруг видео */
+            border-radius: 5px;
+            overflow: hidden; /* Обрезаем рамку */
         }
-        .filter-container {
+
+
+       .filter-container {
             text-align: center;
-            padding: 10px;
-            background: #eee;
+            padding: 20px;
+            background: #f8f8f8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+
         }
+
         .filter-container select {
-            padding: 8px;
+            padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+             margin: 0 10px;
+            font-size: 1em;
+            appearance: none;
+            min-width: 300px;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            cursor: pointer;
         }
+
         .hidden {
             display: none !important;
         }
-         .video-container {
-              position: relative;
-             padding-bottom: 56.25%;
+        .video-container {
+             position: relative;
+             padding-bottom: 56.25%; /* Соотношение 16:9 */
              height: 0;
-            overflow: hidden;
+             overflow: hidden;
+             background-color: #ddd;
+
         }
-        .video-container iframe {
+         .video-container iframe {
             position: absolute;
-             top: 0;
-             left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
-             height: 100%;
-         }
+            height: 100%;
+        }
     </style>
 </head>
 <body>
