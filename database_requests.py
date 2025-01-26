@@ -8,11 +8,6 @@ from datetime import datetime
 connect = sq.connect(database, check_same_thread=False)
 cursor = connect.cursor()
 
-if __name__ == "__main__":
-    app = Flask(__name__)
-    connect = sq.connect(database, check_same_thread=False)
-    cursor = connect.cursor()
-
 def sql_execute(sql_request):
     return cursor.execute(sql_request)
 
@@ -200,6 +195,10 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
 
     sql_execute(sql_req_1)
     connect.commit()
+
+def get_learning_materials():
+    sql_req = f"""SELECT * FROM learning_materials"""
+    return sql_execute(sql_req).fetchall()
 
 if __name__ == "__main__":
     print("         ТИП   КЛАСС   ОТВЕТ   СЛОЖОСТЬ", "ВВЕДИТЕ: ", sep='\n', end="")
