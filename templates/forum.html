@@ -77,9 +77,10 @@
     .btn-container {
       display: flex;
       align-items: center; /* Центрирование по горизонтали */
-      justify-content: center; /* Центрирование по вертикали */
-      max-width: 600px; /* Максимальная ширина контейнера */
+      justify-content: space-between; /* Центрирование по вертикали */
+      max-width: 1000px; /* Максимальная ширина контейнера */
       margin: 110px auto 0;
+      position: relative
     }
 
 
@@ -98,21 +99,23 @@
       margin-left: 5px; /* Установите нужное значение для отступа */
    }
 
-   .btn {
+   .btn-primary {
       border: 0px;
       border-radius: 1px;
+      position: absolute; /* Делаем кнопку абсолютной для её центрирования */
+      left: 50%; /* Сдвигаем кнопку на 50% от контейнера */
+      transform: translateX(-50%); /* Сдвигаем кнопку на половину её ширины влево для центрирования */
    }
 
   .search-input {
-      margin-left: 10px; /* Отступ между кнопкой и полем поиска */
-      padding: 10px; /* Отступ внутри поля поиска */
-      border: 2px solid #ccc; /* Цвет рамки поля поиска */
-      border-radius: 5px; /* Скругление углов поля поиска */
-      width: 200px; /* Ширина поля поиска */
+    margin-left: 10px; /* Отступ между кнопкой и полем поиска */
+    padding: 10px; /* Отступ внутри поля поиска */
+    border: 1px solid #ccc; /* Цвет рамки поля поиска */
+    width: 200px; /* Ширина поля поиска */
   }
 
   .search-input:focus {
-      border-color: blue; /* Цвет рамки при фокусе */
+      border-color: black; /* Цвет рамки при фокусе */
       outline: none; /* Убираем стандартный контур */
   }
 
@@ -126,11 +129,12 @@
   {% include 'header.html' %}
 
     <div class="btn-container">
-      <button class="btn btn-primary mb-3" onclick="window.location.href='{{ url_for('first_page') }}'">
+      <button class="btn-primary" onclick="window.location.href='{{ url_for('first_page') }}'">
           Создать новую тему
       </button>
       <input type="text" class="search-input" placeholder="Поиск тем...">
     </div>
+
     <div class="discussion-container">
       {% for i in range(1, 10) %}
         <div class="discussion-item">

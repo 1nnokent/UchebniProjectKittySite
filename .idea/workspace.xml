@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="столбцы теперь окрашиваются">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="промежуточное обновление forum.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum.html" afterDir="false" />
     </list>
@@ -38,12 +38,12 @@
     &quot;assignee&quot;: &quot;1nnokent&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/1nnokent/UchebniProjectKittySite.git",
-    "accountId": "af480dbd-9a0e-42e9-9ffe-51d509e98e68"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/1nnokent/UchebniProjectKittySite.git&quot;,
+    &quot;accountId&quot;: &quot;af480dbd-9a0e-42e9-9ffe-51d509e98e68&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -292,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737789120792</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="промежуточное обновление forum.html">
+      <option name="closed" value="true" />
+      <created>1737895660435</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1737895660435</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +337,7 @@
     <MESSAGE value="написал правильный путь до файла user" />
     <MESSAGE value="написал правильный путь до файла user" />
     <MESSAGE value="столбцы теперь окрашиваются" />
-    <option name="LAST_COMMIT_MESSAGE" value="столбцы теперь окрашиваются" />
+    <MESSAGE value="промежуточное обновление forum.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="промежуточное обновление forum.html" />
   </component>
 </project>
