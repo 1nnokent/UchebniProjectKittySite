@@ -47,7 +47,7 @@
       margin: 20px auto 0;
       padding: 10px; /* Отступ внутри контейнера */
       background-color: #e9ecef; /* Цвет фона для контейнера */
-      border-radius: 10px; /* Скругленные углы */
+      border-radius: 1px; /* Скругленные углы */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
     }
 
@@ -82,14 +82,6 @@
       margin: 110px auto 0;
     }
 
-   .discussion-item {
-      display: flex;
-      justify-content: space-between;
-      border: 1px solid #ccc; /* Пример оформления, можно удалить */
-      padding: 10px; /* Отступы для удобства восприятия */
-      margin-bottom: 10px; /* Отступ между элементами */
-   }
-
 
    .left-section {
       display: flex;
@@ -97,8 +89,32 @@
    }
 
    .message-count {
+      display: flex;
       margin-left: auto; /* Выровнять вправо */
+      align-items: center; /* Центрирование по горизонтали */
    }
+
+   .label {
+      margin-left: 5px; /* Установите нужное значение для отступа */
+   }
+
+   .btn {
+      border: 0px;
+      border-radius: 1px;
+   }
+
+  .search-input {
+      margin-left: 10px; /* Отступ между кнопкой и полем поиска */
+      padding: 10px; /* Отступ внутри поля поиска */
+      border: 2px solid #ccc; /* Цвет рамки поля поиска */
+      border-radius: 5px; /* Скругление углов поля поиска */
+      width: 200px; /* Ширина поля поиска */
+  }
+
+  .search-input:focus {
+      border-color: blue; /* Цвет рамки при фокусе */
+      outline: none; /* Убираем стандартный контур */
+  }
 
 
 
@@ -113,28 +129,20 @@
       <button class="btn btn-primary mb-3" onclick="window.location.href='{{ url_for('first_page') }}'">
           Создать новую тему
       </button>
+      <input type="text" class="search-input" placeholder="Поиск тем...">
     </div>
     <div class="discussion-container">
-      <div class="discussion-item">
-        <div class="left-section">
-            <h4><a>Название темы 1</a></h4>
-            <p>Дата добавления: 01.01.2023</p>
+      {% for i in range(1, 10) %}
+        <div class="discussion-item">
+          <div class="left-section">
+              <h4><a>Название темы {{ i }}</a></h4>
+              <p>Дата добавления: 01.01.2023</p>
+          </div>
+          <div class="message-count">
+              <span class="count">124</span> <span class="label">сообщ.</span>
+          </div>
         </div>
-        <div class="message-count">
-            <span class="count">124</span>
-            <span class="label">сообщ.</span>
-        </div>
-      </div>
-
-      <div class="discussion-item">
-        <h4><a>Название темы 2</a></h4>
-        <p>Дата добавления: 02.01.2023</p>
-        <div class="message-count">
-            <span class="count">124</span>
-            <span class="label">сообщ.</span>
-        </div>
-      </div>
-
+      {% endfor %}
       <!-- Добавьте здесь другие контейнеры обсуждений -->
     </div>
   </div>
