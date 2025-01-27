@@ -9,23 +9,6 @@ app = Flask(__name__, template_folder="templates")
 def first_page():
     return render_template("index.html")
 
-
-@app.route('/forum', methods=["GET"])
-def forum():
-    if request.method == "GET":
-        return render_template("forum.html")
-
-
-@app.route('/submit-topic', methods=['POST'])
-def submit_topic():
-    topic_title = request.form.get('topicTitle')
-    topic_description = request.form.get('topicDescription')
-    print("Название темы:", topic_title)
-    print("Описание темы:", topic_description)
-
-    # Возвращаем ответ
-    return jsonify({'status': 'success', 'message': 'Данные получены'})
-
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
     if request.method == "GET":
@@ -85,11 +68,10 @@ def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("test1.html", problems=problems, user=[0, "aowje"])
 
-@app.route("/learning_materials/list")
+@app.route("/learning-materials/list")
 def learning_materials_page():
     materials = dr.get_learning_materials()
     return render_template('learning_materials.html', materials=materials)
-
 
 @app.route("/blank")
 def blank_page():
@@ -104,6 +86,22 @@ def variant_page(variant_id):
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
+
+@app.route('/forum/list', methods=['POST', 'GET'])
+def forum_main_page():
+    if request.method == 'GET':
+        discussions = dr.get_discussions()
+        print(discussions)
+        return render_template("forum.html", discussions=discussions)
+    elif request.method == 'POST':
+        info = request.form.to_dict()
+        topic_id = dr.insert_new_topic(info)
+        return redirect(url_for('forum_topic_page', topic_id=topic_id))
+
+@app.route('/forum/<topic_id>', methods=['POST', 'GET'])
+def forum_topic_page(topic_id):
+    return render_template('blank.html')
+
 
 @app.route("/problems/list")
 def problems_page():

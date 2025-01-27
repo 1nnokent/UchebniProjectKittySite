@@ -27,13 +27,7 @@
   <!-- Main CSS File -->
   <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Shuffle
-  * Template URL: https://bootstrapmade.com/bootstrap-3-one-page-template-free-shuffle/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
   <style>
         body {
           background-color: #f8f9fa; /* Цвет фона для страницы */
@@ -171,7 +165,7 @@
             <span class="close">&times;</span>
             <h2>Создание новой темы</h2>
             <br>
-            <form action="/submit-topic" method="post" id="topicForm">
+            <form method="post" id="topicForm" enctype="multipart/form-data">
                 <div class="form-group">
                    <label>Название темы:</label>
                    <input type="text" name="topicTitle" id="topicTitle" class="form-control" required />
@@ -192,16 +186,16 @@
     </div>
 
     <div class="discussion-container">
-      {% for i in range(1, 10) %}
-        <div class="discussion-item">
+      {% for d in discussions %}
+        <a class="discussion-item">
           <div class="left-section">
-              <h4><a>Название темы {{ i }}</a></h4>
-              <p>Дата добавления: 01.01.2023</p>
+              <h4><a>{{ d[0] }}</a></h4>
+              <p>Дата добавления: {{ d[1] }}</p>
           </div>
           <div class="message-count">
-              <span class="count">124</span> <span class="label">сообщ.</span>
+              <span class="count">{{ d[2] }}</span> <span class="label">сообщ.</span>
           </div>
-        </div>
+        </a>
       {% endfor %}
       <!-- Добавьте здесь другие контейнеры обсуждений -->
     </div>
@@ -225,35 +219,6 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-
-        document.getElementById("topicForm").onsubmit = function(event) {
-            event.preventDefault(); // Предотвращаем перезагрузку страницы
-
-            // Получаем значения полей формы
-            const topicTitle = document.getElementById("topicTitle").value;
-            const topicDescription = document.getElementById("topicDescription").value;
-
-            // Отправляем данные на сервер с помощью Fetch API
-            fetch('/submit-topic', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    'topicTitle': topicTitle,
-                    'topicDescription': topicDescription
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Успех:', data);
-                alert(`Тема "${topicTitle}" создана!`);
-                modal.style.display = "none"; // Закрываем модальное окно
-            })
-            .catch((error) => {
-                console.error('Ошибка:', error);
-            });
         }
     </script>
 

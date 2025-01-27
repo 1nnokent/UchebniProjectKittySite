@@ -9,7 +9,8 @@ connect = sq.connect(database, check_same_thread=False)
 cursor = connect.cursor()
 
 def sql_execute(sql_request):
-    return cursor.execute(sql_request)
+    ret = cursor.execute(sql_request)
+    return ret
 
 def user_select_to_dict(tuple_info):
     dict = {}
@@ -103,7 +104,6 @@ def insert_user(info):
                             """
         sql_execute(sql_req)
         connect.commit()
-
         return 0
 
 def get_password_with_login(login):
@@ -195,6 +195,38 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
 
     sql_execute(sql_req_1)
     connect.commit()
+
+def get_discussions():
+    sql_req = f"""
+        SELECT discussion_name, discussion_creation_time, messages_count FROM forum_discussions
+    """
+    return sql_execute(sql_req).fetchall()
+
+def insert_new_topic(info):
+    message_id = sql_execute("SELECT count(*) FROM forum_messages").fetchall()[0][0]
+    discussion_id = sql_execute("SELECT count(*) FROM forum_discussions").fetchall()[0][0]
+    author_id = 0
+    messages_count = 1
+    message_name = info['topicTitle']
+    message_text = info['topicDescription']
+    message_send_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
+    sql_req1 = f"""
+        INSERT INTO forum_discussions 
+        VALUES ({discussion_id}, "{message_name}", {author_id}, {messages_count}, "{message_send_time}")
+    """
+    sql_req2 = f"""
+        INSERT INTO forum_discussion_message
+        VALUES ({discussion_id}, {message_id})
+    """
+    sql_req3 = f"""
+        INSERT INTO forum_messages
+        VALUES ({message_id}, "{message_name}", "{message_text}", "{message_send_time}", {author_id})
+    """
+    sql_execute(sql_req1)
+    sql_execute(sql_req2)
+    sql_execute(sql_req3)
+    connect.commit()
+    return discussion_id
 
 def get_learning_materials():
     sql_req = f"""SELECT * FROM learning_materials"""
