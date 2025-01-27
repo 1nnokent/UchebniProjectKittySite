@@ -100,7 +100,7 @@ def forum_main_page():
 
 @app.route('/forum/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
-    return render_template('blank.html')
+    return render_template('forum.html')
 
 
 @app.route("/problems/list")
