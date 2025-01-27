@@ -22,6 +22,7 @@ def registration_page():
         else:
             pass
 
+
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(failed=False, problem=None):
     if request.method == 'GET' and not failed:
@@ -101,6 +102,11 @@ def forum_main_page():
 @app.route('/forum/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
     return render_template('blank.html')
+
+
+@app.route('/forum2')
+def forum_2():
+    return render_template('forum2.html')
 
 
 @app.route("/problems/list")
