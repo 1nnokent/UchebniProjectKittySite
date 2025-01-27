@@ -10,7 +10,7 @@ def first_page():
     return render_template("index.html")
 
 
-@app.route('/forum', methods=["POST", "GET"])
+@app.route('/forum', methods=["GET"])
 def forum():
     if request.method == "GET":
         return render_template("forum.html")
