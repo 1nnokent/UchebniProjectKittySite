@@ -9,10 +9,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="промежуточное обновление forum.html">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="столбцы теперь окрашиваются">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problem_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problem_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test1.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +91,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -110,7 +114,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-18f935f321a6-38e75241d9cc-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.17181.23" />
+        <option value="bundled-python-sdk-c69650fc56ca-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15619.17" />
       </set>
     </attachedChunks>
   </component>
@@ -293,15 +297,7 @@
       <option name="project" value="LOCAL" />
       <updated>1737789120792</updated>
     </task>
-    <task id="LOCAL-00022" summary="промежуточное обновление forum.html">
-      <option name="closed" value="true" />
-      <created>1737925262524</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1737925262524</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +335,6 @@
     <MESSAGE value="написал правильный путь до файла user" />
     <MESSAGE value="написал правильный путь до файла user" />
     <MESSAGE value="столбцы теперь окрашиваются" />
-    <MESSAGE value="промежуточное обновление forum.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="промежуточное обновление forum.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="столбцы теперь окрашиваются" />
   </component>
 </project>
