@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route('/')
 def first_page():
-    return render_template("index.html")
+    return render_template("yandex.html")
 
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
