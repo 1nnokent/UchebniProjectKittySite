@@ -187,13 +187,13 @@
 
     <div class="discussion-container">
       {% for d in discussions %}
-        <a class="discussion-item">
+        <a href="/forum/{{ d[0] }}" class="discussion-item" style="color: black">
           <div class="left-section">
-              <h4><a>{{ d[0] }}</a></h4>
-              <p>Дата добавления: {{ d[1] }}</p>
+              <h4>{{ d[1] }}</h4>
+              <p>Дата добавления: {{ d[4] }}</p>
           </div>
           <div class="message-count">
-              <span class="count">{{ d[2] }}</span> <span class="label">сообщ.</span>
+              <span class="count">{{ d[3] }}</span> <span class="label">сообщ.</span>
           </div>
         </a>
       {% endfor %}

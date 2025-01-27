@@ -198,7 +198,7 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
 
 def get_discussions():
     sql_req = f"""
-        SELECT discussion_name, discussion_creation_time, messages_count FROM forum_discussions
+        SELECT * FROM forum_discussions
     """
     return sql_execute(sql_req).fetchall()
 

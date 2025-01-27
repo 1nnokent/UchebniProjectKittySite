@@ -9,13 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="всё работае!!!!!">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="изменил forum, теперь форма делает запрос к бд и переводит на страницу">
       <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/test1.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -322,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737998607743</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="изменил forum, теперь форма делает запрос к бд и переводит на страницу">
+      <option name="closed" value="true" />
+      <created>1738001405472</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738001405472</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +366,7 @@
     <MESSAGE value="столбцы теперь окрашиваются" />
     <MESSAGE value="хз, что это" />
     <MESSAGE value="всё работае!!!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="всё работае!!!!!" />
+    <MESSAGE value="изменил forum, теперь форма делает запрос к бд и переводит на страницу" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменил forum, теперь форма делает запрос к бд и переводит на страницу" />
   </component>
 </project>
