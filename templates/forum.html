@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
   <meta charset="utf-8">
@@ -35,91 +35,125 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-    body {
-      background-color: #f8f9fa; /* Цвет фона для страницы */
-      overflow-y: scroll;
+        body {
+          background-color: #f8f9fa; /* Цвет фона для страницы */
+          overflow-y: scroll;
+        }
+
+        .discussion-item {
+          display: flex;
+          flex-direction: row; /* Вертикальное расположение */
+          max-width: 1000px; /* Максимальная ширина контейнера */
+          margin: 20px auto 0;
+          padding: 10px; /* Отступ внутри контейнера */
+          background-color: #e9ecef; /* Цвет фона для контейнера */
+          border-radius: 1px; /* Скругленные углы */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+        }
+
+        img {
+          max-width: 300px; /* Ограничение ширины изображения */
+          height: auto; /* Автоматическая настройка высоты */
+          border-radius: 50%; /* Круглая форма для фото */
+          margin-bottom: 20px; /* Отступ снизу */
+        }
+
+        .info-list {
+          margin-top: 20px; /* Отступ сверху */
+          list-style-type: none; /* Убираем маркеры списка */
+          padding: 0; /* Убираем отступы у списка */
+          text-align: center; /* Центрируем текст списка */
+        }
+
+        .info-list li {
+          margin: 5px 0; /* Отступы для элементов списка */
+        }
+
+        .about-section {
+          text-align: center; /* Центрируем текст */
+          margin-top: 20px; /* Отступ сверху */
+        }
+
+        .btn-container {
+          display: flex;
+          align-items: center; /* Центрирование по горизонтали */
+          justify-content: space-between; /* Центрирование по вертикали */
+          max-width: 1000px; /* Максимальная ширина контейнера */
+          margin: 110px auto 0;
+          position: relative
+        }
+
+
+       .left-section {
+          display: flex;
+          flex-direction: column; /* Вертикальная компоновка заголовка и даты */
+       }
+
+       .message-count {
+          display: flex;
+          margin-left: auto; /* Выровнять вправо */
+          align-items: center; /* Центрирование по горизонтали */
+       }
+
+       .label {
+          margin-left: 5px; /* Установите нужное значение для отступа */
+       }
+
+       .btn-primary {
+          border: 0px;
+          border-radius: 1px;
+          position: absolute; /* Делаем кнопку абсолютной для её центрирования */
+          left: 50%; /* Сдвигаем кнопку на 50% от контейнера */
+          transform: translateX(-50%); /* Сдвигаем кнопку на половину её ширины влево для центрирования */
+       }
+
+      .search-input {
+        margin-left: 10px; /* Отступ между кнопкой и полем поиска */
+        padding: 10px; /* Отступ внутри поля поиска */
+        border: 1px solid #ccc; /* Цвет рамки поля поиска */
+        width: 200px; /* Ширина поля поиска */
+      }
+
+      .search-input:focus {
+          border-color: black; /* Цвет рамки при фокусе */
+          outline: none; /* Убираем стандартный контур */
+      }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
     }
 
-    .discussion-item {
-      display: flex;
-      flex-direction: row; /* Вертикальное расположение */
-      max-width: 1000px; /* Максимальная ширина контейнера */
-      margin: 20px auto 0;
-      padding: 10px; /* Отступ внутри контейнера */
-      background-color: #e9ecef; /* Цвет фона для контейнера */
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1000px;
+      height: 470px;
+      transform: translate(-50%, -50%);
+      background-color: #f8f9fa;
+      padding: 20px;
       border-radius: 1px; /* Скругленные углы */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
     }
 
-    img {
-      max-width: 300px; /* Ограничение ширины изображения */
-      height: auto; /* Автоматическая настройка высоты */
-      border-radius: 50%; /* Круглая форма для фото */
-      margin-bottom: 20px; /* Отступ снизу */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
     }
 
-    .info-list {
-      margin-top: 20px; /* Отступ сверху */
-      list-style-type: none; /* Убираем маркеры списка */
-      padding: 0; /* Убираем отступы у списка */
-      text-align: center; /* Центрируем текст списка */
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
-
-    .info-list li {
-      margin: 5px 0; /* Отступы для элементов списка */
-    }
-
-    .about-section {
-      text-align: center; /* Центрируем текст */
-      margin-top: 20px; /* Отступ сверху */
-    }
-
-    .btn-container {
-      display: flex;
-      align-items: center; /* Центрирование по горизонтали */
-      justify-content: space-between; /* Центрирование по вертикали */
-      max-width: 1000px; /* Максимальная ширина контейнера */
-      margin: 110px auto 0;
-      position: relative
-    }
-
-
-   .left-section {
-      display: flex;
-      flex-direction: column; /* Вертикальная компоновка заголовка и даты */
-   }
-
-   .message-count {
-      display: flex;
-      margin-left: auto; /* Выровнять вправо */
-      align-items: center; /* Центрирование по горизонтали */
-   }
-
-   .label {
-      margin-left: 5px; /* Установите нужное значение для отступа */
-   }
-
-   .btn-primary {
-      border: 0px;
-      border-radius: 1px;
-      position: absolute; /* Делаем кнопку абсолютной для её центрирования */
-      left: 50%; /* Сдвигаем кнопку на 50% от контейнера */
-      transform: translateX(-50%); /* Сдвигаем кнопку на половину её ширины влево для центрирования */
-   }
-
-  .search-input {
-    margin-left: 10px; /* Отступ между кнопкой и полем поиска */
-    padding: 10px; /* Отступ внутри поля поиска */
-    border: 1px solid #ccc; /* Цвет рамки поля поиска */
-    width: 200px; /* Ширина поля поиска */
-  }
-
-  .search-input:focus {
-      border-color: black; /* Цвет рамки при фокусе */
-      outline: none; /* Убираем стандартный контур */
-  }
-
-
 
   </style>
 </head>
@@ -136,12 +170,21 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Создание новой темы</h2>
-            <form id="topicForm">
-                <label for="topicTitle">Название темы:</label>
-                <input type="text" id="topicTitle" name="topicTitle" required>
-                <label for="topicDescription">Описание темы:</label>
-                <textarea id="topicDescription" name="topicDescription" required></textarea>
-                <button type="submit">Сохранить</button>
+            <br>
+            <form action="/submit-topic" method="post" id="topicForm">
+                <div class="form-group">
+                   <label>Название темы:</label>
+                   <input type="text" name="topicTitle" id="topicTitle" class="form-control" required />
+                </div>
+                <br>
+                <div class="form-group">
+                   <label>Описание темы:</label>
+                   <textarea rows=5 name="topicDescription" id="topicDescription" class="form-control" required /></textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                   <input type="submit" name="submit" class="btn-primary" value="Опубликовать">
+                </div>
             </form>
         </div>
       </div>
@@ -164,44 +207,55 @@
     </div>
   </div>
 
-  <script src="static/js/main.js"></script>
   <script>
-    // Получаем элементы модального окна и кнопки
-    const modal = document.getElementById("modal");
-    const btn = document.getElementById("openModal");
-    const span = document.getElementsByClassName("close")[0];
+        // Получаем элементы модального окна и кнопки
+        const modal = document.getElementById("modal");
+        const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
 
-    // Открываем модальное окно при нажатии на кнопку
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-    // Закрываем модальное окно при нажатии на "x"
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Закрываем модальное окно при клике вне его
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        span.onclick = function() {
             modal.style.display = "none";
         }
-    }
 
-    // Обработка отправки формы
-    document.getElementById("topicForm").onsubmit = function(event) {
-        event.preventDefault(); // Предотвращаем перезагрузку страницы
-        const title = document.getElementById("topicTitle").value;
-        const description = document.getElementById("topicDescription").value;
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-        // Здесь можно добавить код для обработки данных (например, отправка на сервер)
+        document.getElementById("topicForm").onsubmit = function(event) {
+            event.preventDefault(); // Предотвращаем перезагрузку страницы
 
-        alert(`Тема "${title}" создана!`);
+            // Получаем значения полей формы
+            const topicTitle = document.getElementById("topicTitle").value;
+            const topicDescription = document.getElementById("topicDescription").value;
 
-        // Закрываем модальное окно после отправки
-        modal.style.display = "none";
-    }
-  </script>
+            // Отправляем данные на сервер с помощью Fetch API
+            fetch('/submit-topic', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'topicTitle': topicTitle,
+                    'topicDescription': topicDescription
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Успех:', data);
+                alert(`Тема "${topicTitle}" создана!`);
+                modal.style.display = "none"; // Закрываем модальное окно
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+            });
+        }
+    </script>
 
 </body>
 

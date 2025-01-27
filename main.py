@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3 as sq
 from config import database
 import database_requests as dr
@@ -9,9 +9,22 @@ app = Flask(__name__, template_folder="templates")
 def first_page():
     return render_template("index.html")
 
-@app.route('/forum')
+
+@app.route('/forum', methods=["POST", "GET"])
 def forum():
-    return render_template("forum.html")
+    if request.method == "GET":
+        return render_template("forum.html")
+
+
+@app.route('/submit-topic', methods=['POST'])
+def submit_topic():
+    topic_title = request.form.get('topicTitle')
+    topic_description = request.form.get('topicDescription')
+    print("Название темы:", topic_title)
+    print("Описание темы:", topic_description)
+
+    # Возвращаем ответ
+    return jsonify({'status': 'success', 'message': 'Данные получены'})
 
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
