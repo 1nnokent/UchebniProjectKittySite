@@ -149,6 +149,21 @@
      </div>
 
      <script>
+         var acc = document.getElementsByClassName("accordion");
+         var i;
+
+         for (i = 0; i < acc.length; i++) {
+             acc[i].addEventListener("click", function() {
+                 this.classList.toggle("active");
+                 var panel = this.nextElementSibling;
+                 if (panel.style.display === "block") {
+                     panel.style.display = "none"; // Скрыть панель
+                 } else {
+                     panel.style.display = "block"; // Показать панель
+                 }
+             });
+         }
+
          // Функция для фильтрации материалов
          function filterMaterials() {
              const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
