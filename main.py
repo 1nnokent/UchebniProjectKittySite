@@ -7,7 +7,8 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route('/')
 def first_page():
-    return render_template("yandex.html")
+    amount = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0]
+    return render_template("yandex.html", amount=amount)
 
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
@@ -101,7 +102,7 @@ def forum_main_page():
 
 @app.route('/forum/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
-    return render_template('forum.html')
+    return render_template('forum2.html')
 
 
 @app.route('/forum2')

@@ -37,15 +37,14 @@
     <div class="conr">
         <div class="row">
             {% set tasks_way1 = "/problems/list " %}
-            {% set tasks_way2 = "/learning_materials/list " %}
+            {% set tasks_way2 = "/learning-materials/list " %}
             <div class="number" style="width:300px"> <a style="color:black" href="{{ tasks_way1 }}"> <h4 style="margin-top:7px">Задачи</h4> </a> </div>
             <div class="number" style="width:300px"> <a style="color:black" href="{{ tasks_way2 }}"> <h4 style="margin-top:7px">Теория</h4> </a> </div>
     </div>
         <h2> Варианты </h2>
         <div class="row">
-            {% for i in range(19) %}
-<!--                {% set tasks_way = "/variants/{{ i + 1 }} " %}-->
-                <div class="number"> <a style="color:black" href="{{ tasks_way }}"> {{ i + 1 }} </a> </div>
+            {% for i in range(amount) %}
+                <div class="number"> <a style="color:black" href="/variants/{{ i + 1 }}"> {{ i + 1 }} </a> </div>
 
             {% endfor %}
         </div>
