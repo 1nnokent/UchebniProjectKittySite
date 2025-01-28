@@ -1,229 +1,190 @@
-
+Артур, [28.01.2025 13:15]
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Кошьки inc.</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Кошьки inc.</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
 
-    <!-- Favicons -->
-    <link href="static/img/favicon.png" rel="icon">
-    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="static/vendor/aos/aos.css" rel="stylesheet">
-    <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-    <link href="static/css/main.css" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #f8f9fa;
-            /* Цвет фона для страницы */
-            overflow-y: scroll;
-        }
-
-        .discussion-item {
-            display: flex;
-            flex-direction: row;
-            /* Вертикальное расположение */
-            max-width: 1000px;
-            /* Максимальная ширина контейнера */
-            margin: 20px auto 0;
-            padding: 10px;
-            /* Отступ внутри контейнера */
-            background-color: #e9ecef;
-            /* Цвет фона для контейнера */
-            border-radius: 1px;
-            /* Скругленные углы */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-            /* Тень для контейнера */
-        }
-
-        img {
-            max-width: 300px;
-            /* Ограничение ширины изображения */
-            height: auto;
-            /* Автоматическая настройка высоты */
-            border-radius: 50%;
-            /* Круглая форма для фото */
-            margin-bottom: 20px;
-            /* Отступ снизу */
-        }
-
-        .info-list {
-            margin-top: 20px;
-            /* Отступ сверху */
-            list-style-type: none;
-            /* Убираем маркеры списка */
-            padding: 0;
-            /* Убираем отступы у списка */
-            text-align: center;
-            /* Центрируем текст списка */
-        }
-
-        .info-list li {
-            margin: 5px 0;
-            /* Отступы для элементов списка */
-        }
-
-        .about-section {
-            text-align: center;
-            /* Центрируем текст */
-            margin-top: 20px;
-            /* Отступ сверху */
-        }
-
-        .btn-container {
-            display: flex;
-            align-items: center;
-            /* Центрирование по горизонтали */
-            justify-content: space-between;
-            /* Центрирование по вертикали */
-            max-width: 1000px;
-            /* Максимальная ширина контейнера */
-            margin: 110px auto 0;
-            position: relative
-        }
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
 
 
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            /* Вертикальная компоновка заголовка и даты */
-        }
+  <style>
+      body {
+         background-color: #f8f9fa; /* Цвет фона для страницы */
+         overflow-y: scroll;
+      }
 
-        .message-count {
-            display: flex;
-            margin-left: auto;
-            /* Выровнять вправо */
-            align-items: center;
-            /* Центрирование по горизонтали */
-        }
+      .forum-topic {
+         margin: 100px auto 20px; /* Центрируем блок с помощью auto */
+         text-align: center; /* Центрируем текст внутри блока */
+         max-width: 600px; /* Устанавливаем максимальную ширину, если это необходимо */
+      }
 
-        .label {
-            margin-left: 5px;
-            /* Установите нужное значение для отступа */
-        }
-        .topic-link {
-            text-decoration: none; /* Убираем подчеркивание ссылки */
-            color: inherit; /* Наследует цвет текста родителя */
-            display: block; /* Занимает всю область родительского элемента */
-        }
+     .message-item {
+        display: flex;
+        width: 1000px; /* Максимальная ширина контейнера */
+        margin: 0 auto 0;
+        padding: 10px; /* Отступ внутри контейнера */
+        border-radius: 1px; /* Скругленные углы */
+        display: block;
+     }
 
-        .topic-link:hover {
-            text-decoration: none;
-            color: inherit;
-             /* Убираем подчеркивание ссылки */
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 1px;
-        }
-       .post-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .messages-container {
+        padding-bottom: 160px; /* Начальный отступ */
+        margin-bottom: 50px; /* Отступ между сообщениями и фиксированным полем ввода */
+    }
 
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
+    .message-user {
+        font-weight: bold; /* Выделяем имя пользователя */
+        margin-bottom: 5px; /* Отступ снизу для имени пользователя */
+    }
 
-        .post-user {
-           font-style: italic;
-            font-weight: bold;
-        }
+    .message-content {
+        padding: 0px; /* Отступ внутри блока сообщения */
+    }
 
-        .post-timestamp {
-           font-style: italic;
-        }
+    .message-box {
+        border: 1px solid #ccc; /* Рамка для сообщения */
+        padding: 10px; /* Отступ внутри рамки */
+        margin-bottom: 5px;
+        border-radius: 1px; /* Округление для рамки сообщения */
+        width: 980px; /* Рамка занимает всю ширину контейнера */
+    }
 
-        .post-content {
-            margin-bottom: 20px;
-        }
+    .message-box p {
+        margin-bottom: 0; /* Убираем нижний отступ для p */
+        padding: 0; /* Убираем внутренний отступ для p, если нужно */
+    }
 
-        .reply-form {
-            margin-top: 30px;
-        }
-    </style>
+    .message-date {
+        color: #666; /* Цвет для даты */
+    }
+
+    .reply-section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 10px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .reply-box {
+        max-width: 980px;
+        margin: 0 auto;
+    }
+
+    .reply-textarea {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        padding: 10px;
+        box-sizing: border-box;
+        resize: none; /* Запретить изменение размера текстового поля вручную */
+    }
+
+    .send-message-btn {
+        margin-top: 10px;
+        padding: 10px 15px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+
+    .send-message-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-primary {
+        border: 0px;
+        border-radius: 1px;
+        margin-top: 10px;
+    }
+
+  </style>
 </head>
 
-<body>
+<body class="forum-page">
 
-    <section id="topic-page">
-        <div class="post-container">
-            <div class="post-header">
-                <div class="post-user">User1</div>
-                 <div class="post-timestamp">2024-08-29 10:00</div>
+  {% include 'header.html' %}
+
+    <div class="forum-topic">
+        <h2>Название темы</h2>
+    </div>
+
+    <div class="messages-container">
+        {% for i in range(1, 10) %}
+        <div style="{% if i % 2 == 0 %}background-color:#dae0e6;{% else %}background-color:#e9ecef;{% endif %}" class="message-item">
+            <div class="message-user"> User {{ i }} </div>
+            <div class="message-content">
+                <div class="message-box"> <!-- Добавляем рамку сообщения -->
+                    <p>Сверху лох</p>
+                </div>
+                <span class="message-date"> xx.xx.2012 </span>
             </div>
-            <div class="post-content">
-                <p>Это первый пост в теме!</p>
-            </div>
-         </div>
+        </div>
+        {% endfor %}
+    </div>
 
-          <div class="post-container">
-           <div class="post-header">
-               <div class="post-user">User2</div>
-              <div class="post-timestamp">2024-08-29 10:30</div>
-          </div>
-          <div class="post-content">
-              <p>Вот ответ на первый пост.</p>
-          </div>
-          </div>
+    <div class="reply-section">
+        <form action="" method="post">
+                <textarea class="reply-textarea" name="reply-textarea" rows="4" placeholder="Введите ваш ответ..."></textarea>
+                <input type="submit" name="submit" class="btn-primary" value="Опубликовать">
+        </form>
+    </div>
 
-        <div class="reply-form">
-            <textarea placeholder="Напишите ответ..."></textarea>
-            <button class="btn btn-primary">Отправить</button>
-       </div>
-    </section>
+    <script>
+        function adjustPaddingForMessages() {
+        const messageElements = document.querySelectorAll('.message');
+        const messagesContainer = document.querySelector('.messages-container');
 
-  <script src="static/vendor/aos/aos.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="static/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="static/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="static/vendor/php-email-form/validate.js"></script>
+        if (messageElements.length > 0) {
+            // Получаем высоту последнего сообщения
+            const lastMessage = messageElements[messageElements.length - 1];
+            const lastMessageHeight = lastMessage.offsetHeight;
 
-  <script src="static/js/main.js"></script>
+            // Устанавливаем padding-bottom для контейнера сообщений
+            messagesContainer.style.paddingBottom = lastMessageHeight + 'px';
+        }
+    }
 
-   <script>
-       document.addEventListener('DOMContentLoaded', function() {
-        const topicLinks = document.querySelectorAll('.topic-link');
-        const topicSection = document.getElementById('topics');
-        const topicPageSection = document.getElementById('topic-page');
+    // Пример вызова функции после отправки сообщения
+    document.querySelector('.send-message-btn').addEventListener('click', function() {
+        // Здесь можно добавить логику отправки сообщения
+        // Например, добавьте новое сообщение в контейнер
 
-       topicLinks.forEach(link => {
-             link.addEventListener('click', function(event) {
-                event.preventDefault();
-                topicSection.style.display = 'none';
-                 topicPageSection.style.display = 'block';
-                const topicId = link.getAttribute('href').split('/').pop();
-                 console.log(topicId)
+        // После добавления сообщения, вызовите метод для изменения padding
+        adjustPaddingForMessages();
+    });
 
-             });
-       });
-
-
-       });
-   </script>
+    // Вызываем при загрузке страницы, чтобы установить изначальный отступ
+    adjustPaddingForMessages();
+    </script>
 </body>
+
 </html>

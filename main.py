@@ -105,8 +105,11 @@ def forum_topic_page(topic_id):
     return render_template('forum2.html')
 
 
-@app.route('/forum2')
-def forum_2():
+@app.route('/forum2', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        message = request.form
+        print(message)
     return render_template('forum2.html')
 
 
