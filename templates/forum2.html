@@ -51,7 +51,7 @@
      }
 
     .messages-container {
-        padding-bottom: 160px; /* Начальный отступ */
+        padding-bottom: 220px; /* Начальный отступ */
         margin-bottom: 50px; /* Отступ между сообщениями и фиксированным полем ввода */
     }
 
@@ -126,6 +126,13 @@
         margin-top: 10px;
     }
 
+    .for-user {
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
   </style>
 </head>
 
@@ -153,6 +160,7 @@
 
     <div class="reply-section">
         <form action="" method="post">
+                <input type="text" class="for-user" name="user" placeholder="Никнейм">
                 <textarea class="reply-textarea" name="reply-textarea" rows="4" placeholder="Введите ваш ответ..."></textarea>
                 <input type="submit" name="submit" class="btn-primary" value="Опубликовать">
         </form>
