@@ -52,23 +52,10 @@ def personal_user_page(user_id):
         kwargs = dr.user_select_to_dict(info)
         return render_template("user_account_pages/user.html", **kwargs)
 
-@app.route("/problems/add", methods=['POST', 'GET'])
-def add_problem():
-    if request.method == 'GET':
-        return render_template("add_problem.html")
-    if request.method == 'POST':
-        info = request.form.to_dict()
-        if not (1 <= int(info['problem_type']) <= 27):
-            return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
-
-        dr.insert_problem(int(info['problem_type']), info['problem_class'], info['problem_source'],
-                                         info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
-        return render_template('problem_added.html')
-
 @app.route("/test")
 def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    return render_template("test1.html", problems=problems, user=[0, "aowje"])
+    return render_template("test.html", user=[0, "aowje"])
 
 @app.route("/learning-materials/list")
 def learning_materials_page():
@@ -117,6 +104,19 @@ def index():
 def problems_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("problem_list.html", problems=problems)
+
+@app.route("/problems/add", methods=['POST', 'GET'])
+def add_problem():
+    if request.method == 'GET':
+        return render_template("add_problem.html")
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        if not (1 <= int(info['problem_type']) <= 27):
+            return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
+
+        dr.insert_problem(int(info['problem_type']), info['problem_class'], info['problem_source'],
+                                         info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
+        return render_template('problem_added.html')
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")

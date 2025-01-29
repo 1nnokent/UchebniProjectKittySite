@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+    <title>Страница Лекций</title>
+  <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            padding-top: 100px;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .lecture-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 15px;
+            width: calc(100% - 20px); /* Три в ряд - 30%;  2 - 50%; 1 - 100% */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+        .lecture-card:hover {
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .lecture-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+        .lecture-card p {
+            color: #555;
+            font-size: 0.9em;
+        }
+        .video-player {
+            margin-top: 10px;
+        }
+        .filter-container {
+            text-align: center;
+            padding: 10px;
+            background: #eee;
+        }
+        .filter-container select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .hidden {
+            display: none !important;
+        }
+         .video-container {
+              position: relative;
+             padding-bottom: 56.25%;
+             height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+             top: 0;
+             left: 0;
+            width: 100%;
+             height: 100%;
+         }
+    </style>
+</head>
+<body>
+     {% include 'header.html' %}
+    <div class="filter-container">
+      <select id="filter-select">
+          <option value="all">Все</option>
+          <option value="video">Видео</option>
+          <option value="presentation">Презентация</option>
+          <option value="other">Другое</option>
+      </select>
+    </div>
+    <div class="container">
+      <div class="lecture-card" data-type="video">
+          <h3>Лекция 1: Введение в Python</h3>
+          <p>Описание лекции 1. Программирование на Python.</p>
+          <div class="video-player hidden">
+              <div class="video-container">
+                  <iframe width="560" height="315" src="https://rutube.ru/play/embed/9852193" frameborder="0" allowfullscreen></iframe>
+              </div>
+          </div>
+      </div>
+      <div class="lecture-card" data-type="presentation">
+          <h3>Презентация 1: Структуры данных</h3>
+          <p>Описание презентации о структурах данных.</p>
+            <div class="video-player hidden">
+                <p>Презентация будет загружена здесь...</p>
+            </div>
+      </div>
+      <div class="lecture-card" data-type="other">
+          <h3>Статья 1: Алгоритмы сортировки</h3>
+          <p>Описание статьи про алгоритмы сортировки.</p>
+            <div class="video-player hidden">
+                <p>Текст статьи будет здесь...</p>
+            </div>
+      </div>
+      <div class="lecture-card" data-type="video">
+          <h3>Лекция 2: Основы JavaScript</h3>
+           <p>Описание лекции 2. Программирование на JavaScript.</p>
+           <div class="video-player hidden">
+               <div class="video-container">
+                   <iframe width="560" height="315" src="https://vk.com/video_ext.php?oid=266841072&id=456239802&hash=47d0f2c61b409f16" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+      </div>
+      <div class="lecture-card" data-type="presentation">
+          <h3>Презентация 2: Веб-дизайн</h3>
+          <p>Описание презентации о веб-дизайне.</p>
+            <div class="video-player hidden">
+                <p>Презентация будет загружена здесь...</p>
+            </div>
+       </div>
+      <div class="lecture-card" data-type="other">
+            <h3>Документ 1: ТЗ по проекту</h3>
+            <p>Описание ТЗ.</p>
+            <div class="video-player hidden">
+                <p>Текст ТЗ будет здесь...</p>
+            </div>
+       </div>
+      <div class="lecture-card" data-type="video">
+             <h3>Лекция 3: Машинное обучение</h3>
+             <p>Описание лекции 3. Введение в машинное обучение.</p>
+             <div class="video-player hidden">
+                 <div class="video-container">
+                    <iframe width="560" height="315" src="https://rutube.ru/play/embed/6605673" frameborder="0" allowfullscreen></iframe>
+                 </div>
+            </div>
+        </div>
+      <div class="lecture-card" data-type="presentation">
+        <h3>Презентация 3: Архитектура</h3>
+         <p>Описание презентации об архитектуре.</p>
+         <div class="video-player hidden">
+             <p>Презентация будет загружена здесь...</p>
+         </div>
+      </div>
+    </div>
+    <script>
+        document.querySelectorAll('.lecture-card').forEach(card => {
+          card.addEventListener('click', () => {
+              card.querySelector('.video-player').classList.toggle('hidden');
+            });
+        });
+
+        document.getElementById('filter-select').addEventListener('change', function() {
+           let selectedType = this.value;
+           document.querySelectorAll('.lecture-card').forEach(card => {
+                if (selectedType === 'all' || card.dataset.type === selectedType) {
+                card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -72,6 +72,7 @@
             <div class="problem-card
                         {% if answers[i][1] == 0 %}incorrect
                         {% elif answers[i][1] == 1 %}correct
+                        {% elif answers[i][1] == -1 %}empty
                         {% else %}default
                         {% endif %}">
                 <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}</h5>

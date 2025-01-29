@@ -25,8 +25,9 @@
   --accent-color: #1bbca3; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-  --incorrect-answer-color: #f76d5e;
+  --incorrect-answer-color: #ff4040;
   --correct-answer-color: #acf273;
+  --empty-answer-color: #c9c9c9;
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -1180,6 +1181,10 @@ section,
 
 .problem-card.correct {
     background-color: var(--correct-answer-color);
+}
+
+.problem-card.empty {
+    background-color: var(--empty-answer-color);
 }
 
 .problem-card:hover {

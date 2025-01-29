@@ -133,7 +133,7 @@ def variant_page_default_kwargs(variant_id):
                       ON variant_problem.problem_id = problems.problem_id
                       WHERE variant_problem.variant_id = {variant_id}"""
     problems = sql_execute(sql_req).fetchall()
-    answers_default = ((-1, -1)) * len(problems)
+    answers_default = ((-1, -2)) * len(problems)
     kwargs = dict()
     kwargs['problems'] = problems
     kwargs['answers'] = answers_default
