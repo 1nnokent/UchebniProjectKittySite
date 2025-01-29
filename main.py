@@ -81,7 +81,7 @@ def forum_main_page():
     if request.method == 'GET':
         discussions = dr.get_discussions()
         print(discussions)
-        return render_template("forum.html", discussions=discussions)
+        return render_template("forum_main_page.html", discussions=discussions)
     elif request.method == 'POST':
         info = request.form.to_dict()
         topic_id = dr.insert_new_topic(info)
@@ -89,7 +89,16 @@ def forum_main_page():
 
 @app.route('/forum/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
-    return render_template('forum2.html')
+    if request.method == 'GET':
+        topic_name = dr.get_topic_name(topic_id)
+        messages = dr.get_topic_messages(topic_id)
+        return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
+    elif request.method == 'POST':
+        info = request.form.to_dict()
+        dr.insert_topic_message(info)
+        topic_name = dr.get_topic_name(topic_id)
+        messages = dr.get_topic_messages(topic_id)
+        return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
 
 
 @app.route('/forum2', methods=['GET', 'POST'])

@@ -9,18 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="маленькие изменения повсюду">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/variant_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_main_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_topic_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738071568914</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="маленькие изменения повсюду">
+      <option name="closed" value="true" />
+      <created>1738140347979</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1738140347979</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,6 +385,7 @@
     <MESSAGE value="всё работае!!!!!" />
     <MESSAGE value="изменил forum, теперь форма делает запрос к бд и переводит на страницу" />
     <MESSAGE value="форум2 передаю в руки максиму" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="маленькие изменения повсюду" />
+    <option name="LAST_COMMIT_MESSAGE" value="маленькие изменения повсюду" />
   </component>
 </project>

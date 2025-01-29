@@ -202,6 +202,32 @@ def get_discussions():
     """
     return sql_execute(sql_req).fetchall()
 
+def get_topic_name(topic_id):
+    sql_req = f"""
+        SELECT discussion_name FROM forum_discussions WHERE discussion_id = { topic_id }
+    """
+    return sql_execute(sql_req).fetchall()[0][0]
+
+def get_topic_messages(topic_id):
+    sql_req = f"""
+        SELECT 
+                users.first_name, 
+                users.second_name, 
+                forum_messages.message_text,
+                forum_messages.message_send_time
+            FROM 
+                users 
+            INNER JOIN 
+                forum_messages ON users.user_id = forum_messages.message_author_id 
+            INNER JOIN 
+                forum_discussion_message ON forum_messages.message_id = forum_discussion_message.message_id 
+            WHERE 
+                forum_discussion_message.discussion_id = { topic_id }
+            ORDER BY 
+                forum_messages.message_send_time ASC;
+    """
+    return sql_execute(sql_req).fetchall()
+
 def insert_new_topic(info):
     message_id = sql_execute("SELECT count(*) FROM forum_messages").fetchall()[0][0]
     discussion_id = sql_execute("SELECT count(*) FROM forum_discussions").fetchall()[0][0]
@@ -227,6 +253,14 @@ def insert_new_topic(info):
     sql_execute(sql_req3)
     connect.commit()
     return discussion_id
+
+def insert_topic_message(info):
+    sql_req1 = f"""
+        INSERT INTO
+                forum_messages
+            VALUES
+                {info}
+    """
 
 def get_learning_materials():
     sql_req = f"""SELECT * FROM learning_materials"""
