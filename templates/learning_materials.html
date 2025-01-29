@@ -142,7 +142,7 @@
 
      <div class="container" id="lectures-container">
          {% for material in materials %}
-         <a href="/" class="lecture-card {% if material[1] != 0 %}no-video{% endif %}" data-type="{% if material[1] == 0 %}video{% elif material[1] == 1 %}presentation{% else %}other{% endif %}" data-egenumber="{{ material[5] }}">
+         <a href="{% if material[1] == 0 %}/learning-video/{{ material[0] }}{% else %}/{% endif %}" class="lecture-card {% if material[1] != 0 %}no-video{% endif %}" data-type="{% if material[1] == 0 %}video{% elif material[1] == 1 %}presentation{% else %}other{% endif %}" data-egenumber="{{ material[5] }}">
              <h3>{{ material[2] }}</h3>
                  <!-- Отображаем только заголовок и дополнительный текст -->
                  {% if material[3] %}
