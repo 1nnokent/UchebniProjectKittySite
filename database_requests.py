@@ -266,6 +266,10 @@ def get_learning_materials():
     sql_req = f"""SELECT * FROM learning_materials"""
     return sql_execute(sql_req).fetchall()
 
+def get_learning_material(material_id):
+    sql_req = f"""SELECT * FROM learning_materials WHERE material_id = {material_id}"""
+    return sql_execute(sql_req).fetchall()
+
 if __name__ == "__main__":
     print("         ТИП   КЛАСС   ОТВЕТ   СЛОЖОСТЬ", "ВВЕДИТЕ: ", sep='\n', end="")
     problem_type, problem_class, problem_answer, problem_difficulty = map(int, input().split())
