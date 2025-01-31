@@ -9,11 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="реализовано отображение forum_topic_page.html с данными из БД">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="надеюсь, workspace.xml всё починит">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forum_topic_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_topic_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,7 +356,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738312743950</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="надеюсь, workspace.xml всё починит">
+      <option name="closed" value="true" />
+      <created>1738320680610</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1738320680610</updated>
+    </task>
+    <task id="LOCAL-00031" summary="надеюсь, workspace.xml всё починит">
+      <option name="closed" value="true" />
+      <created>1738320726541</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1738320726541</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +391,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Поставил url_for в ser.html - теперь страница грузится нормально" />
     <MESSAGE value="Изменил все html файлы под формат url_for" />
     <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
     <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
@@ -402,6 +415,7 @@
     <MESSAGE value="форум2 передаю в руки максиму" />
     <MESSAGE value="маленькие изменения повсюду" />
     <MESSAGE value="реализовано отображение forum_topic_page.html с данными из БД" />
-    <option name="LAST_COMMIT_MESSAGE" value="реализовано отображение forum_topic_page.html с данными из БД" />
+    <MESSAGE value="надеюсь, workspace.xml всё починит" />
+    <option name="LAST_COMMIT_MESSAGE" value="надеюсь, workspace.xml всё починит" />
   </component>
 </project>
