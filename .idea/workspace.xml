@@ -9,13 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="маленькие изменения повсюду">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_main_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forum2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_topic_page.html" afterDir="false" />
-    </list>
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="реализовано отображение forum_topic_page.html с данными из БД" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -343,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738140347979</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="реализовано отображение forum_topic_page.html с данными из БД">
+      <option name="closed" value="true" />
+      <created>1738142840762</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1738142840762</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,6 +388,7 @@
     <MESSAGE value="изменил forum, теперь форма делает запрос к бд и переводит на страницу" />
     <MESSAGE value="форум2 передаю в руки максиму" />
     <MESSAGE value="маленькие изменения повсюду" />
-    <option name="LAST_COMMIT_MESSAGE" value="маленькие изменения повсюду" />
+    <MESSAGE value="реализовано отображение forum_topic_page.html с данными из БД" />
+    <option name="LAST_COMMIT_MESSAGE" value="реализовано отображение forum_topic_page.html с данными из БД" />
   </component>
 </project>
