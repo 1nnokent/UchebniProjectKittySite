@@ -101,7 +101,7 @@ def forum_topic_page(topic_id):
         return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
     elif request.method == 'POST':
         info = request.form.to_dict()
-        dr.insert_topic_message(info)
+        dr.insert_topic_message(topic_id, info)
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
