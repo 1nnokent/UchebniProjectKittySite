@@ -254,13 +254,36 @@ def insert_new_topic(info):
     connect.commit()
     return discussion_id
 
-def insert_topic_message(info):
+def insert_topic_message(topic_id, info):
+    message_text = info['reply_text']
+    message_id = sql_execute("SELECT count(*) FROM forum_messages").fetchall()[0][0]
+    send_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
+    author_id = 0
     sql_req1 = f"""
         INSERT INTO
                 forum_messages
             VALUES
-                {info}
+                ({message_id}, NULL, "{message_text}", "{send_time}", {author_id}) 
     """
+    sql_req2 = f"""
+        INSERT INTO
+                forum_discussion_message
+            VALUES
+                ({topic_id}, {message_id})
+    """
+    cur_num = sql_execute(f"""SELECT messages_count FROM forum_discussions WHERE discussion_id = {topic_id}""").fetchall()[0][0]
+    sql_req3 = f"""
+        UPDATE
+            forum_discussions
+        SET
+            messages_count = {cur_num + 1}
+        WHERE
+            discussion_id = {topic_id}
+    """
+    sql_execute(sql_req1)
+    sql_execute(sql_req2)
+    sql_execute(sql_req3)
+    connect.commit()
 
 def get_learning_materials():
     sql_req = f"""SELECT * FROM learning_materials"""
