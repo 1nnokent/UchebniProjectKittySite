@@ -68,6 +68,12 @@ def learning_video(material_id):
     print(material)
     return render_template('learning_video.html', material=material)
 
+@app.route("/learning-presentation/<material_id>")
+def learning_presentation(material_id):
+    material = dr.get_learning_material(material_id)
+    print(material_id)
+    return render_template('learning_presentation.html', material=material)
+
 @app.route("/blank")
 def blank_page():
     return render_template("blank.html")

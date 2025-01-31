@@ -10,8 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="надеюсь, workspace.xml всё починит">
+      <change afterPath="$PROJECT_DIR$/templates/learning_presentation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum_main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_main_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum_topic_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_topic_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_materials.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_materials.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_video.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_video.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

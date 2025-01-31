@@ -30,7 +30,7 @@
 
   <style>
       body {
-         background-color: #f8f9fa; /* Цвет фона для страницы */
+         background-color: #f0f0f0;
          overflow-y: scroll;
       }
 
@@ -85,7 +85,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #f8f9fa;
+        background-color: white;
         padding: 10px;
         box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
@@ -145,7 +145,7 @@
 
     <div class="messages-container">
         {% for i in range (messages | length) %}
-        <div style="{% if i % 2 == 0 %}background-color:#dae0e6;{% else %}background-color:#e9ecef;{% endif %}" class="message-item">
+        <div style="background-color:white; margin-top: 20px" class="message-item">
             <div class="message-user"> {{ messages[i][0] }} {{ messages[i][1] }} </div>
             <div class="message-content">
                 <div class="message-box"> <!-- Добавляем рамку сообщения -->
