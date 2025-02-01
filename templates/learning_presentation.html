@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -28,15 +28,24 @@
     <style>
          body {
            background-color: #f0f0f0;
-           overflow-y: scroll;
+           overflow: hidden;
+           height: 100%;
+           margin: 0;
+           padding: 0;
         }
         iframe {
             display: block;
             margin: 20px auto;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            scrolling="no"
+            max-width: 100%;
+            width: 960px;
+            height: 569px;
+        }
+        @media (max-width: 1000px) {
+            iframe {
+                width: 95vw;
+                height: 56.25vw; /* Сохраняем соотношение сторон 16:9 */
+            }
         }
     </style>
 </head>
@@ -46,6 +55,7 @@
       <h1>{{ material[0][2] }}</h1>  <!-- Заголовок из material[2] -->
     </div>
     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS1n2HvJKHc7gBssONdcwTsPzIPJRmIYwnpU5q30JZMSjmkDzmgISTqUX9phGJH0w2MIFZ0NUJ1sVPg/embed?start=false&loop=false&delayms=3000"
-            frameborder="0" width="1600" height="900" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            frameborder="0"  allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" scrolling="no"></iframe>
 </body>
+
 </html>

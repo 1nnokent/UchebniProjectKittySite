@@ -111,15 +111,6 @@ def forum_topic_page(topic_id):
         messages = dr.get_topic_messages(topic_id)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
-
-@app.route('/forum2', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        message = request.form
-        print(message)
-    return render_template('forum2.html')
-
-
 @app.route("/problems/list")
 def problems_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
