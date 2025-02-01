@@ -65,7 +65,6 @@ def learning_materials_page():
 @app.route("/learning-video/<material_id>")
 def learning_video(material_id):
     material = dr.get_learning_material(material_id)
-    print(material)
     return render_template('learning_video.html', material=material)
 
 @app.route("/learning-presentation/<material_id>")
@@ -86,7 +85,7 @@ def variant_page(variant_id):
     elif request.method == 'POST':
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
-        return render_template("variant_page.html", **kwargs)
+        return render_template("variant_page", **kwargs)
 
 @app.route('/forum/list', methods=['POST', 'GET'])
 def forum_main_page():
@@ -110,7 +109,7 @@ def forum_topic_page(topic_id):
         dr.insert_topic_message(topic_id, info)
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
-        return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
+        return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
 
 @app.route('/forum2', methods=['GET', 'POST'])
@@ -137,7 +136,7 @@ def add_problem():
 
         dr.insert_problem(int(info['problem_type']), info['problem_class'], info['problem_source'],
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
-        return render_template('problem_added.html')
+        return redirect(url_for('add_problem'))
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
