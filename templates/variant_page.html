@@ -75,9 +75,9 @@
                         {% elif answers[i][1] == -1 %}empty
                         {% else %}default
                         {% endif %}">
-                <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}</h5>
-                <h6 class="problem-author">{{problems[i][3]}}</h6>
-                <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][4]|safe}}</p>
+                <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
+                <h6 class="problem-author">{{problems[i][2]}}</h6>
+                <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
                 <div class="input-group">
                     {% if answers[i][0] == -1 %}
                         <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">
@@ -85,7 +85,7 @@
                         <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" value="{{answers[i][0]}}" name="{{problems[i][0]}}">
                     {% endif %}
                     {% if show_answers == True %}
-                        <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][5]}}</p>
+                        <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][4]}}</p>
                     {% endif %}
                 </div>
             </div>
