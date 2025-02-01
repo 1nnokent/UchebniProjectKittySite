@@ -134,9 +134,10 @@ def add_problem():
         if not (1 <= int(info['problem_type']) <= 27):
             return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
 
-        dr.insert_problem(int(info['problem_type']), info['problem_class'], info['problem_source'],
+        dr.insert_problem(int(info['problem_type']), info['problem_source'],
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
         return redirect(url_for('add_problem'))
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
+

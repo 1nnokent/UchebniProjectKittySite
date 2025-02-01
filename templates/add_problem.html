@@ -63,10 +63,6 @@
         <input class="form-control" id="problem_type" placeholder="Введите число от 1 до 27" name="problem_type">
       </div>
       <div class="form-group">
-        <label for="problem_class">Типаж задания</label>
-        <input class="form-control" id="problem_class" placeholder="Введите число от 1 до 2" name="problem_class">
-      </div>
-      <div class="form-group">
         <label for="problem_source">Оригинальный источник задания</label>
         <input class="form-control" id="problem_source" placeholder="Введите название учебника и/или имя автора" name="problem_source">
       </div>
@@ -83,6 +79,11 @@
           <option>3</option>
           <option>4</option>
         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="file">Прикрепите файлы</label>
+        <input type="file" class="form-control-file" id="file" name="files" multiple>
       </div>
 
       <button type="submit" class="btn-primary" style="align-items:center ">Добавить задачу</button>

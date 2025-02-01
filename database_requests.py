@@ -41,8 +41,19 @@ def user_select_to_dict(tuple_info):
 
     return dict
 
-def insert_problem(problem_type, problem_class, problem_source, problem_statement, problem_answer, problem_difficulty):
+def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
     amount = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    pictures = request.files.getlist('files')
+    for elem in pictures:
+        picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
+        path = "static/img/problem-pictures/problem_" + str(picture_id) + ".jpg"
+        elem.save(path)
+        sql_execute(f"""
+            INSERT 
+                INTO problem_picture
+            VALUES
+                ({amount}, {picture_id}) 
+        """)
     text = ""
     prev = 0
     last = 0
@@ -61,7 +72,7 @@ def insert_problem(problem_type, problem_class, problem_source, problem_statemen
 
     sql_req = f"""
     INSERT INTO problems
-    VALUES ({amount}, {problem_type}, {problem_class}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
+    VALUES ({amount}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
     """
 
     print(sql_req)
