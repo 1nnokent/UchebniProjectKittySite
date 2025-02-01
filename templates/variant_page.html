@@ -84,7 +84,7 @@
                     {% else %}
                         <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" value="{{answers[i][0]}}" name="{{problems[i][0]}}">
                     {% endif %}
-                    {% if show_answers == True %}
+                    {% if show_answers %}
                         <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][4]}}</p>
                     {% endif %}
                 </div>
@@ -93,7 +93,7 @@
         </div>
 
         <div class="button-container">
-            <input id="checkbox1" type="checkbox" name="show_answers">
+            <input id="checkbox1" type="checkbox" name="show_answers" value="true">
             <label for="checkbox1" style="white-space: pre;"> Показать правильные ответы</label>
         </div>
         <div class="button-container">

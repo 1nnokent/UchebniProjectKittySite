@@ -85,7 +85,7 @@ def variant_page(variant_id):
     elif request.method == 'POST':
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
-        return render_template("variant_page", **kwargs)
+        return render_template("variant_page.html", **kwargs)
 
 @app.route('/forum/list', methods=['POST', 'GET'])
 def forum_main_page():
