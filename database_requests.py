@@ -198,8 +198,8 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
         sql_req_2 = f"""
             INSERT INTO user_problem 
             VALUES ({user_id}, {problem[0]}, "{answers[str(problem[0])]}", "{completion_time}", {variant_id}, {assignment_id},
-                    {(answers[str(problem[0])] == sql_execute(f"""SELECT problem_answer FROM problems 
-                    WHERE problem_id = { problem[0] }""").fetchall()[0][0])})
+                    {(answers[str(problem[0])] == sql_execute(f'''SELECT problem_answer FROM problems 
+                    WHERE problem_id = { problem[0] }''').fetchall()[0][0])})
             """
         print(sql_req_2)
         sql_execute(sql_req_2)
