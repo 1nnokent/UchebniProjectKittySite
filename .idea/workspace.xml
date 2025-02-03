@@ -9,15 +9,25 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="временный файл">
-      <change afterPath="$PROJECT_DIR$/templates/add_variant.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error_page.html" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.laccdb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blank.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blank.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modify_variant.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modify_variant.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courses_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courses_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_404_not_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_404_not_found.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_authorization_user_not_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_authorization_user_not_found.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_registration_user_exists.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_registration_user_exists.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum_main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_main_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_materials.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_materials.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_presentation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_presentation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_video.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_video.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problem_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problem_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/yandex.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/yandex.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,135 +405,7 @@
       <option name="project" value="LOCAL" />
       <updated>1738586976473</updated>
     </task>
-    <task id="LOCAL-00034" summary="изменил директорию /learning-videos/ и прочее на стандартизированное /learning-materials/&lt;id&gt;">
-      <option name="closed" value="true" />
-      <created>1738599254866</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599254866</updated>
-    </task>
-    <task id="LOCAL-00035" summary="исправил ссылки на /learning-materials/&lt;id&gt;">
-      <option name="closed" value="true" />
-      <created>1738599274896</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599274896</updated>
-    </task>
-    <task id="LOCAL-00036" summary="убрал другой шрифт (из-за этого header выглядел не так, как на других страницах)">
-      <option name="closed" value="true" />
-      <created>1738599305506</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599305506</updated>
-    </task>
-    <task id="LOCAL-00037" summary="изменил ссылку /problems/list на /problems/all">
-      <option name="closed" value="true" />
-      <created>1738599340329</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599340329</updated>
-    </task>
-    <task id="LOCAL-00038" summary="изменил внешний вид страницы курса">
-      <option name="closed" value="true" />
-      <created>1738599367148</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599367148</updated>
-    </task>
-    <task id="LOCAL-00039" summary="убрал стиль с header">
-      <option name="closed" value="true" />
-      <created>1738599379700</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599379700</updated>
-    </task>
-    <task id="LOCAL-00040" summary="изменения бд (добавил курс)">
-      <option name="closed" value="true" />
-      <created>1738599395032</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599395032</updated>
-    </task>
-    <task id="LOCAL-00041" summary="починил get_course_materials">
-      <option name="closed" value="true" />
-      <created>1738599424825</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599424825</updated>
-    </task>
-    <task id="LOCAL-00042" summary="изменил ссылку с /problems/list на /problems/all">
-      <option name="closed" value="true" />
-      <created>1738599454744</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599454744</updated>
-    </task>
-    <task id="LOCAL-00043" summary="изменил ссылку на страницу форума с /forum/&lt;id&gt; на /forum/topics/&lt;id&gt;">
-      <option name="closed" value="true" />
-      <created>1738599475617</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599475617</updated>
-    </task>
-    <task id="LOCAL-00044" summary="добавил выпадающий список с обучающими материалами и курсами">
-      <option name="closed" value="true" />
-      <created>1738599495765</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599495765</updated>
-    </task>
-    <task id="LOCAL-00045" summary="убрал шрифт на body">
-      <option name="closed" value="true" />
-      <created>1738599507108</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599507108</updated>
-    </task>
-    <task id="LOCAL-00046" summary="хз">
-      <option name="closed" value="true" />
-      <created>1738599514032</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599514032</updated>
-    </task>
-    <task id="LOCAL-00047" summary="поменял ссылки с /list на /all">
-      <option name="closed" value="true" />
-      <created>1738599532958</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1738599532958</updated>
-    </task>
-    <task id="LOCAL-00048" summary="временный файл">
-      <option name="closed" value="true" />
-      <created>1738604025891</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1738604025891</updated>
-    </task>
-    <task id="LOCAL-00049" summary="временный файл">
-      <option name="closed" value="true" />
-      <created>1738604432102</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1738604432102</updated>
-    </task>
-    <option name="localTasksCounter" value="50" />
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,6 +424,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
+    <MESSAGE value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />
+    <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
+    <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
+    <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
+    <MESSAGE value="+" />
+    <MESSAGE value="основная часть завершена; проверить на баги и доработать внешний вид" />
+    <MESSAGE value="добавлена вкладка &quot;Учебные материалы&quot; в test.html" />
+    <MESSAGE value="изменил blank.html, добавил стиль в main.css для .body" />
+    <MESSAGE value="-" />
+    <MESSAGE value="изменения в бдшке (не знаю, какие)" />
+    <MESSAGE value="заменил громоздкие хедеры на {include header.html}" />
+    <MESSAGE value="в функции personal_user_pages поменял page на pages. не логическое, а орфографическое изменение" />
+    <MESSAGE value="написал правильный путь до файла user" />
+    <MESSAGE value="написал правильный путь до файла user" />
     <MESSAGE value="столбцы теперь окрашиваются" />
     <MESSAGE value="хз, что это" />
     <MESSAGE value="всё работае!!!!!" />
@@ -552,21 +449,6 @@
     <MESSAGE value="надеюсь, workspace.xml всё починит" />
     <MESSAGE value="сохранение белой версии" />
     <MESSAGE value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
-    <MESSAGE value="изменил директорию /learning-videos/ и прочее на стандартизированное /learning-materials/&lt;id&gt;" />
-    <MESSAGE value="исправил ссылки на /learning-materials/&lt;id&gt;" />
-    <MESSAGE value="убрал другой шрифт (из-за этого header выглядел не так, как на других страницах)" />
-    <MESSAGE value="изменил ссылку /problems/list на /problems/all" />
-    <MESSAGE value="изменил внешний вид страницы курса" />
-    <MESSAGE value="убрал стиль с header" />
-    <MESSAGE value="изменения бд (добавил курс)" />
-    <MESSAGE value="починил get_course_materials" />
-    <MESSAGE value="изменил ссылку с /problems/list на /problems/all" />
-    <MESSAGE value="изменил ссылку на страницу форума с /forum/&lt;id&gt; на /forum/topics/&lt;id&gt;" />
-    <MESSAGE value="добавил выпадающий список с обучающими материалами и курсами" />
-    <MESSAGE value="убрал шрифт на body" />
-    <MESSAGE value="хз" />
-    <MESSAGE value="поменял ссылки с /list на /all" />
-    <MESSAGE value="временный файл" />
-    <option name="LAST_COMMIT_MESSAGE" value="временный файл" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
   </component>
 </project>
