@@ -146,11 +146,10 @@
                  {% endfor %}
                  
                  {% for file_name in problem[7] %}
-                     {% if file_name.endswith('.xlsx') %}
-                         <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                     {% elif file_name.endswith('.txt') %}
+                         <p><a href="{{ url_for('static', filename='excel-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
+                 {% endfor %}
+                 {% for file_name in problem[8] %}
                          <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                     {% endif %}
                  {% endfor %}
                  <div class="answer">
 
