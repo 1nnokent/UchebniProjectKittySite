@@ -42,19 +42,31 @@ def user_select_to_dict(tuple_info):
     return dict
 
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
-    amount = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
-    pictures = request.files.getlist('files')
+    problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    pictures = request.files.getlist('photos')
     for elem in pictures:
         picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
-        path = "static/img/problem-pictures/problem_" + str(picture_id) + ".jpg"
-        elem.seek(0)
+        path = f"""static/img/problem-pictures/{picture_id}.jpg"""
         elem.save(path)
         sql_execute(f"""
             INSERT 
                 INTO problem_picture
             VALUES
-                ({amount}, {picture_id}) 
+                ({problem_id}, {picture_id}) 
         """)
+
+    tables = request.files.getlist('tables')
+    for elem in tables:
+        table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
+        path = f"""static/excel-tables/{tables_id}.xlsx"""
+        elem.save(path)
+        sql_execute(f"""
+            INSERT
+                INTO problem_table
+            VALUES
+                ({problem_id}, {table_id})
+        """)
+
     text = ""
     prev = 0
     last = 0
@@ -79,6 +91,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     print(sql_req)
     sql_execute(sql_req) #|safe
     connect.commit()
+
 
 def insert_problem_file(problem_type, problem_class, problem_source, filename, problem_answer, problem_difficulty):
     file = open(filename, "r", encoding="UTF-8")
@@ -353,6 +366,18 @@ def insert_problem_to_variant(variant_id, problem_id):
                 variant_problem
             VALUES
                 ({variant_id}, {problem_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def remove_problem_from_variant(variant_id, problem_id):
+    sql_req = f"""
+            DELETE 
+                FROM variant_problem
+            WHERE
+                variant_id = {variant_id}
+            AND
+                problem_id = {problem_id}
     """
     sql_execute(sql_req)
     connect.commit()

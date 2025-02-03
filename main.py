@@ -70,12 +70,7 @@ def learning_material_page(material_id):
     if material[1] == 1:
         return render_template('learning_presentation.html', material=material)
     if material[1] == 2:
-        return render_template('learning_conspect.html', material=material)
-
-@app.route("/learning-abstract")
-def learning_abstract():
-    return render_template('learning_abstract.html')
-
+        return render_template('learning_abstract.html', material=material)
 
 @app.route("/blank")
 def blank_page():
@@ -97,12 +92,17 @@ def modify_variant(variant_id):
         problems = dr.get_problems_by_variant(variant_id)
         return render_template('modify_variant.html', problems=problems)
     if request.method == 'POST':
-        problem_id = request.form.to_dict()['problem_id']
-
-        if problem_id == '' or int(problem_id) >= dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]:
+        info = request.form.to_dict()
+        operation = 'problem_id_add' in info
+        problem_id = info[list(info.keys())[0]]
+        mmax = dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]
+        if problem_id == '' or int(problem_id) - 1 >= mmax:
             return redirect(url_for('error_page'))
 
-        dr.insert_problem_to_variant(variant_id, int(problem_id))
+        if operation:
+            dr.insert_problem_to_variant(variant_id, int(problem_id) - 1)
+        else:
+            dr.remove_problem_from_variant(variant_id, int(problem_id))
         return redirect(url_for('modify_variant', variant_id=variant_id))
 
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
@@ -169,7 +169,7 @@ def course_page(course_id):
 
 @app.route("/error/")
 def error_page():
-    return render_template('error.html')
+    return render_template('error_page.html')
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
