@@ -22,6 +22,13 @@
     <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
 
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            padding-top: 70px;
+        }
         .filter-container {
             display: flex;
             flex-direction: column; /* Вертикальное выравнивание */
@@ -114,11 +121,6 @@
 <body>
      {% include 'header.html' %}
      <div class="filter-container">
-          <div class="filter-group" id="type-filters">
-               <label><input type="checkbox" name="material-type" value="video">Видео</label>
-               <label><input type="checkbox" name="material-type" value="presentation">Презентация</label>
-               <label><input type="checkbox" name="material-type" value="other">Конспект</label>
-          </div>
           <div class="filter-group" id="ege-filters">
               {% for i in range(1, 28) %}
                   <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
@@ -127,13 +129,10 @@
      </div>
 
      <div class="container" id="lectures-container">
-         {% for material in materials %}
-         <a href="/learning-materials/{{ material[0] }}" class="lecture-card {% if material[1] != 0 %}no-video{% endif %}" data-type="{% if material[1] == 0 %}video{% elif material[1] == 1 %}presentation{% else %}other{% endif %}" data-egenumber="{{ material[5] }}">
-             <h3>{{ material[2] }}</h3>
-                 <!-- Отображаем только заголовок и дополнительный текст -->
-                 {% if material[3] %}
-                     <p>{{ material[3] }}</p> <!-- Дополнительный текст -->
-                 {% endif %}
+         {% for course in courses %}
+         <a href="/courses/{{ course[0] }}" class="lecture-card" data-egenumber="{{ course[3] }}">
+             <h3>{{ course[1] }}</h3>
+             <p>{{ course[2] }}</p>
          </a>
          {% endfor %}
      </div>
