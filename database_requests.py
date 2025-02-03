@@ -46,7 +46,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     pictures = request.files.getlist('photos')
     for elem in pictures:
         picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
-        path = f"""static/img/problem-pictures/{picture_id}.jpg"""
+        path = f"""static/img/problem-pictures/problem_{picture_id}.jpg"""
         elem.save(path)
         sql_execute(f"""
             INSERT 
