@@ -142,6 +142,9 @@ def forum_topic_page(topic_id):
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
+    for elem in problems:
+        if elem[1] == 3:
+            print(elem)
     return render_template("problem_list.html", problems=problems)
 
 @app.route("/problems/add", methods=['POST', 'GET'])

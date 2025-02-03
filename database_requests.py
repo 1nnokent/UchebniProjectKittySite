@@ -53,7 +53,14 @@ def get_problems():
         for i in pictures:
             k.append(f"""problem_{i[0]}.jpg""")
         tmp.append(k)
+        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in tables:
+            k.append(f"""{i[0]}.xlxs""")
+        tmp.append(k)
         ret.append(tmp)
+
+
     return ret
 
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
@@ -73,7 +80,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     tables = request.files.getlist('tables')
     for elem in tables:
         table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
-        path = f"""static/excel-tables/{tables_id}.xlsx"""
+        path = f"""static/excel-tables/{table_id}.xlsx"""
         elem.save(path)
         sql_execute(f"""
             INSERT
@@ -100,7 +107,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
 
     sql_req = f"""
     INSERT INTO problems
-    VALUES ({amount}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
+    VALUES ({problem_id}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
     """
 
     print(sql_req)
