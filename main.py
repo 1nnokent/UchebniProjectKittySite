@@ -14,11 +14,11 @@ def first_page():
 def registration_page():
     if request.method == "GET":
         return render_template("/user_account_pages/registration.html")
-    elif request.method == "POST":
+    if request.method == "POST":
         code = dr.insert_user(request.form.to_dict())
         if code == 0:
             return render_template("/user_account_pages/registration_end.html")
-        elif code == 1:
+        if code == 1:
             return render_template("/error_pages/error_registration_user_exists.html") #если пользователь уже есть
         else:
             pass
@@ -82,7 +82,7 @@ def variant_page(variant_id):
     if request.method == 'GET':
         kwargs = dr.variant_page_default_kwargs(variant_id)
         return render_template("variant_page.html", **kwargs)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
@@ -93,7 +93,7 @@ def forum_main_page():
         discussions = dr.get_discussions()
         print(discussions)
         return render_template("forum_main_page.html", discussions=discussions)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         info = request.form.to_dict()
         topic_id = dr.insert_new_topic(info)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
@@ -104,7 +104,7 @@ def forum_topic_page(topic_id):
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         info = request.form.to_dict()
         dr.insert_topic_message(topic_id, info)
         topic_name = dr.get_topic_name(topic_id)
@@ -128,6 +128,16 @@ def add_problem():
         dr.insert_problem(int(info['problem_type']), info['problem_source'],
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
         return redirect(url_for('add_problem'))
+
+@app.route("/courses/list")
+def courses_page():
+    courses = dr.get_courses()
+    return render_template("courses_page.html", courses=courses)
+
+@app.route("/courses/<course_id>")
+def course_page():
+    materials = dr.get_course_materials(course_id)
+    return render_template("course_page.html", materials=materials)
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")

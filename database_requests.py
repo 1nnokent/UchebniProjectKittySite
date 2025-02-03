@@ -47,6 +47,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     for elem in pictures:
         picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
         path = "static/img/problem-pictures/problem_" + str(picture_id) + ".jpg"
+        elem.seek(0)
         elem.save(path)
         sql_execute(f"""
             INSERT 
@@ -302,6 +303,21 @@ def get_learning_materials():
 
 def get_learning_material(material_id):
     sql_req = f"""SELECT * FROM learning_materials WHERE material_id = {material_id}"""
+    return sql_execute(sql_req).fetchall()
+
+def get_courses():
+    sql_req = f"""SELECT * FROM courses"""
+    return sql_execute(sql_req).fetchall()
+
+def get_course_materials(course_id):
+    sql_req = f"""
+            SELECT
+                material_id, material_type, material_name, material_description, material_statement, material_ege_type
+            FROM
+                course_material INNER JOIN materials
+            WHERE
+                course_materials.course_id = {course_id}
+    """
     return sql_execute(sql_req).fetchall()
 
 if __name__ == "__main__":

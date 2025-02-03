@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="сохранение белой версии">
+      <change afterPath="$PROJECT_DIR$/DataBase.laccdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/courses_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +93,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.9" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -124,6 +129,7 @@
       <updated>1731670929884</updated>
       <workItem from="1736575650118" duration="193000" />
       <workItem from="1736577064199" duration="14000" />
+      <workItem from="1738560175054" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Поставил url_for в ser.html - теперь страница грузится нормально">
       <option name="closed" value="true" />
