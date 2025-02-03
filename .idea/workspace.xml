@@ -10,8 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="сохранение белой версии">
+      <change afterPath="$PROJECT_DIR$/static/abstracts/17_Задание_методичка__rui5.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/learning_abstract.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +42,12 @@
     &quot;assignee&quot;: &quot;1nnokent&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/1nnokent/UchebniProjectKittySite&quot;,
-    &quot;accountId&quot;: &quot;b2792309-9bf5-4fa1-a298-051c29bd6a30&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/1nnokent/UchebniProjectKittySite.git",
+    "accountId": "b0a9d1e5-0571-460b-b17a-ca1a854d3853"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -87,7 +91,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.9" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -400,6 +404,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Изменил все html файлы под формат url_for" />
     <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
     <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
     <MESSAGE value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />

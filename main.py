@@ -73,6 +73,7 @@ def learning_presentation(material_id):
     print(material_id)
     return render_template('learning_presentation.html', material=material)
 
+
 @app.route("/blank")
 def blank_page():
     return render_template("blank.html")
