@@ -143,6 +143,32 @@
              </div>
          {% endfor %}
      </div>
+             <!-- Добавленная кнопка -->
+    <div class="text-center mt-4">
+        <button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+            Добавить новую задачу
+        </button>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1">
+        <form method="post" enctype="multipart/form-data">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Добавить задачу</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="taskId" class="form-control" placeholder="Введите id задачи" name="problem_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-primary" onclick="submitTask()">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
      <script>
          var acc = document.getElementsByClassName("accordion");
@@ -184,6 +210,31 @@
          // Вызываем фильтрацию при загрузке страницы
          filterMaterials();
      </script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+        function submitTask() {
+            const taskId = document.getElementById('taskId').value;
+            fetch('/your-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: taskId })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Закрываем модальное окно после успешной отправки
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+                    modal.hide();
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+        }
 
+        // Очищаем поле ввода при закрытии модального окна
+        document.getElementById('addTaskModal').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('taskId').value = '';
+        });
+    </script>
 </body>
 </html>
