@@ -15,10 +15,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  width: 100px;
   height: 40px;
-  background-color: #bfbfbf;
-  border-radius: 10px;
+  background-color: #ffff;
+  border-radius: 0;
   font-size: 14px;
   color: #333;
   cursor: pointer;
@@ -26,8 +26,9 @@
 }
 
 .number:hover {
-  background-color: #e0e0e0;
+  background-color: #1bbca3;
 }
+
 a{
     text-decoration: none;
 }
@@ -117,6 +118,9 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
+}
+.kost:hover{
+    color: #ffffff
 }
 
 /* PHP Email Form Messages

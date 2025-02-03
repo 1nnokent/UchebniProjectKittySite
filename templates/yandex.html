@@ -38,26 +38,125 @@
     </div>
     <div class="conr">
         <div class="row">
-            {% set tasks_way1 = "/problems/list " %}
-            {% set tasks_way2 = "/learning-materials/list " %}
-            <a style="color:black; display:block; width:300px" href="{{ tasks_way1 }}">
+            {% set tasks_way1 = "/problems/all " %}
+            {% set tasks_way2 = "/learning-materials/all " %}
+            <a style="display:block; width:200px" href="{{ tasks_way1 }}">
                 <div class="number" style="width:100%; height:100%;">
-                    <h4 style="margin-top:7px">Задачи</h4>
+                    <h4 style="margin-top:7px" >Задачи</h4>
                 </div>
             </a>
-            <a style="color:black; display:block; width:300px" href="{{ tasks_way2 }}">
+            <a style="display:block; width:200px" href="{{ tasks_way2 }}" >
                 <div class="number" style="width:100%; height:100%;">
                     <h4 style="margin-top:7px">Теория</h4>
                 </div>
             </a>
+            <a style="display:block; width:300px" href="/variants/{{id}}">
+                <div class="number" style="width:100%; height:100%;">
+                    <h4 style="margin-top:7px" >Добавить вариант</h4>
+                </div>
+            </a>
+            <a style="display:block; width:300px" href="/problems/add">
+                <div class="number" style="width:100%; height:100%;">
+                    <h4 style="margin-top:7px" >Добавить задачу</h4>
+                </div>
+            </a>
+            <a style="display:block; width:300px" href="/variants/ {{id}} /modify">
+                <div class="number" style="width:100%; height:100%;">
+                    <h4 style="margin-top:7px" >Изменить вариант</h4>
+                </div>
+            </a>
+<!--            <div class="btn-container" style="display:block; width:300px">-->
+<!--              <button class="btn-primary" id="openModal">-->
+<!--                  Создать новую тему-->
+<!--              </button>-->
+<!--              <div id="modal" class="modal">-->
+<!--                <div class="modal-content">-->
+<!--                    <span class="close">&times;</span>-->
+<!--                    <h2>Создание новой темы</h2>-->
+<!--                    <br>-->
+<!--                    <form method="post" id="topicForm" enctype="multipart/form-data">-->
+<!--                        <div class="form-group">-->
+<!--                           <label>Название темы:</label>-->
+<!--                           <input type="text" name="topicTitle" id="topicTitle" class="form-control" required />-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <div class="form-group">-->
+<!--                           <label>Описание темы:</label>-->
+<!--                           <textarea rows=5 name="topicDescription" id="topicDescription" class="form-control" required /></textarea>-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <div class="form-group">-->
+<!--                           <input type="submit" name="submit" class="btn-primary" value="Опубликовать">-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--        </div>-->
+<!--            <div class="btn-container" style="display:block; width:300px">-->
+<!--  <button class="btn-primary" id="openModal">-->
+<!--      Создать новую тему-->
+<!--  </button>-->
+<!--  <div id="modal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <span class="close">&times;</span>-->
+<!--        <h2>Создание новой темы</h2>-->
+<!--        <br>-->
+<!--        <form method="post" id="topicForm" enctype="multipart/form-data">-->
+<!--            <div class="form-group">-->
+<!--               <label>Название темы:</label>-->
+<!--               <input type="text" name="topicTitle" id="topicTitle" class="form-control" required />-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            <div class="form-group">-->
+<!--               <label>Описание темы:</label>-->
+<!--               <textarea rows=5 name="topicDescription" id="topicDescription" class="form-control" required /></textarea>-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            <div class="form-group">-->
+<!--               <input type="submit" name="submit" class="btn-primary" value="Опубликовать">-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <input type="text" class="search-input" placeholder="Поиск тем...">-->
+<!--</div>-->
+<!--            <div class="btn-container" style="display:block; width:300px">-->
+<!--              <button class="btn-primary" id="openModal">-->
+<!--                  Создать новую тему-->
+<!--              </button>-->
+<!--              <div id="modal" class="modal">-->
+<!--                <div class="modal-content">-->
+<!--                    <span class="close">&times;</span>-->
+<!--                    <h2>Создание новой темы</h2>-->
+<!--                    <br>-->
+<!--                    <form method="post" id="topicForm" enctype="multipart/form-data">-->
+<!--                        <div class="form-group">-->
+<!--                           <label>Название темы:</label>-->
+<!--                           <input type="text" name="topicTitle" id="topicTitle" class="form-control" required />-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <div class="form-group">-->
+<!--                           <label>Описание темы:</label>-->
+<!--                           <textarea rows=5 name="topicDescription" id="topicDescription" class="form-control" required /></textarea>-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <div class="form-group">-->
+<!--                           <input type="submit" name="submit" class="btn-primary" value="Опубликовать">-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <input type="text" class="search-input" placeholder="Поиск тем...">-->
+<!--        </div>-->
         </div>
         <h2> Варианты </h2>
         <div class="row">
             <div style="display: flex; flex-wrap: wrap;">
                 {% for i in range(amount) %}
-                <a style="color:black; display:block; width:50px; text-align:center; margin: 5px;" href="/variants/{{ i + 1 }}">
+                <a style="display:block; width:50px; text-align:center; margin: 5px;" href="/variants/{{ i + 1 }}">
                     <div class="number" style="width:100%; height:100%;">
-                        <h4 style="margin-top:7px">{{ i + 1 }}</h4>
+                        <h4 style="margin-top:7px" >{{ i + 1 }}</h4>
                     </div>
                 </a>
                 {% endfor %}
