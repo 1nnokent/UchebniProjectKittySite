@@ -141,7 +141,7 @@ def forum_topic_page(topic_id):
 
 @app.route("/problems/all")
 def problems_page():
-    problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
+    problems = dr.get_problems()
     return render_template("problem_list.html", problems=problems)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
