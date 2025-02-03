@@ -28,75 +28,80 @@
     <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
     <title>Страница Лекций</title>
   <style>
-    body{
-      padding-top: 70px;
-    }
-    .container {
-    display: flex;
-    justify-content: center; /* Центрирование карточек по горизонтали */
-    flex-wrap: wrap; /* Перенос карточек на новую строку при необходимости */
-  }
-    .problem-card {
-      background: #fff;
-      border-radius: 10px;
-      margin: 10px;
-      padding: 20px;
-      width: calc(60% - 20px);
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      word-wrap: break-word;
-    }
+        body {
+          padding-top: 70px;
+        }
+        .container {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .problem-card {
+          background: #fff;
+          border-radius: 10px;
+          margin: 10px;
+          padding: 20px;
+          width: calc(60% - 20px);
+          height: 250px; /* Увеличенная высота карточки */
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          cursor: pointer;
+          word-wrap: break-word;
+          position: relative; /* Для позиционирования метки */
+        }
 
-.problem-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
+        .problem-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.problem-title {
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: 700;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-}
+        .problem-title {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 700;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
 
-.problem-question {
-    color: #555;
-    font-size: 0.95em;
-    line-height: 1.4;
-    margin: 10px 0;
-}
+        .problem-question {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
 
-
-
+        .card-label {
+             position:absolute;
+             bottom:10px;
+             left:10px;
+             color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+             font-size:12px; /* Размер шрифта для метки */
+         }
   </style>
 </head>
 <body>
      {% include 'header.html' %}
      <div class="container" id="lectures-container">
          {% for material in materials %}
-         <div class="problem-card default" onclick="location.href='{% if material[1] == 0 %}/learning-video/{{ material[0] }}{% elif material[1] == 1 %}/learning-presentation/{{ material[0] }}{% else %}#{% endif %}'">
-
-             <h5 class="problem-title">{{ material[2] }}</h5>
-             {% if material[3] %}
-                 <p class="problem-question">{{ material[3] }}</p>
-             {% endif %}
-             <div class="answer">
-                 <div style="display: block;">
+         <div class="problem-card default">
+             <a class="" href="/learning-materials/{{ material[0] }}">
+                 <h5 class="problem-title">{{ material[2] }}</h5>
+                 {% if material[3] %}
+                     <p class="problem-question">{{ material[3] }}</p>
+                 {% endif %}
+                 <!-- Добавление полупрозрачной надписи -->
+                 <div class="card-label">
                      {% if material[1] == 0 %}
-                         <p>Тип: Видеоматериал</p>
-                         <p>Нажмите, чтобы смотреть видеоматериал</p>
+                         Видеоматериал
                      {% elif material[1] == 1 %}
-                         <p>Тип: Презентация</p>
-                         <p>Нажмите, чтобы открыть презентацию</p>
-                     {% else %}
-                         <p>Тип: Конспект</p>
+                         Презентация
+                     {% elif material[1] == 2 %}
+                         Конспект
                      {% endif %}
                  </div>
-             </div>
+             </a>
          </div>
          {% endfor %}
      </div>
