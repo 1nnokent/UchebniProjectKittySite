@@ -146,7 +146,10 @@
                  {% endfor %}
                  
                  {% for file_name in problem[7] %}
-                     <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" download>Скачать файл "{{ file_name }}"</a></p>
+                         <p><a href="{{ url_for('static', filename='excel-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
+                 {% endfor %}
+                 {% for file_name in problem[8] %}
+                         <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
                  {% endfor %}
                  <div class="answer">
 
