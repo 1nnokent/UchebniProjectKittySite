@@ -303,7 +303,7 @@ def get_learning_materials():
 
 def get_learning_material(material_id):
     sql_req = f"""SELECT * FROM learning_materials WHERE material_id = {material_id}"""
-    return sql_execute(sql_req).fetchall()
+    return sql_execute(sql_req).fetchall()[0]
 
 def get_courses():
     sql_req = f"""SELECT * FROM courses"""
@@ -312,11 +312,13 @@ def get_courses():
 def get_course_materials(course_id):
     sql_req = f"""
             SELECT
-                material_id, material_type, material_name, material_description, material_statement, material_ege_type
+                learning_materials.material_id, material_type, material_name, material_description, material_statement, material_ege_type
             FROM
-                course_material INNER JOIN materials
+                course_material INNER JOIN learning_materials
+            ON
+                course_material.material_id = learning_materials.material_id
             WHERE
-                course_materials.course_id = {course_id}
+                course_material.course_id = {course_id}
     """
     return sql_execute(sql_req).fetchall()
 
