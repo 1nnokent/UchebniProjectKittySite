@@ -9,16 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="learning_conspect.html все кроме бд">
-      <change afterPath="$PROJECT_DIR$/static/conspects/abstract10.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/conspects/abstract11.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/conspects/abstract7.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/conspects/abstract8.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/conspects/abstract9.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="очередное обновление бд">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/learning_conspect.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_conspect.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -404,7 +397,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738606617120</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="очередное обновление бд">
+      <option name="closed" value="true" />
+      <created>1738609671432</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1738609671432</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +424,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />
     <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
     <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
     <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
@@ -448,6 +448,7 @@
     <MESSAGE value="сохранение белой версии" />
     <MESSAGE value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
     <MESSAGE value="learning_conspect.html все кроме бд" />
-    <option name="LAST_COMMIT_MESSAGE" value="learning_conspect.html все кроме бд" />
+    <MESSAGE value="очередное обновление бд" />
+    <option name="LAST_COMMIT_MESSAGE" value="очередное обновление бд" />
   </component>
 </project>
