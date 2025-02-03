@@ -64,10 +64,10 @@ def learning_materials_page():
 @app.route("/learning-materials/<material_id>")
 def learning_material_page(material_id):
     material = dr.get_learning_material(material_id)
-    print(material)
     if material[1] == 0:
         return render_template('learning_video.html', material=material)
     if material[1] == 1:
+        print(material[4])
         return render_template('learning_presentation.html', material=material)
     if material[1] == 2:
         return render_template('learning_conspect.html', material=material)
