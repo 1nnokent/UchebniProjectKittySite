@@ -41,6 +41,21 @@ def user_select_to_dict(tuple_info):
 
     return dict
 
+def get_problems():
+    problems = sql_execute("SELECT * FROM problems").fetchall()
+    ret = []
+    for elem in problems:
+        tmp = []
+        for i in elem:
+            tmp.append(i)
+        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in pictures:
+            k.append(f"""problem_{i[0]}.jpg""")
+        tmp.append(k)
+        ret.append(tmp)
+    return ret
+
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
     problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
     pictures = request.files.getlist('photos')
