@@ -75,7 +75,10 @@ def get_problems():
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
     problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
     pictures = request.files.getlist('photos')
+    print(pictures)
     for elem in pictures:
+        if elem.filename == '':
+            continue
         picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
         path = f"""static/img/problem-pictures/problem_{picture_id}.jpg"""
         elem.save(path)
@@ -88,6 +91,8 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
 
     tables = request.files.getlist('tables')
     for elem in tables:
+        if elem.filename == '':
+            continue
         table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
         path = f"""static/excel-tables/{table_id}.xlsx"""
         elem.save(path)
@@ -100,6 +105,8 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
 
     texts = request.files.getlist('texts')
     for elem in texts:
+        if elem.filename == '':
+            continue
         text_id = sql_execute("SELECT count(*) FROM problem_text_file").fetchall()[0][0]
         path = f"""static/text-files/{text_id}.txt"""
         elem.save(path)

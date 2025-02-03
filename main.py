@@ -153,7 +153,7 @@ def add_problem():
         return render_template("add_problem.html")
     if request.method == 'POST':
         info = request.form.to_dict()
-        if not (1 <= int(info['problem_type']) <= 27):
+        if info['problem_type'] == '' or not (1 <= int(info['problem_type']) <= 27):
             return redirect(url_for('error_page')) #Такого номера задания нет в КИМ
 
         dr.insert_problem(int(info['problem_type']), info['problem_source'],
