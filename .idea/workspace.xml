@@ -9,7 +9,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="learning_conspect.html все кроме бд" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="learning_conspect.html все кроме бд">
+      <change afterPath="$PROJECT_DIR$/static/conspects/abstract10.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/conspects/abstract11.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/conspects/abstract7.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/conspects/abstract8.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/conspects/abstract9.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_conspect.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_conspect.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
