@@ -23,7 +23,6 @@ def registration_page():
         else:
             pass
 
-
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(failed=False, problem=None):
     if request.method == 'GET' and not failed:
@@ -77,6 +76,30 @@ def learning_material_page(material_id):
 def blank_page():
     return render_template("blank.html")
 
+@app.route("/variants/add", methods=['GET', 'POST'])
+def add_variant():
+    if request.method == 'GET':
+        return render_template('add_variant.html')
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        variant_id = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0] + 1
+        dr.insert_variant(variant_id, info['variant_name'], info['variant_description'], 0)
+        return redirect(url_for('modify_variant', variant_id=variant_id))
+
+@app.route("/variants/<variant_id>/modify", methods=['GET', 'POST'])
+def modify_variant(variant_id):
+    if request.method == 'GET':
+        problems = dr.get_problems_by_variant(variant_id)
+        return render_template('modify_variant.html', problems=problems)
+    if request.method == 'POST':
+        problem_id = request.form.to_dict()['problem_id']
+
+        if problem_id == '' or int(problem_id) >= dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]:
+            return redirect(url_for('error_page'))
+
+        dr.insert_problem_to_variant(variant_id, int(problem_id))
+        return redirect(url_for('modify_variant', variant_id=variant_id))
+
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
     if request.method == 'GET':
@@ -123,7 +146,7 @@ def add_problem():
     if request.method == 'POST':
         info = request.form.to_dict()
         if not (1 <= int(info['problem_type']) <= 27):
-            return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
+            return redirect(url_for('error_page')) #Такого номера задания нет в КИМ
 
         dr.insert_problem(int(info['problem_type']), info['problem_source'],
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
@@ -138,6 +161,10 @@ def courses_page():
 def course_page(course_id):
     materials = dr.get_course_materials(course_id)
     return render_template("course_page.html", materials=materials)
+
+@app.route("/error/")
+def error_page():
+    return render_template('error.html')
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")

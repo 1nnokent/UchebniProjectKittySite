@@ -37,8 +37,8 @@
         }
         .filter-container {
             display: flex;
-            flex-direction: column; /* Вертикальное выравнивание */
-            align-items: center; /* Центрирование по горизонтали */
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
             background: #f8f8f8;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -46,7 +46,7 @@
         .filter-group {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Центрирование элементов внутри группы */
+            justify-content: center;
         }
         .filter-group label {
             margin-right: 10px;
@@ -54,9 +54,9 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Изменил на center для выравнивания по центру */
+            align-items: center;
             margin-top: 2.5%;
+            width: 100%;
         }
         .lecture-card {
             background: #fff;
@@ -67,16 +67,16 @@
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-sizing: border-box;
-            position: relative; /* Для позиционирования нижнего текста */
-            height: 250px; /* Фиксированная высота карточки */
-            overflow: hidden; /* Обрезаем содержимое */
+            position: relative;
+            height: 250px;
+            overflow: hidden;
         }
         .lecture-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .lecture-card h3 {
-            margin-bottom: 10px; /* Оставляем расстояние как было */
+            margin-bottom: 10px;
             color: #333;
             font-weight: 700;
             border-bottom: 2px solid #ddd;
@@ -84,52 +84,54 @@
         }
         .video-player {
             margin-top: 15px;
-            height: calc(100% - 50px); /* Высота для видео-плеера с учетом отступов */
+            height: calc(100% - 50px);
         }
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Aspect ratio */
-            height: 0; /* Collapse the height */
-            overflow: hidden; /* Hide overflow */
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
         }
         .video-container iframe {
              position: absolute;
              top: 0;
              left: 0;
              width: 100%;
-             height: calc(100% - 10px); /* Убираем прокрутку */
+             height: calc(100% - 10px);
          }
          .lecture-card p {
              color: #555;
-             font-size: 0.85em; /* Уменьшаем размер шрифта для дополнительного текста */
+             font-size: 0.85em;
              line-height: 1.4;
-             word-wrap: break-word; /* Автоматический перенос слов */
-             overflow-y:auto; /* Прокрутка для текста */
-             max-height: calc(100% - 70px); /* Ограничиваем высоту текста в карточке с учетом отступов */
+             word-wrap: break-word;
+             overflow-y:auto;
+             max-height: calc(100% - 70px);
          }
-         /* Полупрозрачный текст в левом нижнем углу */
          .card-label {
              position:absolute;
              bottom:10px;
              left:10px;
-             color:#rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
-             font-size:12px; /* Размер шрифта для метки */
+             color:rgba(0, 0, 0, 0.5);
+             font-size:12px;
          }
          a {
-             text-decoration: none; /* Убираем подчеркивание у ссылок */
-             color: inherit; /* Наследуем цвет текста от родителя */
+             text-decoration: none;
+             color: inherit;
+         }
+         /* Добавленные стили для центрирования */
+         .add-button-container {
+             width: 100%;
+             display: flex;
+             justify-content: center;
+             margin: 20px 0;
+         }
+         .modal-footer {
+             justify-content: center !important;
          }
     </style>
 </head>
 <body>
      {% include 'header.html' %}
-     <div class="filter-container">
-          <div class="filter-group" id="ege-filters">
-               {% for i in range(1, 28) %}
-                    <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
-               {% endfor %}
-          </div>
-     </div>
 
      <div class="container" id="lectures-container">
          {% for problem in problems %}
@@ -142,99 +144,58 @@
                  </div>
              </div>
          {% endfor %}
+
+         <div class="add-button-container">
+             <button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+                 Добавить новую задачу
+             </button>
+         </div>
      </div>
-             <!-- Добавленная кнопка -->
-    <div class="text-center mt-4">
-        <button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">
-            Добавить новую задачу
-        </button>
-    </div>
 
-    <!-- Модальное окно -->
-    <div class="modal fade" id="addTaskModal" tabindex="-1">
-        <form method="post" enctype="multipart/form-data">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Добавить задачу</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" id="taskId" class="form-control" placeholder="Введите id задачи" name="problem_id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn-primary" onclick="submitTask()">Добавить</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+     <!-- Модальное окно -->
+     <div class="modal fade" id="addTaskModal" tabindex="-1">
+         <form method="post" enctype="multipart/form-data">
+             <div class="modal-dialog modal-dialog-centered">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title">Добавить задачу</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                     </div>
+                     <div class="modal-body">
+                         <input type="text" id="taskId" class="form-control" placeholder="Введите id задачи" name="problem_id">
+                     </div>
+                     <div class="modal-footer">
+                         <button type="submit" class="btn-primary" onclick="submitTask()">Добавить</button>
+                     </div>
+                 </div>
+             </div>
+         </form>
+     </div>
 
+     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
      <script>
-         var acc = document.getElementsByClassName("accordion");
-         var i;
-
-         for (i = 0; i < acc.length; i++) {
-             acc[i].addEventListener("click", function() {
-                 this.classList.toggle("active");
-                 var panel = this.nextElementSibling;
-                 if (panel.style.display === "block") {
-                     panel.style.display = "none"; // Скрыть панель
-                 } else {
-                     panel.style.display = "block"; // Показать панель
+         function submitTask() {
+             const taskId = document.getElementById('taskId').value;
+             fetch('/your-endpoint', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({ id: taskId })
+             })
+             .then(response => {
+                 if (response.ok) {
+                     const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+                     modal.hide();
                  }
-             });
+             })
+             .catch(error => console.error('Ошибка:', error));
          }
 
-         // Функция для фильтрации материалов
-         function filterMaterials() {
-             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
-                                     .map(checkbox => checkbox.value);
-
-             document.querySelectorAll('.problem-card').forEach(card => {
-                 const problemType = card.querySelector('.problem-title').textContent.match(/Тип (\d+)/)[1];
-
-                 // Проверяем соответствие типа
-                 const typeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(problemType);
-
-                 // Показываем карточку, если совпадают условия
-                 card.style.display = typeMatch ? 'block' : 'none';
-             });
-         }
-
-         // Добавляем обработчики событий для чекбоксов
-         document.querySelectorAll('#ege-filters input[type="checkbox"]').forEach(checkbox => {
-             checkbox.addEventListener('change', filterMaterials);
+         document.getElementById('addTaskModal').addEventListener('hidden.bs.modal', function () {
+             document.getElementById('taskId').value = '';
          });
 
-         // Вызываем фильтрацию при загрузке страницы
-         filterMaterials();
      </script>
-    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        function submitTask() {
-            const taskId = document.getElementById('taskId').value;
-            fetch('/your-endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: taskId })
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Закрываем модальное окно после успешной отправки
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
-                    modal.hide();
-                }
-            })
-            .catch(error => console.error('Ошибка:', error));
-        }
-
-        // Очищаем поле ввода при закрытии модального окна
-        document.getElementById('addTaskModal').addEventListener('hidden.bs.modal', function () {
-            document.getElementById('taskId').value = '';
-        });
-    </script>
 </body>
 </html>

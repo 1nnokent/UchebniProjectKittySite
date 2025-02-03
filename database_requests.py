@@ -139,6 +139,21 @@ def get_user_info_with_user_id(id):
         """
     return sql_execute(sql_req).fetchall()
 
+def get_problems_by_variant(variant_id):
+    sql_req = f"""
+            SELECT 
+                problems.problem_id, problem_type_id, problem_source, problem_statement, problem_answer, problem_difficulty
+            FROM
+                problems 
+            INNER JOIN
+                variant_problem
+            ON
+                problems.problem_id = variant_problem.problem_id
+            WHERE
+                variant_problem.variant_id = {variant_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
 def variant_page_default_kwargs(variant_id):
     sql_req = f"""SELECT * FROM
                       problems INNER JOIN variant_problem
@@ -322,7 +337,22 @@ def get_course_materials(course_id):
     """
     return sql_execute(sql_req).fetchall()
 
-if __name__ == "__main__":
-    print("         ТИП   КЛАСС   ОТВЕТ   СЛОЖОСТЬ", "ВВЕДИТЕ: ", sep='\n', end="")
-    problem_type, problem_class, problem_answer, problem_difficulty = map(int, input().split())
-    insert_problem_file(problem_type, problem_class, "costil.txt", problem_answer, problem_difficulty)
+def insert_variant(variant_id, variant_name, variant_description, author_id):
+    sql_req = f"""
+            INSERT INTO
+                variants
+            VALUES
+                ({variant_id}, "{variant_name}", "{variant_description}", {author_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def insert_problem_to_variant(variant_id, problem_id):
+    sql_req = f"""
+            INSERT INTO
+                variant_problem
+            VALUES
+                ({variant_id}, {problem_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
