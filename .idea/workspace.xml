@@ -9,15 +9,25 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="сохранение белой версии">
-      <change afterPath="$PROJECT_DIR$/DataBase.laccdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/courses_page.html" afterDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase.laccdb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courses_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courses_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_404_not_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_404_not_found.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_authorization_user_not_found.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_authorization_user_not_found.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/error_pages/error_registration_user_exists.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/error_pages/error_registration_user_exists.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forum_main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forum_main_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_materials.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_materials.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_presentation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_presentation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/learning_video.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/learning_video.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/problem_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/problem_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/yandex.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/yandex.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +87,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/UchebniProjectKittySite&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/07 - Files - static &amp; url_for &amp; upload &amp; redirect&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -387,7 +397,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738511705748</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;">
+      <option name="closed" value="true" />
+      <created>1738586976473</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1738586976473</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +424,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Вторая версия схемы дб (тоже не факт, что верная)&#10;Добавил времена выполнения варианта и задач, создал связь между пользователем и задачей&#10;Изменил общий вид схемы" />
     <MESSAGE value="вроде добавил новую бд, вроде она последняя&#10;немного добавил папок для html страниц" />
     <MESSAGE value="-немного изменён код для читабельности&#10;-добавлена страница добавления задачи&#10;-директория списка всех задач изменена на problems/list&#10;-функции для работы с БД перетащены в файл database_requests" />
     <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
@@ -431,6 +448,7 @@
     <MESSAGE value="реализовано отображение forum_topic_page.html с данными из БД" />
     <MESSAGE value="надеюсь, workspace.xml всё починит" />
     <MESSAGE value="сохранение белой версии" />
-    <option name="LAST_COMMIT_MESSAGE" value="сохранение белой версии" />
+    <MESSAGE value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
   </component>
 </project>
