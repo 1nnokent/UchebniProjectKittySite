@@ -48,16 +48,25 @@ def get_problems():
         tmp = []
         for i in elem:
             tmp.append(i)
+
         pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = { elem[0] }""")
         k = []
         for i in pictures:
             k.append(f"""problem_{i[0]}.jpg""")
         tmp.append(k)
+
         tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = { elem[0] }""")
         k = []
         for i in tables:
             k.append(f"""{i[0]}.xlxs""")
         tmp.append(k)
+
+        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in texts:
+            k.append(f"""{i[0]}.txt""")
+        tmp.append(k)
+
         ret.append(tmp)
 
 
@@ -87,6 +96,18 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
                 INTO problem_table
             VALUES
                 ({problem_id}, {table_id})
+        """)
+
+    texts = request.files.getlist('texts')
+    for elem in texts:
+        text_id = sql_execute("SELECT count(*) FROM problem_text_file").fetchall()[0][0]
+        path = f"""static/text-files/{text_id}.txt"""
+        elem.save(path)
+        sql_execute(f"""
+            INSERT
+                INTO problem_text_file
+            VALUES
+                ({problem_id}, {text_id})
         """)
 
     text = ""

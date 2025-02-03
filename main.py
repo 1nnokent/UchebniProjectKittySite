@@ -143,7 +143,7 @@ def forum_topic_page(topic_id):
 def problems_page():
     problems = dr.get_problems()
     for elem in problems:
-        if elem[1] == 3:
+        if elem[1] == 17:
             print(elem)
     return render_template("problem_list.html", problems=problems)
 
