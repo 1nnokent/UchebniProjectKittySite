@@ -112,12 +112,16 @@
              position:absolute;
              bottom:10px;
              left:10px;
-             color:#rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+             color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
              font-size:12px; /* Размер шрифта для метки */
+
          }
          a {
              text-decoration: none; /* Убираем подчеркивание у ссылок */
              color: inherit; /* Наследуем цвет текста от родителя */
+         }
+         .problem-card img {
+             max-width: calc(100% - 20px); /* Ограничиваем максимальную ширину картинки */
          }
     </style>
 </head>
@@ -134,17 +138,27 @@
      <div class="container" id="lectures-container">
          {% for problem in problems %}
              <div class="problem-card default" data-type="{{ problem[1] }}">
-                 <h5 class="problem-title">Задание {{problem[0] + 1}}. Тип {{problem[1]}}. Сложность: {{problem[5]}}</h5>
-                 <h6 class="problem-author">{{problem[2]}}</h6>
-                 <p class="problem-question">{{problem[3]|safe}}</p>
+                 <h5 class="problem-title">Задание {{ problem[0] + 1 }}. Тип {{ problem[1] }}. Сложность: {{ problem[5] }}</h5>
+                 <h6 class="problem-author">{{ problem[2] }}</h6>
+                 <p class="problem-question">{{ problem[3]|safe }}</p>
+                 {% for image_name in problem[6] %}
+                     <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}" alt="Изображение к задаче {{ problem[0] + 1 }}" onerror="this.style.display='none'"></p>
+                 {% endfor %}
+                 
+                 {% for file_name in problem[7] %}
+                     <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" download>Скачать файл "{{ file_name }}"</a></p>
+                 {% endfor %}
                  <div class="answer">
+
                      <button class="accordion">Показать ответ</button>
+
                      <div class="panel">
-                         <p class="problem-question">Ответ: {{problem[4]}}</p>
+                         <p class="problem-question">Ответ: {{ problem[4] }}</p>
                      </div>
                  </div>
              </div>
          {% endfor %}
+     </div>
      </div>
 
      <script>
