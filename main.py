@@ -57,21 +57,21 @@ def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("test.html", user=[0, "aowje"])
 
-@app.route("/learning-materials/list")
+@app.route("/learning-materials/all")
 def learning_materials_page():
     materials = dr.get_learning_materials()
     return render_template('learning_materials.html', materials=materials)
 
-@app.route("/learning-video/<material_id>")
-def learning_video(material_id):
+@app.route("/learning-materials/<material_id>")
+def learning_material_page(material_id):
     material = dr.get_learning_material(material_id)
-    return render_template('learning_video.html', material=material)
-
-@app.route("/learning-presentation/<material_id>")
-def learning_presentation(material_id):
-    material = dr.get_learning_material(material_id)
-    print(material_id)
-    return render_template('learning_presentation.html', material=material)
+    print(material)
+    if material[1] == 0:
+        return render_template('learning_video.html', material=material)
+    if material[1] == 1:
+        return render_template('learning_presentation.html', material=material)
+    if material[1] == 2:
+        return render_template('learning_conspect.html', material=material)
 
 @app.route("/blank")
 def blank_page():
@@ -87,7 +87,7 @@ def variant_page(variant_id):
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
 
-@app.route('/forum/list', methods=['POST', 'GET'])
+@app.route('/forum/topics/all', methods=['POST', 'GET'])
 def forum_main_page():
     if request.method == 'GET':
         discussions = dr.get_discussions()
@@ -98,7 +98,7 @@ def forum_main_page():
         topic_id = dr.insert_new_topic(info)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
-@app.route('/forum/<topic_id>', methods=['POST', 'GET'])
+@app.route('/forum/topics/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
     if request.method == 'GET':
         topic_name = dr.get_topic_name(topic_id)
@@ -111,7 +111,7 @@ def forum_topic_page(topic_id):
         messages = dr.get_topic_messages(topic_id)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
-@app.route("/problems/list")
+@app.route("/problems/all")
 def problems_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("problem_list.html", problems=problems)
@@ -129,13 +129,13 @@ def add_problem():
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
         return redirect(url_for('add_problem'))
 
-@app.route("/courses/list")
+@app.route("/courses/all")
 def courses_page():
     courses = dr.get_courses()
     return render_template("courses_page.html", courses=courses)
 
 @app.route("/courses/<course_id>")
-def course_page():
+def course_page(course_id):
     materials = dr.get_course_materials(course_id)
     return render_template("course_page.html", materials=materials)
 
