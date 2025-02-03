@@ -31,14 +31,22 @@
       body {
           background-color: #f0f0f0;
           overflow: hidden;
-          height: 100%;
+          height: 100vh;
           margin: 0;
           padding: 0;
+      }
+      iframe {
+          width: 100%;
+          height: 100vh;
+          border: none;
+          margin: 0;
+          padding: 0;
+          display: block;
       }
   </style>
 </head>
 <body>
   {% include 'header.html' %}
-     <iframe style="margin-top: 100px;" src="static/abstracts/17_Задание_методичка__rui5.pdf" width="100%" height="100%"></iframe>
+  <iframe src="static/abstracts/17_Задание_методичка__rui5.pdf"></iframe>
 </body>
 </html>

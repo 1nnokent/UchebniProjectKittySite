@@ -73,6 +73,10 @@ def learning_material_page(material_id):
     if material[1] == 2:
         return render_template('learning_conspect.html', material=material)
 
+@app.route("/learning-abstract")
+def learning_abstract():
+    return render_template('learning_abstract.html')
+
 
 @app.route("/blank")
 def blank_page():
