@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница Лекций</title>
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            padding-top: 70px;
+        }
+        header {
+            background-color: #437DD4;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .filter-container {
+            display: flex;
+            flex-direction: column; /* Вертикальное выравнивание */
+            align-items: center; /* Центрирование по горизонтали */
+            padding: 20px;
+            background: #f8f8f8;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Центрирование элементов внутри группы */
+        }
+        .filter-group label {
+            margin-right: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Изменил на center для выравнивания по центру */
+            margin-top: 2.5%;
+        }
+        .lecture-card {
+            background: #fff;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: calc(33.33% - 20px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+            position: relative; /* Для позиционирования нижнего текста */
+            height: 250px; /* Фиксированная высота карточки */
+            overflow: hidden; /* Обрезаем содержимое */
+        }
+        .lecture-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .lecture-card h3 {
+            margin-bottom: 10px; /* Оставляем расстояние как было */
+            color: #333;
+            font-weight: 700;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .video-player {
+            margin-top: 15px;
+            height: calc(100% - 50px); /* Высота для видео-плеера с учетом отступов */
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Aspect ratio */
+            height: 0; /* Collapse the height */
+            overflow: hidden; /* Hide overflow */
+        }
+        .video-container iframe {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: calc(100% - 10px); /* Убираем прокрутку */
+         }
+         .lecture-card p {
+             color: #555;
+             font-size: 0.85em; /* Уменьшаем размер шрифта для дополнительного текста */
+             line-height: 1.4;
+             word-wrap: break-word; /* Автоматический перенос слов */
+             overflow-y:auto; /* Прокрутка для текста */
+             max-height: calc(100% - 70px); /* Ограничиваем высоту текста в карточке с учетом отступов */
+         }
+         /* Полупрозрачный текст в левом нижнем углу */
+         .card-label {
+             position:absolute;
+             bottom:10px;
+             left:10px;
+             color:#rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+             font-size:12px; /* Размер шрифта для метки */
+         }
+         a {
+             text-decoration: none; /* Убираем подчеркивание у ссылок */
+             color: inherit; /* Наследуем цвет текста от родителя */
+         }
+    </style>
+</head>
+<body>
+     {% include 'header.html' %}
+     <div class="filter-container">
+          <div class="filter-group" id="ege-filters">
+               {% for i in range(1, 28) %}
+                    <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
+               {% endfor %}
+          </div>
+     </div>
+
+     <div class="container" id="lectures-container">
+         {% for problem in problems %}
+             <div class="problem-card default" data-type="{{ problem[1] }}">
+                 <h5 class="problem-title">Задание {{problem[0] + 1}}. Тип {{problem[1]}}. Сложность: {{problem[5]}}</h5>
+                 <h6 class="problem-author">{{problem[2]}}</h6>
+                 <p class="problem-question">{{problem[3]|safe}}</p>
+                 <div class="answer">
+                     <p class="problem-question">Ответ: {{problem[4]}}</p>
+                 </div>
+             </div>
+         {% endfor %}
+     </div>
+
+     <script>
+         var acc = document.getElementsByClassName("accordion");
+         var i;
+
+         for (i = 0; i < acc.length; i++) {
+             acc[i].addEventListener("click", function() {
+                 this.classList.toggle("active");
+                 var panel = this.nextElementSibling;
+                 if (panel.style.display === "block") {
+                     panel.style.display = "none"; // Скрыть панель
+                 } else {
+                     panel.style.display = "block"; // Показать панель
+                 }
+             });
+         }
+
+         // Функция для фильтрации материалов
+         function filterMaterials() {
+             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
+                                     .map(checkbox => checkbox.value);
+
+             document.querySelectorAll('.problem-card').forEach(card => {
+                 const problemType = card.querySelector('.problem-title').textContent.match(/Тип (\d+)/)[1];
+
+                 // Проверяем соответствие типа
+                 const typeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(problemType);
+
+                 // Показываем карточку, если совпадают условия
+                 card.style.display = typeMatch ? 'block' : 'none';
+             });
+         }
+
+         // Добавляем обработчики событий для чекбоксов
+         document.querySelectorAll('#ege-filters input[type="checkbox"]').forEach(checkbox => {
+             checkbox.addEventListener('change', filterMaterials);
+         });
+
+         // Вызываем фильтрацию при загрузке страницы
+         filterMaterials();
+     </script>
+
+</body>
+</html>
