@@ -31,38 +31,22 @@
       body {
           background-color: #f0f0f0;
           overflow: hidden;
-          height: 100%;
+          height: 100vh;
           margin: 0;
           padding: 0;
       }
-      .video-container {
-          max-width: 960px;
-          margin: 20px auto;
+      iframe {
+          width: 100%;
+          height: 100vh;
+          border: none;
+          margin: 0;
           padding: 0;
-      }
-      .video-container iframe {
           display: block;
-          width: 960px;
-          height: 569px;
-          border: 1px solid #ddd;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          background-color: #fff;
-      }
-      @media (max-width: 1000px) {
-          .video-container iframe {
-              width: 95vw;
-              height: 56.25vw; /* Сохраняем соотношение сторон 16:9 */
-          }
       }
   </style>
 </head>
 <body>
   {% include 'header.html' %}
-    <div style="margin-top: 100px; text-align: center; margin-bottom: 20px">
-      <h1>{{ material[2] }}</h1>  <!-- Заголовок из material[2] -->
-    </div>
-    <div class="video-container">
-      <iframe src="{{ material[4] }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+  <iframe src="../static/conspects/{{material[4]}}.pdf"></iframe>
 </body>
 </html>

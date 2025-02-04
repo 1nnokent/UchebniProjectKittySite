@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+    <title>Страница Лекций</title>
+  <style>
+        body {
+          padding-top: 70px;
+        }
+        .container {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .problem-card {
+          background: #fff;
+          border-radius: 10px;
+          margin: 10px;
+          padding: 20px;
+          width: calc(60% - 20px);
+          height: 250px; /* Увеличенная высота карточки */
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          cursor: pointer;
+          word-wrap: break-word;
+          position: relative; /* Для позиционирования метки */
+        }
+
+        .problem-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .problem-title {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 700;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .problem-question {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .card-label {
+             position:absolute;
+             bottom:10px;
+             left:10px;
+             color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+             font-size:12px; /* Размер шрифта для метки */
+         }
+  </style>
+</head>
+<body>
+     {% include 'header.html' %}
+     <div class="container" id="lectures-container">
+         {% for material in materials %}
+         <div class="problem-card default">
+             <a class="" href="/learning-materials/{{ material[0] }}">
+                 <h5 class="problem-title">{{ material[2] }}</h5>
+                 {% if material[3] %}
+                     <p class="problem-question">{{ material[3] }}</p>
+                 {% endif %}
+                 <!-- Добавление полупрозрачной надписи -->
+                 <div class="card-label">
+                     {% if material[1] == 0 %}
+                         Видеоматериал
+                     {% elif material[1] == 1 %}
+                         Презентация
+                     {% elif material[1] == 2 %}
+                         Конспект
+                     {% endif %}
+                 </div>
+             </a>
+         </div>
+         {% endfor %}
+     </div>
+ </body>
+</html>

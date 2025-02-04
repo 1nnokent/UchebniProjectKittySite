@@ -59,44 +59,15 @@
   <div class="container">
     <form class="addition_form" method="post" enctype="multipart/form-data">
       <div class="form-group">
-        <label for="problem_type">Номер задания в КИМ (от 1 до 27)</label>
-        <input class="form-control" id="problem_type" placeholder="Введите число от 1 до 27" name="problem_type">
-      </div>
-      <div class="form-group">
-        <label for="problem_source">Оригинальный источник задания</label>
-        <input class="form-control" id="problem_source" placeholder="Введите название учебника и/или имя автора" name="problem_source">
+        <label for="variant_name">Название варианта</label>
+        <input class="form-control" id="variant_name" placeholder="Введите название" name="variant_name">
       </div>
       <br>
-      <textarea rows="5" cols="50" class="form-control" id="problem_statement" placeholder="Введите условие задачи" name="problem_statement"></textarea>
-      <input class="form-control" id="problem_answer" placeholder="Введите правильный ответ на задачу" name="problem_answer">
-
       <div class="form-group">
-        <label for="problem_difficulty">Выберите отображающуюся сложность задачи:</label>
-        <select class="form-control" id="problem_difficulty" name="problem_difficulty">
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-        </select>
+          <label for="variant_description">Описание варианта</label>
+          <textarea rows="5" cols="50" class="form-control" id="variant_description" placeholder="Введите описание" name="variant_description"></textarea>
       </div>
-
-      <div class="form-group">
-        <label for="photos">Прикрепите фотоматериалы (если необходимо)</label>
-        <input type="file" class="form-control-file" id="photos" name="photos" multiple>
-      </div>
-
-      <div class="form-group">
-        <label for="tables">Прикрепите excel-таблицы (если необходимо)</label>
-        <input type="file" class="form-control-file" id="tables" name="tables" multiple>
-      </div>
-
-      <div class="form-group">
-        <label for="texts">Прикрепите txt-файлы (если необходимо)</label> <br>
-        <input type="file" class="form-control-file" id="texts" name="texts" multiple>
-      </div>
-
-      <button type="submit" class="btn-primary" style="align-items:center ">Добавить задачу</button>
+      <button type="submit" class="btn-primary" style="align-items:center ">Создать вариант</button>
     </form>
   </div>
 

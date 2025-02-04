@@ -41,19 +41,82 @@ def user_select_to_dict(tuple_info):
 
     return dict
 
+def get_problems():
+    problems = sql_execute("SELECT * FROM problems").fetchall()
+    ret = []
+    for elem in problems:
+        tmp = []
+        for i in elem:
+            tmp.append(i)
+
+        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in pictures:
+            k.append(f"""problem_{i[0]}.jpg""")
+        tmp.append(k)
+
+        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in tables:
+            k.append(f"""{i[0]}.xlxs""")
+        tmp.append(k)
+
+        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = { elem[0] }""")
+        k = []
+        for i in texts:
+            k.append(f"""{i[0]}.txt""")
+        tmp.append(k)
+
+        ret.append(tmp)
+
+
+    return ret
+
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
-    amount = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
-    pictures = request.files.getlist('files')
+    problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    pictures = request.files.getlist('photos')
+    print(pictures)
     for elem in pictures:
+        if elem.filename == '':
+            continue
         picture_id = sql_execute("SELECT count(*) FROM problem_picture").fetchall()[0][0]
-        path = "static/img/problem-pictures/problem_" + str(picture_id) + ".jpg"
+        path = f"""static/img/problem-pictures/problem_{picture_id}.jpg"""
         elem.save(path)
         sql_execute(f"""
             INSERT 
                 INTO problem_picture
             VALUES
-                ({amount}, {picture_id}) 
+                ({problem_id}, {picture_id}) 
         """)
+
+    tables = request.files.getlist('tables')
+    for elem in tables:
+        if elem.filename == '':
+            continue
+        table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
+        path = f"""static/excel-tables/{table_id}.xlsx"""
+        elem.save(path)
+        sql_execute(f"""
+            INSERT
+                INTO problem_table
+            VALUES
+                ({problem_id}, {table_id})
+        """)
+
+    texts = request.files.getlist('texts')
+    for elem in texts:
+        if elem.filename == '':
+            continue
+        text_id = sql_execute("SELECT count(*) FROM problem_text_file").fetchall()[0][0]
+        path = f"""static/text-files/{text_id}.txt"""
+        elem.save(path)
+        sql_execute(f"""
+            INSERT
+                INTO problem_text_file
+            VALUES
+                ({problem_id}, {text_id})
+        """)
+
     text = ""
     prev = 0
     last = 0
@@ -72,12 +135,13 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
 
     sql_req = f"""
     INSERT INTO problems
-    VALUES ({amount}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
+    VALUES ({problem_id}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
     """
 
     print(sql_req)
     sql_execute(sql_req) #|safe
     connect.commit()
+
 
 def insert_problem_file(problem_type, problem_class, problem_source, filename, problem_answer, problem_difficulty):
     file = open(filename, "r", encoding="UTF-8")
@@ -136,6 +200,21 @@ def get_user_info_with_user_id(id):
         SELECT * from users
         WHERE user_id = "{id}"
         """
+    return sql_execute(sql_req).fetchall()
+
+def get_problems_by_variant(variant_id):
+    sql_req = f"""
+            SELECT 
+                problems.problem_id, problem_type_id, problem_source, problem_statement, problem_answer, problem_difficulty
+            FROM
+                problems 
+            INNER JOIN
+                variant_problem
+            ON
+                problems.problem_id = variant_problem.problem_id
+            WHERE
+                variant_problem.variant_id = {variant_id}
+    """
     return sql_execute(sql_req).fetchall()
 
 def variant_page_default_kwargs(variant_id):
@@ -302,9 +381,53 @@ def get_learning_materials():
 
 def get_learning_material(material_id):
     sql_req = f"""SELECT * FROM learning_materials WHERE material_id = {material_id}"""
+    return sql_execute(sql_req).fetchall()[0]
+
+def get_courses():
+    sql_req = f"""SELECT * FROM courses"""
     return sql_execute(sql_req).fetchall()
 
-if __name__ == "__main__":
-    print("         ТИП   КЛАСС   ОТВЕТ   СЛОЖОСТЬ", "ВВЕДИТЕ: ", sep='\n', end="")
-    problem_type, problem_class, problem_answer, problem_difficulty = map(int, input().split())
-    insert_problem_file(problem_type, problem_class, "costil.txt", problem_answer, problem_difficulty)
+def get_course_materials(course_id):
+    sql_req = f"""
+            SELECT
+                learning_materials.material_id, material_type, material_name, material_description, material_statement, material_ege_type
+            FROM
+                course_material INNER JOIN learning_materials
+            ON
+                course_material.material_id = learning_materials.material_id
+            WHERE
+                course_material.course_id = {course_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
+def insert_variant(variant_id, variant_name, variant_description, author_id):
+    sql_req = f"""
+            INSERT INTO
+                variants
+            VALUES
+                ({variant_id}, "{variant_name}", "{variant_description}", {author_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def insert_problem_to_variant(variant_id, problem_id):
+    sql_req = f"""
+            INSERT INTO
+                variant_problem
+            VALUES
+                ({variant_id}, {problem_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def remove_problem_from_variant(variant_id, problem_id):
+    sql_req = f"""
+            DELETE 
+                FROM variant_problem
+            WHERE
+                variant_id = {variant_id}
+            AND
+                problem_id = {problem_id}
+    """
+    sql_execute(sql_req)
+    connect.commit()

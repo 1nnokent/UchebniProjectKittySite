@@ -23,17 +23,11 @@
 
     <style>
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             background-color: #f0f0f0;
             color: #333;
             padding-top: 70px;
-        }
-        header {
-            background-color: #437DD4;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .filter-container {
             display: flex;
@@ -42,6 +36,7 @@
             padding: 20px;
             background: #f8f8f8;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
         .filter-group {
             display: flex;
@@ -53,10 +48,12 @@
         }
         .container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Изменил на center для выравнивания по центру */
-            margin-top: 2.5%;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
         .lecture-card {
             background: #fff;
@@ -112,16 +109,12 @@
              position:absolute;
              bottom:10px;
              left:10px;
-             color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+             color:#rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
              font-size:12px; /* Размер шрифта для метки */
-
          }
          a {
              text-decoration: none; /* Убираем подчеркивание у ссылок */
              color: inherit; /* Наследуем цвет текста от родителя */
-         }
-         .problem-card img {
-             max-width: calc(100% - 20px); /* Ограничиваем максимальную ширину картинки */
          }
     </style>
 </head>
@@ -129,74 +122,46 @@
      {% include 'header.html' %}
      <div class="filter-container">
           <div class="filter-group" id="ege-filters">
-               {% for i in range(1, 28) %}
-                    <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
-               {% endfor %}
+              {% for i in range(1, 28) %}
+                  <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
+              {% endfor %}
           </div>
      </div>
 
      <div class="container" id="lectures-container">
-         {% for problem in problems %}
-             <div class="problem-card default" data-type="{{ problem[1] }}">
-                 <h5 class="problem-title">Задание {{ problem[0] + 1 }}. Тип {{ problem[1] }}. Сложность: {{ problem[5] }}</h5>
-                 <h6 class="problem-author">{{ problem[2] }}</h6>
-                 <p class="problem-question">{{ problem[3]|safe }}</p>
-                 {% for image_name in problem[6] %}
-                     <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}" alt="Изображение к задаче {{ problem[0] + 1 }}" onerror="this.style.display='none'"></p>
-                 {% endfor %}
-                 
-                 {% for file_name in problem[7] %}
-                         <p><a href="{{ url_for('static', filename='excel-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                 {% endfor %}
-                 {% for file_name in problem[8] %}
-                         <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                 {% endfor %}
-                 <div class="answer">
-
-                     <button class="accordion">Показать ответ</button>
-
-                     <div class="panel">
-                         <p class="problem-question">Ответ: {{ problem[4] }}</p>
-                     </div>
-                 </div>
-             </div>
+         {% for course in courses %}
+         <a href="/courses/{{ course[0] }}" class="lecture-card" data-egenumber="{{ course[3] }}">
+             <h3>{{ course[1] }}</h3>
+             <p>{{ course[2] }}</p>
+         </a>
          {% endfor %}
-     </div>
      </div>
 
      <script>
-         var acc = document.getElementsByClassName("accordion");
-         var i;
+         // Функция для фильтрации материалов
+         function filterMaterials() {
+             const selectedTypes = Array.from(document.querySelectorAll('#type-filters input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
+             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
+                                     .map(checkbox => parseInt(checkbox.value,10));
 
-         for (i = 0; i < acc.length; i++) {
-             acc[i].addEventListener("click", function() {
-                 this.classList.toggle("active");
-                 var panel = this.nextElementSibling;
-                 if (panel.style.display === "block") {
-                     panel.style.display = "none"; // Скрыть панель
+             document.querySelectorAll('.lecture-card').forEach(card => {
+                 const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(card.dataset.type); // Проверяем соответствие типа
+                 const egeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(parseInt(card.dataset.egenumber,10));
+
+                 // Если выбран "Все", показываем все карточки
+                 if (selectedTypes.includes("all")) {
+                     card.style.display = 'block';
                  } else {
-                     panel.style.display = "block"; // Показать панель
+                     card.style.display = (typeMatch && egeMatch) ? 'block' : 'none';
                  }
              });
          }
 
-         // Функция для фильтрации материалов
-         function filterMaterials() {
-             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
-                                     .map(checkbox => checkbox.value);
-
-             document.querySelectorAll('.problem-card').forEach(card => {
-                 const problemType = card.querySelector('.problem-title').textContent.match(/Тип (\d+)/)[1];
-
-                 // Проверяем соответствие типа
-                 const typeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(problemType);
-
-                 // Показываем карточку, если совпадают условия
-                 card.style.display = typeMatch ? 'block' : 'none';
-             });
-         }
-
          // Добавляем обработчики событий для чекбоксов
+         document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(checkbox => {
+             checkbox.addEventListener('change', filterMaterials);
+         });
+
          document.querySelectorAll('#ege-filters input[type="checkbox"]').forEach(checkbox => {
              checkbox.addEventListener('change', filterMaterials);
          });

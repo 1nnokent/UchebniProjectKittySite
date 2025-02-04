@@ -14,15 +14,14 @@ def first_page():
 def registration_page():
     if request.method == "GET":
         return render_template("/user_account_pages/registration.html")
-    elif request.method == "POST":
+    if request.method == "POST":
         code = dr.insert_user(request.form.to_dict())
         if code == 0:
             return render_template("/user_account_pages/registration_end.html")
-        elif code == 1:
+        if code == 1:
             return render_template("/error_pages/error_registration_user_exists.html") #если пользователь уже есть
         else:
             pass
-
 
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(failed=False, problem=None):
@@ -57,63 +56,95 @@ def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("test.html", user=[0, "aowje"])
 
-@app.route("/learning-materials/list")
+@app.route("/learning-materials/all")
 def learning_materials_page():
     materials = dr.get_learning_materials()
     return render_template('learning_materials.html', materials=materials)
 
-@app.route("/learning-video/<material_id>")
-def learning_video(material_id):
+@app.route("/learning-materials/<material_id>")
+def learning_material_page(material_id):
     material = dr.get_learning_material(material_id)
-    return render_template('learning_video.html', material=material)
-
-@app.route("/learning-presentation/<material_id>")
-def learning_presentation(material_id):
-    material = dr.get_learning_material(material_id)
-    print(material_id)
-    return render_template('learning_presentation.html', material=material)
+    if material[1] == 0:
+        return render_template('learning_video.html', material=material)
+    if material[1] == 1:
+        print(material[4])
+        return render_template('learning_presentation.html', material=material)
+    if material[1] == 2:
+        return render_template('learning_conspect.html', material=material)
 
 @app.route("/blank")
 def blank_page():
     return render_template("blank.html")
+
+@app.route("/variants/add", methods=['GET', 'POST'])
+def add_variant():
+    if request.method == 'GET':
+        return render_template('add_variant.html')
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        variant_id = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0] + 1
+        dr.insert_variant(variant_id, info['variant_name'], info['variant_description'], 0)
+        return redirect(url_for('modify_variant', variant_id=variant_id))
+
+@app.route("/variants/<variant_id>/modify", methods=['GET', 'POST'])
+def modify_variant(variant_id):
+    if request.method == 'GET':
+        problems = dr.get_problems_by_variant(variant_id)
+        return render_template('modify_variant.html', problems=problems)
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        operation = 'problem_id_add' in info
+        problem_id = info[list(info.keys())[0]]
+        mmax = dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]
+        if problem_id == '' or int(problem_id) - 1 >= mmax:
+            return redirect(url_for('error_page'))
+
+        if operation:
+            dr.insert_problem_to_variant(variant_id, int(problem_id) - 1)
+        else:
+            dr.remove_problem_from_variant(variant_id, int(problem_id))
+        return redirect(url_for('modify_variant', variant_id=variant_id))
 
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
     if request.method == 'GET':
         kwargs = dr.variant_page_default_kwargs(variant_id)
         return render_template("variant_page.html", **kwargs)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
 
-@app.route('/forum/list', methods=['POST', 'GET'])
+@app.route('/forum/topics/all', methods=['POST', 'GET'])
 def forum_main_page():
     if request.method == 'GET':
         discussions = dr.get_discussions()
         print(discussions)
         return render_template("forum_main_page.html", discussions=discussions)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         info = request.form.to_dict()
         topic_id = dr.insert_new_topic(info)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
-@app.route('/forum/<topic_id>', methods=['POST', 'GET'])
+@app.route('/forum/topics/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
     if request.method == 'GET':
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return render_template('forum_topic_page.html', topic_name=topic_name, messages=messages)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         info = request.form.to_dict()
         dr.insert_topic_message(topic_id, info)
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
-@app.route("/problems/list")
+@app.route("/problems/all")
 def problems_page():
-    problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
+    problems = dr.get_problems()
+    for elem in problems:
+        if elem[1] == 17:
+            print(elem)
     return render_template("problem_list.html", problems=problems)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
@@ -122,12 +153,26 @@ def add_problem():
         return render_template("add_problem.html")
     if request.method == 'POST':
         info = request.form.to_dict()
-        if not (1 <= int(info['problem_type']) <= 27):
-            return render_template("error_incorrect_problem") #Такого номера задания нет в КИМ
+        if info['problem_type'] == '' or not (1 <= int(info['problem_type']) <= 27):
+            return redirect(url_for('error_page')) #Такого номера задания нет в КИМ
 
         dr.insert_problem(int(info['problem_type']), info['problem_source'],
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
         return redirect(url_for('add_problem'))
+
+@app.route("/courses/all")
+def courses_page():
+    courses = dr.get_courses()
+    return render_template("courses_page.html", courses=courses)
+
+@app.route("/courses/<course_id>")
+def course_page(course_id):
+    materials = dr.get_course_materials(course_id)
+    return render_template("course_page.html", materials=materials)
+
+@app.route("/error/")
+def error_page():
+    return render_template('error_page.html')
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
