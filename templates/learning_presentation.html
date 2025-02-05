@@ -35,7 +35,7 @@
         }
         iframe {
             display: block;
-            margin: 20px auto;
+            margin: 10px auto;
             background-color: #fff;
             max-width: 100%;
             width: 960px;
@@ -51,10 +51,11 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <div style="margin-top: 100px; text-align: center; margin-bottom: 20px">
-      <h1>{{ material[2] }}</h1>  <!-- Заголовок из material[2] -->
+    <div style="margin-top: 90px; text-align: center">
+      <h2>{{ material[2] }}</h2>  
     </div>
 <!--    <iframe src="../{{material[4]}}"-->
+
 <!--            frameborder="0"  allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" scrolling="no"></iframe>-->
     <iframe src="https://docs.google.com/presentation/d/e/{{material[4]}}" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 </body>
