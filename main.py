@@ -142,9 +142,9 @@ def forum_topic_page(topic_id):
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
-    for elem in problems:
-        if elem[1] == 17:
-            print(elem)
+    # for elem in problems:
+    #     if elem[1] == 17:
+    #         print(elem)
     return render_template("problem_list.html", problems=problems)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
@@ -169,6 +169,17 @@ def courses_page():
 def course_page(course_id):
     materials = dr.get_course_materials(course_id)
     return render_template("course_page.html", materials=materials)
+
+@app.route('/my-groups', methods=["POST", "GET"])
+def my_groups():
+    # groups = dr.get_my_groups()
+    return render_template("my_groups.html")
+
+@app.route("/groups/1")
+def group_page():
+    # group = dr.get_group_info(group_id)
+    materials = dr.get_course_materials(0)
+    return render_template("group_page.html", assignments=materials)
 
 @app.route("/error/")
 def error_page():

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Кошьки inc.</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      margin-top: 80px;
+    }
+    .problem-card, .card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px;
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .problem-card h5, .card h5 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+    .problem-card p, .card p {
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'header.html' %}
+  {% set members = ['Иван', 'Мария', 'Петр'] %}
+  {% set course_stats = [70, 85, 50] %}
+  <!-- Эмуляция массива заданий для разделов "Теория" и "Тесты" -->
+  {% set assignments = [
+      [0, 2, "Основы языков программирования", "Описание теоретического задания: основы языков программирования.", "/learning-materials/0", "Теория"],
+      [1, 3, "Алгоритмы", "Описание тестового задания: вопросы по алгоритмам.", "/learning-materials/1", "Тест"],
+      [2, 4, "ООП", "Описание теоретического задания: принципы ООП.", "/learning-materials/2", "Теория"],
+      [3, 5, "Базы данных", "Описание тестового задания: задачи по базам данных.", "/learning-materials/3", "Тест"],
+      [4, 6, "Разработка приложений", "Описание практического задания: разработка небольшого приложения.", "/learning-materials/4", "Теория"],
+      [5, 7, "Веб-разработка", "Описание проектного задания: создание веб-сайта.", "/learning-materials/5", "Тест"],
+      [6, 8, "Алгоритмы сортировки", "Описание лабораторной работы: изучение алгоритмов сортировки.", "/learning-materials/6", "Теория"],
+      [7, 9, "Литература", "Описание домашнего задания: написать эссе по литературе.", "/learning-materials/7", "Тест"],
+      [8, 10, "Математика", "Описание тестового задания: вопросы по математике.", "/learning-materials/8", "Теория"],
+      [9, 11, "История программирования", "Описание теоретического задания: история программирования.", "/learning-materials/9", "Тест"],
+      [10, 12, "Базы данных", "Описание практического задания: создание базы данных.", "/learning-materials/10", "Теория"],
+      [11, 13, "Мобильные приложения", "Описание проектного задания: разработка мобильного приложения.", "/learning-materials/11", "Тест"],
+      [12, 14, "Искусственный интеллект", "Описание лабораторной работы: исследования в области ИИ.", "/learning-materials/12", "Теория"],
+      [13, 15, "Экономика", "Описание домашнего задания: реферат по экономике.", "/learning-materials/13", "Тест"]
+  ] %}
+  
+  <section class="container my-5">
+    <div class="row">
+       <!-- Сворачиваемый список участников группы с отображением статистики выполненных курсов -->
+      <div class="col-12">       
+        <div class="members-list my-4">
+          <h2 class="mb-3">Участники группы</h2>
+          <ul class="list-group">
+            {% for member in members %}
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="min-height: 50px;">
+              <span>{{ member }}</span>
+              <span class="badge bg-primary rounded-pill" style="min-width: 50px; text-align: center;">{{ course_stats[loop.index0] }}%</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Теория -->
+      <div class="col-12 mt-4">
+        <h2 class="text-center">Теория</h2>
+        <div class="row" id="theory-container">
+          {% for problem in assignments %}
+            {% if problem[5] == "Теория" %}
+            <div class="col-md-4 mb-4">
+              <a href="{{ problem[4] }}" class="card h-100 text-decoration-none text-reset" data-type="{{ problem[1] }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ problem[2] }}</h5>
+                  <p class="card-text">{{ problem[3]|safe }}</p>
+                </div>
+              </a>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Тесты -->
+      <div class="col-12 mt-4">
+        <h2 class="text-center">Тесты</h2>
+        <div class="row" id="tests-container">
+          {% for problem in assignments %}
+            {% if problem[5] == "Тест" %}
+            <div class="col-md-4 mb-4">
+              <a href="/testing-materials/{{ problem[0] }}" class="card h-100 text-decoration-none text-reset {% if problem[1] != 0 %}no-video{% endif %}" data-type="{% if problem[1] == 0 %}video{% elif problem[1] == 1 %}presentation{% else %}other{% endif %}" data-egenumber="{{ problem[5] }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ problem[2] }}</h5>
+                  {% if problem[3] %}
+                    <p class="card-text">{{ problem[3]|safe }}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Доступные курсы -->
+      <div class="col-12 mt-4">
+        <h2 class="text-center">Доступные курсы</h2>
+        <div class="d-flex justify-content-center flex-wrap" id="courses-container">
+          {% for course in courses %}
+
+          <div class="course-card default m-2 p-3" style="border: 1px solid #ddd; border-radius: 5px; width: 200px;">
+            <h5 class="course-title">{{ course.name }}</h5>
+            <p class="course-description">{{ course.description }}</p>
+            <a href="{{ url_for('course_page', course_id=course.id) }}" class="btn btn-primary">Перейти к курсу</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- JS Files -->
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
