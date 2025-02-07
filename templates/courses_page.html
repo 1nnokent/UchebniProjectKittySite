@@ -120,13 +120,6 @@
 </head>
 <body>
      {% include 'header.html' %}
-<!--     <div class="filter-container">-->
-<!--          <div class="filter-group" id="ege-filters">-->
-<!--              {% for i in range(1, 28) %}-->
-<!--                  <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>-->
-<!--              {% endfor %}-->
-<!--          </div>-->
-<!--     </div>-->
 
      <div class="container" id="lectures-container">
          {% for course in courses %}
@@ -136,39 +129,6 @@
          </a>
          {% endfor %}
      </div>
-
-<!--     <script>-->
-<!--         // Функция для фильтрации материалов-->
-<!--         function filterMaterials() {-->
-<!--             const selectedTypes = Array.from(document.querySelectorAll('#type-filters input[type="checkbox"]:checked')).map(checkbox => checkbox.value);-->
-<!--             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))-->
-<!--                                     .map(checkbox => parseInt(checkbox.value,10));-->
-
-<!--             document.querySelectorAll('.lecture-card').forEach(card => {-->
-<!--                 const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(card.dataset.type); // Проверяем соответствие типа-->
-<!--                 const egeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(parseInt(card.dataset.egenumber,10));-->
-
-<!--                 // Если выбран "Все", показываем все карточки-->
-<!--                 if (selectedTypes.includes("all")) {-->
-<!--                     card.style.display = 'block';-->
-<!--                 } else {-->
-<!--                     card.style.display = (typeMatch && egeMatch) ? 'block' : 'none';-->
-<!--                 }-->
-<!--             });-->
-<!--         }-->
-
-<!--         // Добавляем обработчики событий для чекбоксов-->
-<!--         document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(checkbox => {-->
-<!--             checkbox.addEventListener('change', filterMaterials);-->
-<!--         });-->
-
-<!--         document.querySelectorAll('#ege-filters input[type="checkbox"]').forEach(checkbox => {-->
-<!--             checkbox.addEventListener('change', filterMaterials);-->
-<!--         });-->
-
-<!--         // Вызываем фильтрацию при загрузке страницы-->
-<!--         filterMaterials();-->
-<!--     </script>-->
 
 </body>
 </html>
