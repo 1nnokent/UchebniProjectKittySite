@@ -95,7 +95,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
         if elem.filename == '':
             continue
         table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
-        path = f"""static/excel-tables/{table_id}.xlxs"""
+        path = f"""static/excel-tables/{table_id}.xlsx"""
         elem.save(path)
         sql_execute(f"""
             INSERT

@@ -46,9 +46,9 @@
     <h1 class="text-center">Мои группы</h1>
     <div class="row">
       {% for group in groups %}
-      <div class="col-md-4">
+      <div class="col-md-4 mb-4"> <!-- Добавлено отступ между карточками -->
         <a href="/groups/{{ group[0] }}" style="text-decoration: none; color: inherit;">
-          <div class="card mb-0"> <!-- Уменьшено расстояние между карточками -->
+          <div class="card"> <!-- Убрано mb-0 для нормального расстояния между карточками -->
             <div class="card-body">
               <h5 class="card-title">{{ group[1] }}</h5> 
               <p class="card-text">{{ group[2] }}</p> 

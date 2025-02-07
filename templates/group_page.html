@@ -94,12 +94,49 @@
       padding: 15px;
       margin: 10px;
     }
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .table tbody + tbody {
+      border-top: 2px solid #dee2e6;
+    }
+    .table .table {
+      background-color: #fff;
+    }
+    .bg-gray {
+      background-color: #d3d3d3;
+    }
+    .bg-red {
+      background-color: #ffcccc;
+    }
+    .bg-yellow {
+      background-color: #ffffcc;
+    }
+    .bg-green {
+      background-color: #ccffcc;
+    }
   </style>
 </head>
 
 <body>
   {% include 'header.html' %}
-  {% set course_stats = [70, 85, 50] %}
+  {% set course_stats = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70],
+    [70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+  ] %}
   <!-- Эмуляция массива заданий для разделов "Теория" и "Тесты" -->
   {% set learning_materials = [
       [0, 2, "Основы языков программирования", "Описание теоретического задания: основы языков программирования.", "0", 0],
@@ -110,31 +147,44 @@
   
   <section class="container my-5">
     <div class="row">
-       <!-- Сворачиваемый список участников группы с отображением статистики выполненных курсов -->
+       <!-- Таблица участников группы с отображением статистики выполненных курсов -->
       <div class="col-12">       
         <div class="members-list my-4">
           <h2 class="mb-3">Участники группы</h2>
-          <ul class="list-group">
-            {% for member in members %}
-            <li class="list-group-item d-flex justify-content-between align-items-center" style="min-height: 50px;">
-              <span>{{ member[0] }} {{ member[1] }} {{ member[2] }}</span>
-              <span class="badge bg-primary rounded-pill" style="min-width: 50px; text-align: center;">{{ course_stats[loop.index0] }}%</span>
-            </li>
-            {% endfor %}
-          </ul>
+          <table class="table" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th style="width: 150px;">Имя</th>
+                {% for i in range(1, 28) %}
+                <th class="text-center" style="width: 30px; padding: 3px;">{{ i }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for member in members %}
+              <tr>
+                <td>{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
+                {% for stat in course_stats[loop.index0] %}
+                <td class="text-center {% if stat == 0 %}bg-gray{% elif stat < 40 %}bg-red{% elif stat < 70 %}bg-yellow{% else %}bg-green{% endif %}" style="background-color: inherit;">{{ stat }}%</td>
+                {% endfor %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
       
-      <!-- Теория -->
+      <!-- Курсы/Теория -->
       <div class="col-12 mt-4">
-        <h2 class="text-center">Теория</h2>
-        <div class="row" id="theory-container">
+        <h2 class="text-center">Курсы/Теория</h2>
+        <div class="row" id="courses-theory-container">
           {% for material in learning_materials %}
             <div class="col-md-4 mb-4">
-              <a href="/learning-materials/{{ material[0] }}" class="card h-100">
+              <a href="{% if material[5] == 0 %}/learning-materials/{{ material[0] }}{% else %}/courses/{{ material[0] }}{% endif %}" class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title">{{ material[2] }}</h5>
                   <p class="card-text">{{ material[3]|safe }}</p>
+
                 </div>
               </a>
             </div>
@@ -159,20 +209,7 @@
         </div>
       </div>
 
-      <!-- Доступные курсы -->
-      <div class="col-12 mt-4">
-        <h2 class="text-center">Курсы</h2>
-        <div class="d-flex justify-content-start flex-wrap" id="courses-container">
-          {% for course in courses %}
-          <a href="/courses/{{ course[0] }}">
-            <div class="course-card">
-              <h5 class="course-title">{{ course[1] }}</h5>
-              <p class="course-description">{{ course[2] }}</p>
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-      </div>
+      
     </div>
   </section>
 </body>

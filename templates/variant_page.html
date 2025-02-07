@@ -62,6 +62,15 @@
 
 <body>
   {% include 'header.html' %}
+    {# Добавляем тестовый массив с дополнительными пунктами (начиная с 6-го), так как первые 5 уже подтягиваются из БД #}
+    {% set test_array = [
+        [6, "Тестовый тип", "Тестовый автор 6", "Тестовый вопрос 6", "Тестовый ответ 6", "Средняя", [], [], []],
+        [7, "Тестовый тип", "Тестовый автор 7", "Тестовый вопрос 7", "Тестовый ответ 7", "Высокая", [], [], []],
+        [8, "Тестовый тип", "Тестовый автор 8", "Тестовый вопрос 8", "Тестовый ответ 8", "Низкая", [], [], []],
+        [9, "Тестовый тип", "Тестовый автор 9", "Тестовый вопрос 9", "Тестовый ответ 9", "Средняя", [], [], []],
+        [10, "Тестовый тип", "Тестовый автор 10", "Тестовый вопрос 10", "Тестовый ответ 10", "Высокая", [], [], []]
+    ] %}
+    {% set problems = problems + test_array %}
 
     <form method="post" enctype="multipart/form-data">
         <div class="container">
@@ -78,6 +87,30 @@
                 <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
                 <h6 class="problem-author">{{problems[i][2]}}</h6>
                 <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
+                
+                {% for image_name in problems[i][6] %}
+                    <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}" 
+                          alt="Изображение к задаче {{i + 1}}" 
+                          onerror="this.style.display='none'"
+                          style="max-width: calc(100% - 20px);"></p>
+                {% endfor %}
+                
+                {% for file_name in problems[i][7] %}
+                    <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" 
+                         download 
+                         style="color: blue; text-decoration: underline;">
+                        Скачать файл "{{ file_name }}"
+                    </a></p>
+                {% endfor %}
+                
+                {% for file_name in problems[i][8] %}
+                    <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" 
+                         download 
+                         style="color: blue; text-decoration: underline;">
+                        Скачать файл "{{ file_name }}"
+                    </a></p>
+                {% endfor %}
+
                 <div class="input-group">
                     {% if answers[i][0] == -1 %}
                         <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">
