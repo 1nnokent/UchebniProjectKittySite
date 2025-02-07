@@ -77,7 +77,6 @@ def get_problems():
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
     problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
     pictures = request.files.getlist('photos')
-    print(pictures)
     for elem in pictures:
         if elem.filename == '':
             continue
@@ -96,7 +95,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
         if elem.filename == '':
             continue
         table_id = sql_execute("SELECT count(*) FROM problem_table").fetchall()[0][0]
-        path = f"""static/excel-tables/{table_id}.xlsx"""
+        path = f"""static/excel-tables/{table_id}.xlxs"""
         elem.save(path)
         sql_execute(f"""
             INSERT
@@ -140,7 +139,6 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     VALUES ({problem_id}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
     """
 
-    print(sql_req)
     sql_execute(sql_req) #|safe
     connect.commit()
 
@@ -151,7 +149,6 @@ def insert_problem_file(problem_type, problem_class, problem_source, filename, p
     insert_problem(problem_type, problem_source, problem_class, file_text, problem_answer, problem_difficulty)
 
 def insert_user(info):
-    print(info)
     current_id = int(sql_execute("""
             SELECT COUNT(*) FROM users
             """).fetchall()[0][0])
@@ -171,7 +168,6 @@ def insert_user(info):
         role_id = sql_execute(f"""SELECT role_id FROM roles WHERE role_name = '{info['role']}' """).fetchall()[0][0]
         school_id = sql_execute(f"""SELECT school_id FROM schools WHERE school_name = '{info['school']}' """).fetchall()[0][0]
         city_id = sql_execute(f"""SELECT city_id FROM cities WHERE city_name = '{info['city']}' """).fetchall()[0][0]
-        print(role_id, school_id, city_id)
         registration_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
         sql_req = f"""
                             INSERT INTO users 
@@ -274,8 +270,6 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
     VALUES ({user_id}, {variant_id}, "{completion_time}", {assignment_id})
     """
     problems = sql_execute(f"""SELECT problem_id FROM variant_problem WHERE variant_id = {variant_id}""").fetchall()
-    print(answers)
-    print(problems)
     for problem in problems:
         sql_req_2 = f"""
             INSERT INTO user_problem 
@@ -283,7 +277,6 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
                     {(answers[str(problem[0])] == sql_execute(f'''SELECT problem_answer FROM problems 
                     WHERE problem_id = { problem[0] }''').fetchall()[0][0])})
             """
-        print(sql_req_2)
         sql_execute(sql_req_2)
 
     sql_execute(sql_req_1)
@@ -492,5 +485,21 @@ def get_group_assignments(group_id):
                     assignment_group.group_id = {group_id}
     """
     variants = sql_execute(sql_req).fetchall()
-    print(variants)
     return variants
+
+def encode_group_code(group_id):
+    code = ''
+    alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    leng = 0
+    while group_id or leng < 5:
+        code += alph[group_id % 26]
+        group_id //= 26
+        leng += 1
+    return code[::-1]
+
+def decode_group_code(encoded_id):
+    ret = 0
+    alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    for i in range(5):
+        ret += alph.find(encoded_id[i]) * 26 ** (4 - i)
+    return ret
