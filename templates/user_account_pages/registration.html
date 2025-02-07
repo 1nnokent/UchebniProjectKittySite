@@ -60,11 +60,11 @@
       <div class="form-group" id="role">
         <label for="role">Как вы собираетесь пользоваться сайтом?</label>
         <div>
-          <input type="radio" id="teacher" name="role" value="teacher" checked>
+          <input type="radio" id="teacher" name="role" value="teacher" checked onchange="toggleClassField()">
           <label for="teacher">Я учитель</label>
         </div>
         <div>
-          <input type="radio" id="student" name="role" value="student">
+          <input type="radio" id="student" name="role" value="student" onchange="toggleClassField()">
           <label for="student">Я обучающийся</label>
         </div>
       </div>
@@ -75,12 +75,7 @@
       <input class="form-control" id="login" placeholder="Введите логин" name="login">
       <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
       <input type="email" class="form-control" id="email" placeholder="Введите адрес электронной почты" name="email">
-      <input type="url" class="form-control" id="url" placeholder="Введите сайт вашей школы" name="url">
       <input type="tel" class="form-control" id="tel" placeholder="Введите ваш номер телефона" name="tel">
-      <div class="form-group">
-        <label for="love_range">Насколько вы любите КЕ</label>
-        <input type="range" class="form-control" id="love_range" name="love_range">
-      </div>
 
       <div class="form-group">
         <label for="birth_date">Введите дату рождения</label>
@@ -88,30 +83,37 @@
       </div>
 
       <div class="form-group">
-        <label for="school">Выберите место обучения:</label>
+        <label for="school">Выберите место обучения/преподавания:</label>
         <select class="form-control" id="school" name="school">
           <option>-</option>
           <option>Лицей "Вторая школа"</option>
           <option>СУНЦ МГУ</option>
           <option>Физтех-лицей им. П.Л.Капицы</option>
           <option>ОШЦПМ</option>
+          <option>Лицей «Инновация»</option>
+          <option>Гимназия «Победа»</option>
+          <option>Школа №42</option>
         </select>
       </div>
 
+      <!-- Перемещенное поле выбора класса -->
+      <div class="form-group" id="class_group">
+        <label for="class">Введите ваш текущий класс обучения (с буквой):</label>
+        <input class="form-control" id="class" name="class">
+      </div>
+
       <div class="form-group">
-        <label for="school">Выберите место проживания:</label>
+        <label for="city">Выберите место проживания:</label>
         <select class="form-control" id="city" name="city">
           <option>-</option>
           <option>г. Москва</option>
           <option>г. Санкт-Петербург</option>
           <option>г. Сан-Франциско</option>
+          <option>г. Киев</option>
+          <option>г. Минск</option>
+          <option>г. Новосибирск</option>
           <option>другое</option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label for="class">Введите ваш текущий класс обучения (с буквой):</label>
-        <input class="form-control" id="class" name="class">
       </div>
 
       <div class="form-group">
@@ -121,10 +123,23 @@
 
       <button type="submit" class="btn-primary" style="align-items:center;">Зарегистрироваться</button>
     </form>
-  </div>
 
-  <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function toggleClassField() {
+        var teacherRadio = document.getElementById('teacher');
+        var classGroup = document.getElementById('class_group');
+        if (teacherRadio.checked) {
+          classGroup.style.display = 'none';
+        } else {
+          classGroup.style.display = 'block';
+        }
+      }
+      // Инициализация состояния при загрузке страницы
+      document.addEventListener('DOMContentLoaded', function() {
+        toggleClassField();
+      });
+    </script>
+
 </body>
 
 </html>

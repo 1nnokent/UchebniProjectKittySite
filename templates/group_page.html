@@ -97,45 +97,28 @@
     .table {
       width: 100%;
       margin-bottom: 1rem;
-      color: #212529;
+
     }
     .table th,
     .table td {
-      padding: 0.75rem;
-      vertical-align: top;
       border-top: 1px solid #dee2e6;
     }
     .table thead th {
-      vertical-align: bottom;
       border-bottom: 2px solid #dee2e6;
     }
     .table tbody + tbody {
       border-top: 2px solid #dee2e6;
     }
-    .table .table {
-      background-color: #fff;
-    }
-    .bg-gray {
-      background-color: #d3d3d3;
-    }
-    .bg-red {
-      background-color: #ffcccc;
-    }
-    .bg-yellow {
-      background-color: #ffffcc;
-    }
-    .bg-green {
-      background-color: #ccffcc;
-    }
+    
   </style>
 </head>
 
 <body>
   {% include 'header.html' %}
   {% set course_stats = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70],
-    [70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [10, 20, 30, 40, 50, 60, 70, 80, 90, -1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70],
+    [70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, -1, 40, 30, 20, 10]
   ] %}
   <!-- Эмуляция массива заданий для разделов "Теория" и "Тесты" -->
   {% set learning_materials = [
@@ -151,21 +134,33 @@
       <div class="col-12">       
         <div class="members-list my-4">
           <h2 class="mb-3">Участники группы</h2>
-          <table class="table" style="table-layout: fixed;">
+          <table class="table table-bordered" style="table-layout: fixed; border-collapse: collapse;">
             <thead>
               <tr>
-                <th style="width: 150px;">Имя</th>
+                <th style="width: 150px; text-align: center;">Имя</th>
                 {% for i in range(1, 28) %}
                 <th class="text-center" style="width: 30px; padding: 3px;">{{ i }}</th>
                 {% endfor %}
               </tr>
+              
             </thead>
             <tbody>
               {% for member in members %}
               <tr>
-                <td>{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
-                {% for stat in course_stats[loop.index0] %}
-                <td class="text-center {% if stat == 0 %}bg-gray{% elif stat < 40 %}bg-red{% elif stat < 70 %}bg-yellow{% else %}bg-green{% endif %}" style="background-color: inherit;">{{ stat }}%</td>
+                <td class="text-center" style="font-size: 12px;">{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
+                {% set stats = course_stats[loop.index0] %}
+                {% for stat in stats %}
+                  {% if stat == -1 %}
+                    <td class="text-center" style="background-color: rgba(128, 128, 128, 0.5); font-size: 12px;">null</td>
+                  {% elif stat == 100 %}
+                    <td style="background-color: rgba(0, 0, 255, 0.5); font-size: 12px; text-align: center;">100%</td>
+                  {% elif stat < 20 %}
+                    <td class="text-center" style="background-color: rgba(255, 0, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
+                  {% elif stat < 60 %}
+                    <td class="text-center" style="background-color: rgba(255, 255, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
+                  {% else %}
+                    <td class="text-center" style="background-color: rgba(0, 128, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
+                  {% endif %}
                 {% endfor %}
               </tr>
               {% endfor %}
@@ -178,7 +173,7 @@
       <div class="col-12 mt-4">
         <h2 class="text-center">Курсы/Теория</h2>
         <div class="row" id="courses-theory-container">
-          {% for material in learning_materials %}
+          {% for material in assignments %}
             <div class="col-md-4 mb-4">
               <a href="{% if material[5] == 0 %}/learning-materials/{{ material[0] }}{% else %}/courses/{{ material[0] }}{% endif %}" class="card h-100">
                 <div class="card-body">
