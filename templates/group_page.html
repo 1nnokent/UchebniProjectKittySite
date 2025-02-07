@@ -101,21 +101,11 @@
   {% include 'header.html' %}
   {% set course_stats = [70, 85, 50] %}
   <!-- Эмуляция массива заданий для разделов "Теория" и "Тесты" -->
-  {% set assignments = [
+  {% set learning_materials = [
       [0, 2, "Основы языков программирования", "Описание теоретического задания: основы языков программирования.", "0", 0],
       [1, 3, "Алгоритмы", "Описание тестового задания: вопросы по алгоритмам.", "1", 1],
       [2, 4, "ООП", "Описание теоретического задания: принципы ООП.", "2", 0],
-      [3, 5, "Базы данных", "Описание тестового задания: задачи по базам данных.", "3", 1],
-      [4, 6, "Разработка приложений", "Описание практического задания: разработка небольшого приложения.", "4", 0],
-      [5, 7, "Веб-разработка", "Описание проектного задания: создание веб-сайта.", "5", 1],
-      [6, 8, "Алгоритмы сортировки", "Описание лабораторной работы: изучение алгоритмов сортировки.", "6", 0],
-      [7, 9, "Литература", "Описание домашнего задания: написать эссе по литературе.", "7", 1],
-      [8, 10, "Математика", "Описание тестового задания: вопросы по математике.", "8", 0],
-      [9, 11, "История программирования", "Описание теоретического задания: история программирования.", "9", 1],
-      [10, 12, "Базы данных", "Описание практического задания: создание базы данных.", "10", 0],
-      [11, 13, "Мобильные приложения", "Описание проектного задания: разработка мобильного приложения.", "11", 1],
-      [12, 14, "Искусственный интеллект", "Описание лабораторной работы: исследования в области ИИ.", "12", 0],
-      [13, 15, "Экономика", "Описание домашнего задания: реферат по экономике.", "13", 1]
+      [3, 5, "Базы данных", "Описание тестового задания: задачи по базам данных.", "3", 1]
   ] %}
   
   <section class="container my-5">
@@ -139,38 +129,32 @@
       <div class="col-12 mt-4">
         <h2 class="text-center">Теория</h2>
         <div class="row" id="theory-container">
-          {% for problem in assignments %}
-            {% if problem[5] == 0 %}
+          {% for material in learning_materials %}
             <div class="col-md-4 mb-4">
-              <a href="/learning-materials/{{ problem[4] }}" class="card h-100">
+              <a href="/learning-materials/{{ material[0] }}" class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">{{ problem[2] }}</h5>
-                  <p class="card-text">{{ problem[3]|safe }}</p>
+                  <h5 class="card-title">{{ material[2] }}</h5>
+                  <p class="card-text">{{ material[3]|safe }}</p>
                 </div>
               </a>
             </div>
-            {% endif %}
           {% endfor %}
         </div>
       </div>
 
       <!-- Тесты -->
       <div class="col-12 mt-4">
-        <h2 class="text-center">Задания </h2>
+        <h2 class="text-center">Задания</h2>
         <div class="row" id="tests-container">
-          {% for problem in assignments %}
-            {% if problem[5] == 1 %}
+          {% for assignment in assignments %}
             <div class="col-md-4 mb-4">
-              <a href="/variants/{{ problem[4] }}" class="card h-100">
+              <a href="/variants/{{ assignment[1] }}" class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">{{ problem[2] }}</h5>
-                  {% if problem[3] %}
-                    <p class="card-text">{{ problem[3]|safe }}</p>
-                  {% endif %}
+                  <h5 class="card-title">{{ assignment[2] }}</h5>
+                    <p class="card-text">{{ assignment[3]|safe }}</p>
                 </div>
               </a>
             </div>
-            {% endif %}
           {% endfor %}
         </div>
       </div>

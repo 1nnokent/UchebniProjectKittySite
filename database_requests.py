@@ -458,7 +458,6 @@ def get_group_members(group_id):
                 user_group.group_id = {group_id}
     """
     members = sql_execute(sql_req).fetchall()
-    print(members)
     return members
 
 def get_group_courses(group_id):
@@ -467,11 +466,31 @@ def get_group_courses(group_id):
                 *
             FROM
                 courses
-            INNER JOIN
+                INNER JOIN
                 group_course ON group_course.course_id = courses.course_id
             WHERE
                 group_course.group_id = {group_id}
     """
     courses = sql_execute(sql_req).fetchall()
-    print(courses)
     return courses
+
+def get_group_assignments(group_id):
+    sql_req = f"""
+            SELECT
+                assignments.assignment_id, variants.variant_id, variants.variant_name, variants.variant_description
+            FROM
+                    assignment_group
+                INNER JOIN
+                    assignments
+                ON
+                    assignment_group.assignment_id = assignments.assignment_id
+                INNER JOIN
+                    variants
+                ON
+                    assignments.variant_id = variants.variant_id
+                WHERE
+                    assignment_group.group_id = {group_id}
+    """
+    variants = sql_execute(sql_req).fetchall()
+    print(variants)
+    return variants

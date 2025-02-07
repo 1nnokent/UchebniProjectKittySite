@@ -161,7 +161,7 @@ def add_problem():
         return redirect(url_for('add_problem'))
 
 @app.route("/courses/all")
-def courses_page():
+def course_main_page():
     courses = dr.get_courses()
     return render_template("courses_page.html", courses=courses)
 
@@ -171,16 +171,17 @@ def course_page(course_id):
     return render_template("course_page.html", materials=materials)
 
 @app.route('/groups/all', methods=["POST", "GET"])
-def my_groups():
-    groups = dr.get_groups(0)
+def group_main_page():
+    groups = dr.get_groups(0) #user_id
     return render_template("my_groups.html", groups=groups)
 
 @app.route("/groups/<group_id>")
 def group_page(group_id):
     members = dr.get_group_members(group_id)
     courses = dr.get_group_courses(group_id)
-    materials = dr.get_course_materials(0)
-    return render_template("group_page.html", members=members, assignments=materials, courses=courses)
+    assignments = dr.get_group_assignments(group_id)
+    return render_template("group_page.html", members=members,
+                           courses=courses, assignments=assignments)
 
 @app.route("/error/")
 def error_page():
