@@ -114,11 +114,6 @@
 <body>
      {% include 'header.html' %}
      <div class="filter-container">
-          <div class="filter-group" id="type-filters">
-               <label><input type="checkbox" name="material-type" value="video">Видео</label>
-               <label><input type="checkbox" name="material-type" value="presentation">Презентация</label>
-               <label><input type="checkbox" name="material-type" value="other">Конспект</label>
-          </div>
           <div class="filter-group" id="ege-filters">
               {% for i in range(1, 28) %}
                   <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
