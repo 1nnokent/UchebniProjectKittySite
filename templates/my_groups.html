@@ -41,16 +41,11 @@
        0 - id группы,
        1 - название группы,
        2 - описание группы  -->
-  {% set user_groups = [
-    [1, 'Тестовая группа 1', 'Описание тестовой группы 1'],
-    [2, 'Тестовая группа 2', 'Описание тестовой группы 2'],
-    [3, 'Тестовая группа 3', 'Описание тестовой группы 3']
-] %}
 
   <div class="container mt-5 px-3">
     <h1 class="text-center">Мои группы</h1>
     <div class="row">
-      {% for group in user_groups %}
+      {% for group in groups %}
       <div class="col-md-4">
         <a href="/groups/{{ group[0] }}" style="text-decoration: none; color: inherit;">
           <div class="card mb-0"> <!-- Уменьшено расстояние между карточками -->
