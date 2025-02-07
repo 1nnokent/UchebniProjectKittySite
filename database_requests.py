@@ -60,7 +60,7 @@ def get_problems():
         tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = { elem[0] }""")
         k = []
         for i in tables:
-            k.append(f"""{i[0]}.xlxs""")
+            k.append(f"""{i[0]}.xlsx""")
         tmp.append(k)
 
         texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = { elem[0] }""")
@@ -70,7 +70,6 @@ def get_problems():
         tmp.append(k)
 
         ret.append(tmp)
-
 
     return ret
 
@@ -217,17 +216,40 @@ def get_problems_by_variant(variant_id):
     return sql_execute(sql_req).fetchall()
 
 def variant_page_default_kwargs(variant_id):
-    sql_req = f"""SELECT * FROM
-                      problems INNER JOIN variant_problem
-                      ON variant_problem.problem_id = problems.problem_id
-                      WHERE variant_problem.variant_id = {variant_id}"""
-    problems = sql_execute(sql_req).fetchall()
+    ret = []
+    problems = get_problems_by_variant(variant_id)
+    for elem in problems:
+        tmp = []
+        for i in elem:
+            tmp.append(i)
+        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in pictures:
+            k.append(f"""problem_{i[0]}.jpg""")
+        tmp.append(k)
+
+        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in tables:
+            k.append(f"""{i[0]}.xlsx""")
+        tmp.append(k)
+
+        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in texts:
+            k.append(f"""{i[0]}.txt""")
+        tmp.append(k)
+
+        ret.append(tmp)
+
     answers_default = ((-1, -2)) * len(problems)
     kwargs = dict()
-    kwargs['problems'] = problems
+    kwargs['problems'] = ret
+    print(ret)
     kwargs['answers'] = answers_default
     kwargs['show_answers'] = False
     kwargs['amount_right'] = -1
+
     return kwargs
 
 def variant_page_feedback_kwargs(variant_id):
