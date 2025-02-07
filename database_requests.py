@@ -434,3 +434,44 @@ def remove_problem_from_variant(variant_id, problem_id):
     """
     sql_execute(sql_req)
     connect.commit()
+
+def get_groups(user_id):
+    group_list = sql_execute(f"""SELECT group_id FROM user_group WHERE user_id = {user_id}""").fetchall()
+    group_list_string = "("
+    for elem in group_list:
+        group_list_string = group_list_string + str(elem[0]) + ', '
+    group_list_string = group_list_string[:-2:] + ')'
+    groups = sql_execute(f"""SELECT * FROM groups WHERE group_id IN {group_list_string}""").fetchall()
+    return groups
+
+def get_group_members(group_id):
+    sql_req = f"""
+            SELECT
+                first_name, third_name, second_name, role_name
+            FROM
+                users
+            INNER JOIN
+                roles ON users.role_id = roles.role_id
+            INNER JOIN
+                user_group ON user_group.user_id = users.user_id
+            WHERE
+                user_group.group_id = {group_id}
+    """
+    members = sql_execute(sql_req).fetchall()
+    print(members)
+    return members
+
+def get_group_courses(group_id):
+    sql_req = f"""
+            SELECT
+                *
+            FROM
+                courses
+            INNER JOIN
+                group_course ON group_course.course_id = courses.course_id
+            WHERE
+                group_course.group_id = {group_id}
+    """
+    courses = sql_execute(sql_req).fetchall()
+    print(courses)
+    return courses
