@@ -1135,9 +1135,8 @@ section,
 }
 
 .problem-author {
-    font-size: 1.35rem;
-    font-weight: 420;
-    margin-bottom: 10px;
+    font-size: 1.25rem;
+    margin-bottom: 5px;
 }
 
 .problem-question {
