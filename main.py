@@ -49,6 +49,7 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = dr.user_select_to_dict(info)
+        print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/test")

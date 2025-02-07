@@ -57,21 +57,10 @@
 
   <div class="container">
     <form class="login_form" method="post" enctype="multipart/form-data">
-      <div class="form-group" id="role">
-        <label for="role">Как вы собираетесь пользоваться сайтом?</label>
-        <div>
-          <input type="radio" id="teacher" name="role" value="teacher" checked onchange="toggleClassField()">
-          <label for="teacher">Я учитель</label>
-        </div>
-        <div>
-          <input type="radio" id="student" name="role" value="student" onchange="toggleClassField()">
-          <label for="student">Я обучающийся</label>
-        </div>
-      </div>
 
       <input class="form-control" id="first_name" placeholder="Введите имя" name="first_name">
+      <input class="form-control" id="middle_name" placeholder="Введите отчество (при наличии)" name="middle_name">
       <input class="form-control" id="second_name" placeholder="Введите фамилию" name="second_name">
-      <input class="form-control" id="third_name" placeholder="Введите отчество (при наличии)" name="third_name">
       <input class="form-control" id="login" placeholder="Введите логин" name="login">
       <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
       <input type="email" class="form-control" id="email" placeholder="Введите адрес электронной почты" name="email">
@@ -96,12 +85,6 @@
         </select>
       </div>
 
-      <!-- Перемещенное поле выбора класса -->
-      <div class="form-group" id="class_group">
-        <label for="class">Введите ваш текущий класс обучения (с буквой):</label>
-        <input class="form-control" id="class" name="class">
-      </div>
-
       <div class="form-group">
         <label for="city">Выберите место проживания:</label>
         <select class="form-control" id="city" name="city">
@@ -114,6 +97,24 @@
           <option>г. Новосибирск</option>
           <option>другое</option>
         </select>
+      </div>
+
+      <div class="form-group" id="role">
+        <label for="role">Как вы собираетесь пользоваться сайтом?</label>
+        <div>
+          <input type="radio" id="teacher" name="role" value="Учитель" checked onchange="toggleClassField()">
+          <label for="teacher">Я учитель</label>
+        </div>
+        <div>
+          <input type="radio" id="student" name="role" value="Ученик" onchange="toggleClassField()">
+          <label for="student">Я обучающийся</label>
+        </div>
+      </div>
+
+      <!-- Перемещенное поле выбора класса -->
+      <div class="form-group" id="class_group">
+        <label for="class">Введите ваш текущий класс обучения (с буквой):</label>
+        <input class="form-control" id="class" name="class">
       </div>
 
       <div class="form-group">
