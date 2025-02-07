@@ -85,24 +85,22 @@
      {% include 'header.html' %}
      <div class="container" id="lectures-container">
          {% for material in materials %}
-         <div class="problem-card default">
-             <a class="" href="/learning-materials/{{ material[0] }}">
-                 <h5 class="problem-title">{{ material[2] }}</h5>
-                 {% if material[3] %}
-                     <p class="problem-question">{{ material[3] }}</p>
+         <a href="/learning-materials/{{ material[0] }}" class="problem-card default">
+             <h5 class="problem-title">{{ material[2] }}</h5>
+             {% if material[3] %}
+                 <p class="problem-question">{{ material[3] }}</p>
+             {% endif %}
+             <!-- Добавление полупрозрачной надписи -->
+             <div class="card-label">
+                 {% if material[1] == 0 %}
+                     Видеоматериал
+                 {% elif material[1] == 1 %}
+                     Презентация
+                 {% elif material[1] == 2 %}
+                     Конспект
                  {% endif %}
-                 <!-- Добавление полупрозрачной надписи -->
-                 <div class="card-label">
-                     {% if material[1] == 0 %}
-                         Видеоматериал
-                     {% elif material[1] == 1 %}
-                         Презентация
-                     {% elif material[1] == 2 %}
-                         Конспект
-                     {% endif %}
-                 </div>
-             </a>
-         </div>
+             </div>
+         </a>
          {% endfor %}
      </div>
  </body>
