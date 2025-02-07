@@ -253,16 +253,37 @@ def variant_page_default_kwargs(variant_id):
     return kwargs
 
 def variant_page_feedback_kwargs(variant_id):
-    sql_req = f"""SELECT * FROM
-                      problems INNER JOIN variant_problem
-                      ON variant_problem.problem_id = problems.problem_id
-                      WHERE variant_problem.variant_id = {variant_id}"""
-    problems = sql_execute(sql_req).fetchall()
+    problems = get_problems_by_variant(variant_id)
+    ret = []
+    for elem in problems:
+        tmp = []
+        for i in elem:
+            tmp.append(i)
+        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in pictures:
+            k.append(f"""problem_{i[0]}.jpg""")
+        tmp.append(k)
+
+        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in tables:
+            k.append(f"""{i[0]}.xlsx""")
+        tmp.append(k)
+
+        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = {elem[0]}""")
+        k = []
+        for i in texts:
+            k.append(f"""{i[0]}.txt""")
+        tmp.append(k)
+
+        ret.append(tmp)
+
     kwargs = dict()
     given_answers = []
     tmp = request.form.to_dict()
 
-    if not (tmp.__contains__('show_answers')):
+    if not ('show_answers' in tmp):
         tmp['show_answers'] = False
 
     for key in tmp:
@@ -276,7 +297,7 @@ def variant_page_feedback_kwargs(variant_id):
             answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
     answers = tuple(answers)
-    kwargs['problems'] = problems
+    kwargs['problems'] = ret
     kwargs['answers'] = answers
     kwargs['show_answers'] = tmp['show_answers']
     kwargs['amount_right'] = 0
