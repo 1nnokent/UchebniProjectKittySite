@@ -170,16 +170,17 @@ def course_page(course_id):
     materials = dr.get_course_materials(course_id)
     return render_template("course_page.html", materials=materials)
 
-@app.route('/my-groups', methods=["POST", "GET"])
+@app.route('/groups/all', methods=["POST", "GET"])
 def my_groups():
-    # groups = dr.get_my_groups()
-    return render_template("my_groups.html")
+    groups = dr.get_groups(0)
+    return render_template("my_groups.html", groups=groups)
 
-@app.route("/groups/1")
-def group_page():
-    # group = dr.get_group_info(group_id)
+@app.route("/groups/<group_id>")
+def group_page(group_id):
+    members = dr.get_group_members(group_id)
+    courses = dr.get_group_courses(group_id)
     materials = dr.get_course_materials(0)
-    return render_template("group_page.html", assignments=materials)
+    return render_template("group_page.html", members=members, assignments=materials, courses=courses)
 
 @app.route("/error/")
 def error_page():
