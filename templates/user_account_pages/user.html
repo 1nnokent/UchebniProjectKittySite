@@ -70,7 +70,7 @@
       margin-top: 20px; /* Отступ сверху */
       list-style-type: none; /* Убираем маркеры списка */
       padding: 0; /* Убираем отступы у списка */
-      text-align: center; /* Центрируем текст списка */
+      text-align: left; /* Центрируем текст списка */
     }
 
     .info-list li {
@@ -107,11 +107,12 @@
     <img src="{{ url_for('static', filename=photo_directory) }}" alt="Фото пользователя">
     <ul class="info-list">
       <li><h3>{{ first_name }} {{ second_name }}</h3></li>
-      <li><h4>{{ email }}</h4></li>
-      <li><h4>{{ birth_date }}</h4></li>
+      <li><h4>{{ role }}</h4></li>
+      <li><h5>Адрес электронной почты: {{ email }}</h5></li>
+      <li><h5>День рождения: {{ birth_date }}</h5></li>
       <li><h5>С нами с: {{ registration_time }}</h5></li>
-      <li><h5>Школа: {{ school_id }}</h5></li>
-      <li><h5>Город: {{ city_id }}</h5></li>
+      <li><h5>Школа: {{ school }}</h5></li>
+      <li><h5>Город: {{ city }}</h5></li>
       <li><h5>Класс: {{ class }}</h5></li>
     </ul>
   </div>

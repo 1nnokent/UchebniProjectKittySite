@@ -14,19 +14,21 @@ def sql_execute(sql_request):
 
 def user_select_to_dict(tuple_info):
     dict = {}
-    dict['user_id'] = tuple_info[0][0]
-    dict['role_id'] = tuple_info[0][1]
-    dict['registration_time'] = tuple_info[0][2]
-    dict['first_name'] = tuple_info[0][3]
-    dict['second_name'] = tuple_info[0][4]
-    dict['third_name'] = tuple_info[0][5]
-    dict['login'] = tuple_info[0][6]
-    dict['password'] = tuple_info[0][7]
-    dict['email'] = tuple_info[0][8]
-    dict['birth_date'] = tuple_info[0][9]
-    dict['school_id'] = tuple_info[0][10]
-    dict['city_id'] = tuple_info[0][11]
-    dict['class'] = tuple_info[0][12]
+    dict['user_id'] = tuple_info[0]
+    dict['role'] = sql_execute(f"""SELECT role_name FROM roles WHERE role_id = {tuple_info[1]}""").fetchall()[0][0]
+    dict['registration_time'] = tuple_info[2]
+    dict['first_name'] = tuple_info[3]
+    dict['second_name'] = tuple_info[4]
+    dict['third_name'] = tuple_info[5]
+    dict['login'] = tuple_info[6]
+    dict['password'] = tuple_info[7]
+    dict['email'] = tuple_info[8]
+    dict['url'] = tuple_info[9]
+    dict['tel'] = tuple_info[10]
+    dict['birth_date'] = tuple_info[11]
+    dict['school'] = sql_execute(f"""SELECT school_name FROM schools WHERE school_id = {tuple_info[12]}""").fetchall()[0][0]
+    dict['city'] = sql_execute(f"""SELECT city_name FROM cities WHERE city_id = {tuple_info[13]}""").fetchall()[0][0]
+    dict['class'] = tuple_info[14]
     dict['number_of_attempts'] = {}
     dict['number_of_right_attempts'] = {}
     dict['ratio'] = {}
@@ -34,8 +36,8 @@ def user_select_to_dict(tuple_info):
         dict['number_of_attempts'][task] = random.randint(1, 25)
         dict['number_of_right_attempts'][task] = random.randint(1, dict['number_of_attempts'][task])
         dict['ratio'][task] = dict['number_of_right_attempts'][task] / dict['number_of_attempts'][task]
-    if tuple_info[0][13] != -1:
-        dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[0][13]) + '_avatar.jpg'
+    if tuple_info[15] != -1:
+        dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[13]) + '_avatar.jpg'
     else:
         dict['photo_directory'] = '/img/profile-pictures/profile_default_avatar.jpg'
 
@@ -173,8 +175,9 @@ def insert_user(info):
         registration_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
         sql_req = f"""
                             INSERT INTO users 
-                            VALUES ({current_id}, {role_id}, "{registration_time}", "{info['first_name']}", "{info['second_name']}", "{info['third_name']}", "{info['login']}", 
-                            "{info['password']}", "{info['email']}", "{info['url']}", "{info['tel']}", {info['love_range']}, 
+                            VALUES ({current_id}, {role_id}, "{registration_time}", "{info['first_name']}", 
+                            "{info['second_name']}", "{info['third_name']}", "{info['login']}", 
+                            "{info['password']}", "{info['email']}", "{info['url']}", "{info['tel']}", 
                             "{info['birth_date']}", {school_id}, {city_id}, "{info['class']}", {photo_id})
                             """
         sql_execute(sql_req)
@@ -200,7 +203,7 @@ def get_user_info_with_user_id(id):
         SELECT * from users
         WHERE user_id = "{id}"
         """
-    return sql_execute(sql_req).fetchall()
+    return sql_execute(sql_req).fetchall()[0]
 
 def get_problems_by_variant(variant_id):
     sql_req = f"""
