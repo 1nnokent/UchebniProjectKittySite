@@ -19,15 +19,16 @@ def user_select_to_dict(tuple_info):
     dict['registration_time'] = tuple_info[2]
     dict['first_name'] = tuple_info[3]
     dict['second_name'] = tuple_info[4]
-    dict['surname'] = tuple_info[5]
+    dict['third_name'] = tuple_info[5]
     dict['login'] = tuple_info[6]
     dict['password'] = tuple_info[7]
     dict['email'] = tuple_info[8]
-    dict['tel'] = tuple_info[9]
-    dict['birth_date'] = tuple_info[10]
-    dict['school'] = sql_execute(f"""SELECT school_name FROM schools WHERE school_id = {tuple_info[11]}""").fetchall()[0][0]
-    dict['city'] = sql_execute(f"""SELECT city_name FROM cities WHERE city_id = {tuple_info[12]}""").fetchall()[0][0]
-    dict['class'] = tuple_info[13]
+    dict['url'] = tuple_info[9]
+    dict['tel'] = tuple_info[10]
+    dict['birth_date'] = tuple_info[11]
+    dict['school'] = sql_execute(f"""SELECT school_name FROM schools WHERE school_id = {tuple_info[12]}""").fetchall()[0][0]
+    dict['city'] = sql_execute(f"""SELECT city_name FROM cities WHERE city_id = {tuple_info[13]}""").fetchall()[0][0]
+    dict['class'] = tuple_info[14]
     dict['number_of_attempts'] = {}
     dict['number_of_right_attempts'] = {}
     dict['ratio'] = {}
@@ -35,8 +36,8 @@ def user_select_to_dict(tuple_info):
         dict['number_of_attempts'][task] = random.randint(1, 25)
         dict['number_of_right_attempts'][task] = random.randint(1, dict['number_of_attempts'][task])
         dict['ratio'][task] = dict['number_of_right_attempts'][task] / dict['number_of_attempts'][task]
-    if tuple_info[14] != -1:
-        dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[14]) + '.jpg'
+    if tuple_info[15] != -1:
+        dict['photo_directory'] = '/img/profile-pictures/profile_' + str(tuple_info[13]) + '_avatar.jpg'
     else:
         dict['photo_directory'] = '/img/profile-pictures/profile_default_avatar.jpg'
 
@@ -59,7 +60,7 @@ def get_problems():
         tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = { elem[0] }""")
         k = []
         for i in tables:
-            k.append(f"""{i[0]}.xlsx""")
+            k.append(f"""{i[0]}.xlxs""")
         tmp.append(k)
 
         texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = { elem[0] }""")
@@ -70,11 +71,13 @@ def get_problems():
 
         ret.append(tmp)
 
+
     return ret
 
 def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
     problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
     pictures = request.files.getlist('photos')
+    print(pictures)
     for elem in pictures:
         if elem.filename == '':
             continue
@@ -137,6 +140,7 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
     VALUES ({problem_id}, {problem_type}, "{problem_source}", "{text}", "{problem_answer}", {problem_difficulty})
     """
 
+    print(sql_req)
     sql_execute(sql_req) #|safe
     connect.commit()
 
@@ -147,6 +151,7 @@ def insert_problem_file(problem_type, problem_class, problem_source, filename, p
     insert_problem(problem_type, problem_source, problem_class, file_text, problem_answer, problem_difficulty)
 
 def insert_user(info):
+    print(info)
     current_id = int(sql_execute("""
             SELECT COUNT(*) FROM users
             """).fetchall()[0][0])
@@ -160,18 +165,19 @@ def insert_user(info):
         photo_id = -1
         if has_photo:
             photo_id = current_id
-            path = "static/img/profile-pictures/profile_" + str(photo_id) + ".jpg"
+            path = "static/img/profile-pictures/profile_" + str(photo_id) + "_avatar.jpg"
             photo.save(path)
 
         role_id = sql_execute(f"""SELECT role_id FROM roles WHERE role_name = '{info['role']}' """).fetchall()[0][0]
         school_id = sql_execute(f"""SELECT school_id FROM schools WHERE school_name = '{info['school']}' """).fetchall()[0][0]
         city_id = sql_execute(f"""SELECT city_id FROM cities WHERE city_name = '{info['city']}' """).fetchall()[0][0]
+        print(role_id, school_id, city_id)
         registration_time = datetime.now().strftime("%y-%m-%d %H:%M:%S")
         sql_req = f"""
                             INSERT INTO users 
                             VALUES ({current_id}, {role_id}, "{registration_time}", "{info['first_name']}", 
-                            "{info['second_name']}", "{info['surname']}", "{info['login']}", 
-                            "{info['password']}", "{info['email']}", "{info['tel']}", 
+                            "{info['second_name']}", "{info['third_name']}", "{info['login']}", 
+                            "{info['password']}", "{info['email']}", "{info['url']}", "{info['tel']}", 
                             "{info['birth_date']}", {school_id}, {city_id}, "{info['class']}", {photo_id})
                             """
         sql_execute(sql_req)
@@ -215,74 +221,30 @@ def get_problems_by_variant(variant_id):
     return sql_execute(sql_req).fetchall()
 
 def variant_page_default_kwargs(variant_id):
-    ret = []
-    problems = get_problems_by_variant(variant_id)
-    for elem in problems:
-        tmp = []
-        for i in elem:
-            tmp.append(i)
-        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in pictures:
-            k.append(f"""problem_{i[0]}.jpg""")
-        tmp.append(k)
-
-        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in tables:
-            k.append(f"""{i[0]}.xlsx""")
-        tmp.append(k)
-
-        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in texts:
-            k.append(f"""{i[0]}.txt""")
-        tmp.append(k)
-
-        ret.append(tmp)
-
+    sql_req = f"""SELECT * FROM
+                      problems INNER JOIN variant_problem
+                      ON variant_problem.problem_id = problems.problem_id
+                      WHERE variant_problem.variant_id = {variant_id}"""
+    problems = sql_execute(sql_req).fetchall()
     answers_default = ((-1, -2)) * len(problems)
     kwargs = dict()
-    kwargs['problems'] = ret
-    print(ret)
+    kwargs['problems'] = problems
     kwargs['answers'] = answers_default
     kwargs['show_answers'] = False
     kwargs['amount_right'] = -1
-
     return kwargs
 
 def variant_page_feedback_kwargs(variant_id):
-    problems = get_problems_by_variant(variant_id)
-    ret = []
-    for elem in problems:
-        tmp = []
-        for i in elem:
-            tmp.append(i)
-        pictures = sql_execute(f"""SELECT picture_id FROM problem_picture WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in pictures:
-            k.append(f"""problem_{i[0]}.jpg""")
-        tmp.append(k)
-
-        tables = sql_execute(f"""SELECT table_id FROM problem_table WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in tables:
-            k.append(f"""{i[0]}.xlsx""")
-        tmp.append(k)
-
-        texts = sql_execute(f"""SELECT text_file_id FROM problem_text_file WHERE problem_id = {elem[0]}""")
-        k = []
-        for i in texts:
-            k.append(f"""{i[0]}.txt""")
-        tmp.append(k)
-
-        ret.append(tmp)
-
+    sql_req = f"""SELECT * FROM
+                      problems INNER JOIN variant_problem
+                      ON variant_problem.problem_id = problems.problem_id
+                      WHERE variant_problem.variant_id = {variant_id}"""
+    problems = sql_execute(sql_req).fetchall()
     kwargs = dict()
     given_answers = []
     tmp = request.form.to_dict()
 
-    if not ('show_answers' in tmp):
+    if not (tmp.__contains__('show_answers')):
         tmp['show_answers'] = False
 
     for key in tmp:
@@ -296,7 +258,7 @@ def variant_page_feedback_kwargs(variant_id):
             answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
     answers = tuple(answers)
-    kwargs['problems'] = ret
+    kwargs['problems'] = problems
     kwargs['answers'] = answers
     kwargs['show_answers'] = tmp['show_answers']
     kwargs['amount_right'] = 0
@@ -312,6 +274,8 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
     VALUES ({user_id}, {variant_id}, "{completion_time}", {assignment_id})
     """
     problems = sql_execute(f"""SELECT problem_id FROM variant_problem WHERE variant_id = {variant_id}""").fetchall()
+    print(answers)
+    print(problems)
     for problem in problems:
         sql_req_2 = f"""
             INSERT INTO user_problem 
@@ -319,6 +283,7 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
                     {(answers[str(problem[0])] == sql_execute(f'''SELECT problem_answer FROM problems 
                     WHERE problem_id = { problem[0] }''').fetchall()[0][0])})
             """
+        print(sql_req_2)
         sql_execute(sql_req_2)
 
     sql_execute(sql_req_1)
@@ -340,7 +305,7 @@ def get_topic_messages(topic_id):
     sql_req = f"""
         SELECT 
                 users.first_name, 
-                users.surname, 
+                users.second_name, 
                 forum_messages.message_text,
                 forum_messages.message_send_time
             FROM 
@@ -438,6 +403,17 @@ def get_course_materials(course_id):
     """
     return sql_execute(sql_req).fetchall()
 
+def get_course_variant(course_id):
+    sql_req = f"""
+            SELECT
+                course_variant.variant_id
+            FROM
+                course_variant
+            WHERE
+                course_variant.course_id = {course_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
 def insert_variant(variant_id, variant_name, variant_description, author_id):
     sql_req = f"""
             INSERT INTO
@@ -469,79 +445,3 @@ def remove_problem_from_variant(variant_id, problem_id):
     """
     sql_execute(sql_req)
     connect.commit()
-
-def get_groups(user_id):
-    group_list = sql_execute(f"""SELECT group_id FROM user_group WHERE user_id = {user_id}""").fetchall()
-    group_list_string = "("
-    for elem in group_list:
-        group_list_string = group_list_string + str(elem[0]) + ', '
-    group_list_string = group_list_string[:-2:] + ')'
-    groups = sql_execute(f"""SELECT * FROM groups WHERE group_id IN {group_list_string}""").fetchall()
-    return groups
-
-def get_group_members(group_id):
-    sql_req = f"""
-            SELECT
-                first_name, second_name, surname, role_name
-            FROM
-                users
-            INNER JOIN
-                roles ON users.role_id = roles.role_id
-            INNER JOIN
-                user_group ON user_group.user_id = users.user_id
-            WHERE
-                user_group.group_id = {group_id}
-    """
-    members = sql_execute(sql_req).fetchall()
-    return members
-
-def get_group_courses(group_id):
-    sql_req = f"""
-            SELECT
-                *
-            FROM
-                courses
-                INNER JOIN
-                group_course ON group_course.course_id = courses.course_id
-            WHERE
-                group_course.group_id = {group_id}
-    """
-    courses = sql_execute(sql_req).fetchall()
-    return courses
-
-def get_group_assignments(group_id):
-    sql_req = f"""
-            SELECT
-                assignments.assignment_id, variants.variant_id, variants.variant_name, variants.variant_description
-            FROM
-                    assignment_group
-                INNER JOIN
-                    assignments
-                ON
-                    assignment_group.assignment_id = assignments.assignment_id
-                INNER JOIN
-                    variants
-                ON
-                    assignments.variant_id = variants.variant_id
-                WHERE
-                    assignment_group.group_id = {group_id}
-    """
-    variants = sql_execute(sql_req).fetchall()
-    return variants
-
-def encode_group_code(group_id):
-    code = ''
-    alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    leng = 0
-    while group_id or leng < 5:
-        code += alph[group_id % 26]
-        group_id //= 26
-        leng += 1
-    return code[::-1]
-
-def decode_group_code(encoded_id):
-    ret = 0
-    alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    for i in range(5):
-        ret += alph.find(encoded_id[i]) * 26 ** (4 - i)
-    return ret

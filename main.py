@@ -49,7 +49,6 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = dr.user_select_to_dict(info)
-        print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/test")
@@ -116,6 +115,16 @@ def variant_page(variant_id):
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
 
+@app.route("/variants_fc/<course_id>/<variant_id>", methods=['GET', 'POST'])
+def variant_page_fc(course_id, variant_id):
+    if request.method == 'GET':
+        kwargs = dr.variant_page_default_kwargs(variant_id)
+        return render_template("variant_page_fc.html", **kwargs, course_id=course_id, variant_id=variant_id)
+    if request.method == 'POST':
+        kwargs = dr.variant_page_feedback_kwargs(variant_id)
+        dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
+        return render_template("variant_page_fc.html", **kwargs, course_id=course_id, variant_id=variant_id)
+
 @app.route('/forum/topics/all', methods=['POST', 'GET'])
 def forum_main_page():
     if request.method == 'GET':
@@ -162,27 +171,27 @@ def add_problem():
         return redirect(url_for('add_problem'))
 
 @app.route("/courses/all")
-def course_main_page():
+def courses_page():
     courses = dr.get_courses()
     return render_template("courses_page.html", courses=courses)
 
 @app.route("/courses/<course_id>")
 def course_page(course_id):
     materials = dr.get_course_materials(course_id)
-    return render_template("course_page.html", materials=materials)
+    variant_id = dr.get_course_variant(course_id)
+    print(variant_id)
+    return render_template("course_page.html", materials=materials, course_id=course_id, variant_id=variant_id[0][0])
 
-@app.route('/groups/all', methods=["POST", "GET"])
-def group_main_page():
-    groups = dr.get_groups(0) #user_id
-    return render_template("my_groups.html", groups=groups)
+@app.route('/my-groups', methods=["POST", "GET"])
+def my_groups():
+    # groups = dr.get_my_groups()
+    return render_template("my_groups.html")
 
-@app.route("/groups/<group_id>")
-def group_page(group_id):
-    members = dr.get_group_members(group_id)
-    courses = dr.get_group_courses(group_id)
-    assignments = dr.get_group_assignments(group_id)
-    return render_template("group_page.html", members=members,
-                           courses=courses, assignments=assignments)
+@app.route("/groups/1")
+def group_page():
+    # group = dr.get_group_info(group_id)
+    materials = dr.get_course_materials(0)
+    return render_template("group_page.html", assignments=materials)
 
 @app.route("/error/")
 def error_page():
@@ -190,3 +199,4 @@ def error_page():
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
+
