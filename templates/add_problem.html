@@ -31,6 +31,7 @@
     body {
       background-color: #f8f9fa; /* Цвет фона для страницы */
       overflow-y: scroll;
+      padding: 40px;
     }
 
     .container {
@@ -100,8 +101,8 @@
     </form>
   </div>
 
-  <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- JS Files -->
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

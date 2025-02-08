@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница Лекций</title>
+    <title>Страница Заданий</title>
 
     <!-- Favicons -->
     <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
@@ -35,174 +35,135 @@
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        .filter-container {
-            display: flex;
-            flex-direction: column; /* Вертикальное выравнивание */
-            align-items: center; /* Центрирование по горизонтали */
+        .filters-sidebar {
+            position: fixed;
+            right: 0;
+            top: 100px;
+            width: 250px;
+            background: #fff;
             padding: 20px;
-            background: #f8f8f8;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            height: calc(100vh - 120px);
+            overflow-y: auto;
         }
         .filter-group {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Центрирование элементов внутри группы */
+            flex-direction: column;
+            gap: 8px;
         }
         .filter-group label {
-            margin-right: 10px;
-        }
-        .container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Изменил на center для выравнивания по центру */
-            margin-top: 2.5%;
+            align-items: center;
+            gap: 5px;
         }
-        .lecture-card {
+        .lectures-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-right: 270px;
+            padding: 20px;
+            max-width: 100%;
+        }
+        .problem-card {
             background: #fff;
             border-radius: 10px;
-            margin: 10px;
             padding: 20px;
-            width: calc(33.33% - 20px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box;
-            position: relative; /* Для позиционирования нижнего текста */
-            height: 250px; /* Фиксированная высота карточки */
-            overflow: hidden; /* Обрезаем содержимое */
+            transition: transform 0.3s ease;
+            break-inside: avoid;
+            min-width: 600px;
         }
-        .lecture-card:hover {
+        .problem-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .lecture-card h3 {
-            margin-bottom: 10px; /* Оставляем расстояние как было */
-            color: #333;
-            font-weight: 700;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
+        .problem-card img {
+            max-width: 100%;
         }
-        .video-player {
+        .answer {
             margin-top: 15px;
-            height: calc(100% - 50px); /* Высота для видео-плеера с учетом отступов */
         }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Aspect ratio */
-            height: 0; /* Collapse the height */
-            overflow: hidden; /* Hide overflow */
+        .accordion {
+            cursor: pointer;
+            background: #f8f9fa;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
         }
-        .video-container iframe {
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: calc(100% - 10px); /* Убираем прокрутку */
-         }
-         .lecture-card p {
-             color: #555;
-             font-size: 0.85em; /* Уменьшаем размер шрифта для дополнительного текста */
-             line-height: 1.4;
-             word-wrap: break-word; /* Автоматический перенос слов */
-             overflow-y:auto; /* Прокрутка для текста */
-             max-height: calc(100% - 70px); /* Ограничиваем высоту текста в карточке с учетом отступов */
-         }
-         /* Полупрозрачный текст в левом нижнем углу */
-         .card-label {
-             position:absolute;
-             bottom:10px;
-             left:10px;
-             color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
-             font-size:12px; /* Размер шрифта для метки */
-
-         }
-         a {
-             text-decoration: none; /* Убираем подчеркивание у ссылок */
-             color: inherit; /* Наследуем цвет текста от родителя */
-         }
-         .problem-card img {
-             max-width: calc(100% - 20px); /* Ограничиваем максимальную ширину картинки */
-         }
+        .filters-sidebar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body>
-     {% include 'header.html' %}
-     <div class="filter-container">
-          <div class="filter-group" id="ege-filters">
-               {% for i in range(1, 28) %}
-                    <label><input type="checkbox" value="{{ i }}"> {{ i }}</label>
-               {% endfor %}
-          </div>
-     </div>
+    {% include 'header.html' %}
 
-     <div class="container" id="lectures-container">
-         {% for problem in problems %}
-             <div class="problem-card default" data-type="{{ problem[1] }}">
-                 <h5 class="problem-title">Задание {{ problem[0] + 1 }}. Тип {{ problem[1] }}</h5>
-                 <h6 class="problem-author">Cложность: {{ problem[5] }}. Источник: {{ problem[2] }}</h6>
-                 <p class="problem-question">{{ problem[3]|safe }}</p>
-                 {% for image_name in problem[6] %}
-                     <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}" alt="Изображение к задаче {{ problem[0] + 1 }}" onerror="this.style.display='none'"></p>
-                 {% endfor %}
-                 
-                 {% for file_name in problem[7] %}
-                         <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                 {% endfor %}
-                 {% for file_name in problem[8] %}
-                         <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" download style="color: blue; text-decoration: underline;">Скачать файл "{{ file_name }}"</a></p>
-                 {% endfor %}
-                 <div class="answer">
+    <!-- Блок фильтров -->
+    <aside class="filters-sidebar" style="right: 40px; border-radius: 10px; scrollbar-width: none; -ms-overflow-style: none;">
+        <h4>Фильтры заданий</h4>
+        <div class="filter-group" id="ege-filters">
+            {% for i in range(1, 28) %}
+                <label><input type="checkbox" value="{{ i }}"> Задание {{ i }}</label>
+            {% endfor %}
+        </div>
+        
+        <h4 style="margin-top: 20px;">Фильтр по сложности</h4>
+        <div class="filter-group" id="difficulty-filters">
+            {% for i in range(0, 5) %}
+                <label><input type="checkbox" value="{{ i }}"> Сложность {{ i }}</label>
+            {% endfor %}
+        </div>
+    </aside>
 
-                     <button class="accordion">Показать ответ</button>
+    <!-- Основной контент -->
+    <div class="lectures-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
+        {% for problem in problems %}
+            <div class="problem-card default" data-type="{{ problem[1] }}" data-difficulty="{{ problem[5] }}" style="margin: 10px;">
+                <h5 class="problem-title">№ {{ problem[0] + 1 }}. Тип {{ problem[1] }}</h5>
+                <h6 class="problem-author">Сложность: {{ problem[5] }}. Источник: {{ problem[2] }}</h6>
+                <p class="problem-question">{{ problem[3]|safe }}</p>
+                {% for image_name in problem[6] %}
+                    <img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}" alt="Изображение к задаче {{ problem[0] + 1 }}" onerror="this.style.display='none'">
+                {% endfor %}
+                
+                {% for file_name in problem[7] %}
+                    <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}" download class="file-link">Скачать Excel: {{ file_name }}</a></p>
+                {% endfor %}
+                {% for file_name in problem[8] %}
+                    <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}" download class="file-link">Скачать TXT: {{ file_name }}</a></p>
+                {% endfor %}
+                <div class="answer">
+                    <button class="accordion">Показать ответ</button>
+                    <div class="panel">
+                        <p class="problem-question">Ответ: {{ problem[4] }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-                     <div class="panel">
-                         <p class="problem-question">Ответ: {{ problem[4] }}</p>
-                     </div>
-                 </div>
-             </div>
-         {% endfor %}
-     </div>
+    <script>
 
-     <script>
-         var acc = document.getElementsByClassName("accordion");
-         var i;
+        // Функция фильтрации
+        function filterMaterials() {
+            const selectedTypes = Array.from(document.querySelectorAll('#ege-filters input:checked')).map(c => c.value);
+            const selectedDifficulties = Array.from(document.querySelectorAll('#difficulty-filters input:checked')).map(c => c.value);
+            
+            document.querySelectorAll('.problem-card').forEach(card => {
+                const type = card.dataset.type;
+                const difficulty = card.dataset.difficulty;
+                
+                const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(type);
+                const difficultyMatch = selectedDifficulties.length === 0 || selectedDifficulties.includes(difficulty);
+                
+                card.style.display = (typeMatch && difficultyMatch) ? 'block' : 'none';
+            });
+        }
 
-         for (i = 0; i < acc.length; i++) {
-             acc[i].addEventListener("click", function() {
-                 this.classList.toggle("active");
-                 var panel = this.nextElementSibling;
-                 if (panel.style.display === "block") {
-                     panel.style.display = "none"; // Скрыть панель
-                 } else {
-                     panel.style.display = "block"; // Показать панель
-                 }
-             });
-         }
-
-         // Функция для фильтрации материалов
-         function filterMaterials() {
-             const selectedEgeNumbers = Array.from(document.querySelectorAll('#ege-filters input[type="checkbox"]:checked'))
-                                     .map(checkbox => checkbox.value);
-
-             document.querySelectorAll('.problem-card').forEach(card => {
-                 const problemType = card.querySelector('.problem-title').textContent.match(/Тип (\d+)/)[1];
-
-                 // Проверяем соответствие типа
-                 const typeMatch = selectedEgeNumbers.length === 0 || selectedEgeNumbers.includes(problemType);
-
-                 // Показываем карточку, если совпадают условия
-                 card.style.display = typeMatch ? 'block' : 'none';
-             });
-         }
-
-         // Добавляем обработчики событий для чекбоксов
-         document.querySelectorAll('#ege-filters input[type="checkbox"]').forEach(checkbox => {
-             checkbox.addEventListener('change', filterMaterials);
-         });
-
-         // Вызываем фильтрацию при загрузке страницы
-         filterMaterials();
-     </script>
-
+        // Инициализация фильтров
+        document.querySelectorAll('#ege-filters input, #difficulty-filters input').forEach(checkbox => {
+            checkbox.addEventListener('change', filterMaterials);
+        });
+        filterMaterials();
+    </script>
 </body>
 </html>
