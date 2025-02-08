@@ -184,15 +184,20 @@ def course_page(course_id):
 @app.route('/groups/all', methods=["POST", "GET"])
 def group_main_page():
     groups = dr.get_groups(0) #user_id
-    return render_template("my_groups.html", groups=groups)
+    return render_template("group_main.html", groups=groups)
 
-@app.route("/groups/<group_id>")
+@app.route("/groups/<group_id>", methods=['GET', 'POST'])
 def group_page(group_id):
-    members = dr.get_group_members(group_id)
-    courses = dr.get_group_courses(group_id)
-    assignments = dr.get_group_assignments(group_id)
-    return render_template("group_page.html", members=members,
-                           courses=courses, assignments=assignments)
+    if request.method == 'GET':
+        members = dr.get_group_members(group_id)
+        courses = dr.get_group_courses(group_id)
+        assignments = dr.get_group_assignments(group_id)
+        return render_template("group_page.html", members=members,
+                               courses=courses, assignments=assignments)
+    if request.method == 'POST':
+        pass
+        
+        
 
 @app.route("/error/")
 def error_page():
