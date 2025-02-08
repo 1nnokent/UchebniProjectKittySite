@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Кошьки inc.</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            overflow-y: scroll;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Изменил на center для выравнивания по центру */
+            margin-top: 3%
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between; /* выравнивание элементов в строке */
+            align-items: center;
+        }
+
+        .show-answer {
+            margin-left: 10px; /* дополнительное расстояние между элементами */
+        }
+        .button-container {
+            display: flex; /* Используем flexbox для выравнивания */
+            justify-content: center; /* Центрируем по горизонтали */
+            align-items: center; /* Центрируем по вертикали */
+            height: 7vh; /* Задаем высоту контейнера на весь экран */
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 100px;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            border-radius: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #19bca3;
+            color: white;
+        }
+
+        .tab-button.active:hover {
+            color: black;
+        }
+
+        .tab-button:hover {
+            background-color: #ddd;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="tabs">
+        <button class="tab-button" onclick="window.location.href='/courses/{{ course_id }}'">Учебные материалы</button>
+        <button class="tab-button active" onclick="window.location.href='/variants_fc/{{ course_id }}/{{ variant_id }}'">Задачи</button>
+        <button class="tab-button" onclick="window.location.href='/courses/all'">Вернуться к выбору курса</button>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+            {% if amount_right != -1 %}
+                <p class="problem-question">Решено правильно: {{amount_right}}/{{problems | length}}</p>
+            {% endif %}
+            {% for i in range(problems | length) %}
+            <div class="problem-card
+                        {% if answers[i][1] == 0 %}incorrect
+                        {% elif answers[i][1] == 1 %}correct
+                        {% elif answers[i][1] == -1 %}empty
+                        {% else %}default
+                        {% endif %}">
+                <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
+                <h6 class="problem-author">{{problems[i][2]}}</h6>
+                <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
+
+
+                <div class="input-group">
+                    {% if answers[i][0] == -1 %}
+                        <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">
+                    {% else %}
+                        <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" value="{{answers[i][0]}}" name="{{problems[i][0]}}">
+                    {% endif %}
+                    {% if show_answers %}
+                        <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][4]}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="button-container">
+            <input id="checkbox1" type="checkbox" name="show_answers" value="true">
+            <label for="checkbox1" style="white-space: pre;"> Показать правильные ответы</label>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="btn-primary">Завершить работу</button>
+        </div>
+    </form>
+</body>
+
+</html>
