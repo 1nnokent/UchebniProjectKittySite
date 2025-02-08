@@ -39,7 +39,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center; /* Изменил на center для выравнивания по центру */
-            margin-top: 10%;
+            margin-top: 3%
         }
 
         .input-group {
@@ -99,7 +99,11 @@
 
 <body>
     {% include 'header.html' %}
-    {% include 'buttons_for_cp.html' %}
+    <div class="tabs">
+        <button class="tab-button" onclick="window.location.href='/courses/{{ course_id }}'">Учебные материалы</button>
+        <button class="tab-button active" onclick="window.location.href='/variants_fc/{{ course_id }}/{{ variant_id }}'">Задачи</button>
+        <button class="tab-button" onclick="window.location.href='/courses/all'">Вернуться к выбору курса</button>
+    </div>
     <form method="post" enctype="multipart/form-data">
         <div class="container">
             {% if amount_right != -1 %}

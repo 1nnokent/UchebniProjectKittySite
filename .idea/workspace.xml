@@ -9,18 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="невнесённые изменения">
-      <change afterPath="$PROJECT_DIR$/templates/buttons_for_cp.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/varint_page_fc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2025_2_19_PM_[Changes]1/DataBase_exp.sqlite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2025_2_19_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2025_2_19_PM__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="course_page.html теперь с вариантами">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_requests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/course_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/course_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/variant_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/variant_page_fc.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_page_fc.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -428,7 +420,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738611032535</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="course_page.html теперь с вариантами">
+      <option name="closed" value="true" />
+      <created>1739027067222</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1739027067222</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +447,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
     <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
     <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
     <MESSAGE value="+" />
@@ -472,6 +471,7 @@
     <MESSAGE value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
     <MESSAGE value="learning_conspect.html все кроме бд" />
     <MESSAGE value="очередное обновление бд" />
-    <option name="LAST_COMMIT_MESSAGE" value="очередное обновление бд" />
+    <MESSAGE value="course_page.html теперь с вариантами" />
+    <option name="LAST_COMMIT_MESSAGE" value="course_page.html теперь с вариантами" />
   </component>
 </project>

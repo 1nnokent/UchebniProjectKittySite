@@ -121,7 +121,11 @@
 </head>
 <body>
     {% include 'header.html' %}
-    {% include 'buttons_for_cp.html' %}
+    <div class="tabs">
+        <button class="tab-button active" onclick="window.location.href='/courses/{{ course_id }}'">Учебные материалы</button>
+        <button class="tab-button" onclick="window.location.href='/variants_fc/{{ course_id }}/{{ variant_id }}'">Задачи</button>
+        <button class="tab-button" onclick="window.location.href='/courses/all'">Вернуться к выбору курса</button>
+    </div>
 
     <div class="tab-content active" id="materials-container">
         <div class="container" id="lectures-container">
