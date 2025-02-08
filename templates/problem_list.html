@@ -88,6 +88,18 @@
             border: none;
             padding: 8px 15px;
             border-radius: 5px;
+            transition: 0.4s;
+        }
+        .accordion.active {
+            background: #e2e3e5;
+        }
+        .panel {
+            display: none;
+            overflow: hidden;
+            padding: 0 18px;
+        }
+        .panel.show {
+            display: block;
         }
         .filters-sidebar::-webkit-scrollbar {
             display: none;
@@ -142,6 +154,18 @@
     </div>
 
     <script>
+        // Функция для аккордеона с ответами
+        document.querySelectorAll('.accordion').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                } else {
+                    panel.style.display = 'block';
+                }
+            });
+        });
 
         // Функция фильтрации
         function filterMaterials() {
