@@ -49,6 +49,7 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = dr.user_select_to_dict(info)
+        print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/test")
@@ -67,6 +68,7 @@ def learning_material_page(material_id):
     if material[1] == 0:
         return render_template('learning_video.html', material=material)
     if material[1] == 1:
+        print(material[4])
         return render_template('learning_presentation.html', material=material)
     if material[1] == 2:
         return render_template('learning_conspect.html', material=material)
@@ -107,7 +109,7 @@ def modify_variant(variant_id):
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
     if request.method == 'GET':
-        problems = dr.get_variant_problems(variant_id)
+        kwargs = dr.variant_page_default_kwargs(variant_id)
         return render_template("variant_page.html", **kwargs)
     if request.method == 'POST':
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
@@ -118,6 +120,7 @@ def variant_page(variant_id):
 def forum_main_page():
     if request.method == 'GET':
         discussions = dr.get_discussions()
+        print(discussions)
         return render_template("forum_main_page.html", discussions=discussions)
     if request.method == 'POST':
         info = request.form.to_dict()
@@ -140,6 +143,9 @@ def forum_topic_page(topic_id):
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
+    # for elem in problems:
+    #     if elem[1] == 17:
+    #         print(elem)
     return render_template("problem_list.html", problems=problems)
 
 @app.route("/problems/add", methods=['POST', 'GET'])
@@ -181,10 +187,6 @@ def group_page(group_id):
 @app.route("/error/")
 def error_page():
     return render_template('error_page.html')
-
-@app.route('/temp/<variant_id>')
-def temp_page(variant_id):
-    kwargs = dr.variant_page_default_kwargs(variant_id)
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
