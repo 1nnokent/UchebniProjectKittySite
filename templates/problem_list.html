@@ -37,20 +37,14 @@
         }
         .filters-sidebar {
             position: fixed;
-            right: 40px; /* Сдвиг справа согласно предыдущему inline-стилю */
+            left: 0;
             top: 100px;
             width: 250px;
             background: #fff;
             padding: 20px;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             height: calc(100vh - 120px);
             overflow-y: auto;
-            border-radius: 10px;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* Internet Explorer 10+ */
-        }
-        .filters-sidebar::-webkit-scrollbar {
-            display: none;  /* Chrome, Safari, Opera */
         }
         .filter-group {
             display: flex;
@@ -66,7 +60,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
-            margin-right: 270px;
+            margin-left: 270px;
             padding: 20px;
             max-width: 100%;
         }
@@ -92,10 +86,9 @@
             cursor: pointer;
             background: #f8f9fa;
             border: none;
-            padding: 4px 8px;
+            padding: 8px 15px;
             border-radius: 5px;
             transition: 0.4s;
-            font-size: 0.8rem;
         }
         .accordion.active {
             background: #e2e3e5;
@@ -105,21 +98,26 @@
             overflow: hidden;
             padding: 0 18px;
         }
+        .panel.show {
+            display: block;
+        }
+        .filters-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Убираем обводку у кнопки "Выделить всё" */
+        button.select-all:focus {
+            outline: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
     {% include 'header.html' %}
 
     <!-- Блок фильтров -->
-    <aside class="filters-sidebar">
+    <aside class="filters-sidebar" style="left: 40px; border-radius: 10px; scrollbar-width: none; -ms-overflow-style: none;">
         <h4>Фильтры заданий</h4>
-        <div id="filter-controls" style="margin-bottom: 10px;">
-            <input type="text" id="searchInput" placeholder="Поиск по заданию" style="width: 100%; padding: 8px; margin-bottom: 10px;">
-            <div style="display: flex; gap: 10px;">
-                <button type="button" id="selectAll" class="btn btn-sm btn-primary" style="padding: 4px 8px; font-size: 0.8rem;">Выделить все</button>
-                <button type="button" id="clearSelection" class="btn btn-sm btn-secondary" style="padding: 4px 8px; font-size: 0.8rem;">Очистить выбор</button>
-            </div>
-        </div>
+        <button class="select-all" style="outline: none; border: none; background: none; cursor: pointer; margin-bottom: 10px;">Выделить всё</button>
         <div class="filter-group" id="ege-filters">
             {% for i in range(1, 28) %}
                 <label><input type="checkbox" value="{{ i }}"> Задание {{ i }}</label>
@@ -175,48 +173,27 @@
             });
         });
 
-        // Объединённая функция фильтрации и поиска
-        function updateFilters() {
+        // Функция фильтрации
+        function filterMaterials() {
             const selectedTypes = Array.from(document.querySelectorAll('#ege-filters input:checked')).map(c => c.value);
             const selectedDifficulties = Array.from(document.querySelectorAll('#difficulty-filters input:checked')).map(c => c.value);
-            const searchText = document.getElementById("searchInput").value.toLowerCase();
-
+            
             document.querySelectorAll('.problem-card').forEach(card => {
                 const type = card.dataset.type;
                 const difficulty = card.dataset.difficulty;
-                const title = card.querySelector('.problem-title').textContent.toLowerCase();
-                const matchesFilters =
-                    (selectedTypes.length === 0 || selectedTypes.includes(type)) &&
-                    (selectedDifficulties.length === 0 || selectedDifficulties.includes(difficulty)) &&
-                    title.includes(searchText);
-                card.style.display = matchesFilters ? 'block' : 'none';
+                
+                const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(type);
+                const difficultyMatch = selectedDifficulties.length === 0 || selectedDifficulties.includes(difficulty);
+                
+                card.style.display = (typeMatch && difficultyMatch) ? 'block' : 'none';
             });
         }
 
-        // Инициализация событий для фильтров
+        // Инициализация фильтров
         document.querySelectorAll('#ege-filters input, #difficulty-filters input').forEach(checkbox => {
-            checkbox.addEventListener('change', updateFilters);
+            checkbox.addEventListener('change', filterMaterials);
         });
-
-        // Событие для поиска по заданию
-        document.getElementById('searchInput').addEventListener('input', updateFilters);
-
-        // События для кнопок "Выделить все" и "Очистить выбор"
-        document.getElementById('selectAll').addEventListener('click', function() {
-            document.querySelectorAll('#ege-filters input, #difficulty-filters input').forEach(cb => {
-                cb.checked = true;
-            });
-            updateFilters();
-        });
-
-        document.getElementById('clearSelection').addEventListener('click', function() {
-            document.querySelectorAll('#ege-filters input, #difficulty-filters input').forEach(cb => {
-                cb.checked = false;
-            });
-            updateFilters();
-        });
-
-        updateFilters();
+        filterMaterials();
     </script>
 </body>
 </html>
