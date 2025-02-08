@@ -9,10 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="course_page.html теперь с вариантами">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="course_page.html делаюделаю">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/course_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/course_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/variant_page_fc.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/variant_page_fc.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -428,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739027067222</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="course_page.html делаюделаю">
+      <option name="closed" value="true" />
+      <created>1739030116634</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1739030116635</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +454,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
     <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
     <MESSAGE value="+" />
     <MESSAGE value="основная часть завершена; проверить на баги и доработать внешний вид" />
@@ -472,6 +478,7 @@
     <MESSAGE value="learning_conspect.html все кроме бд" />
     <MESSAGE value="очередное обновление бд" />
     <MESSAGE value="course_page.html теперь с вариантами" />
-    <option name="LAST_COMMIT_MESSAGE" value="course_page.html теперь с вариантами" />
+    <MESSAGE value="course_page.html делаюделаю" />
+    <option name="LAST_COMMIT_MESSAGE" value="course_page.html делаюделаю" />
   </component>
 </project>
