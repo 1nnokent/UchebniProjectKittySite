@@ -49,7 +49,6 @@ def personal_user_page(user_id):
         return render_template("error_pages/authorization_user_not_found_error.html")
     else:
         kwargs = dr.user_select_to_dict(info)
-        print(kwargs)
         return render_template("user_account_pages/user.html", **kwargs)
 
 @app.route("/test")
@@ -116,6 +115,16 @@ def variant_page(variant_id):
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
 
+@app.route("/variants_fc/<course_id>/<variant_id>", methods=['GET', 'POST'])
+def variant_page_fc(course_id, variant_id):
+    if request.method == 'GET':
+        kwargs = dr.variant_page_default_kwargs(variant_id)
+        return render_template("variant_page_fc.html", **kwargs, course_id=course_id, variant_id=variant_id)
+    if request.method == 'POST':
+        kwargs = dr.variant_page_feedback_kwargs(variant_id)
+        dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
+        return render_template("variant_page_fc.html", **kwargs, course_id=course_id, variant_id=variant_id)
+
 @app.route('/forum/topics/all', methods=['POST', 'GET'])
 def forum_main_page():
     if request.method == 'GET':
@@ -165,6 +174,7 @@ def add_problem():
 def course_main_page():
     courses = dr.get_courses()
     return render_template("courses_page.html", courses=courses)
+
 
 @app.route("/courses/<course_id>")
 def course_page(course_id):

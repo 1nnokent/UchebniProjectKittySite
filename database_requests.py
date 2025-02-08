@@ -438,6 +438,17 @@ def get_course_materials(course_id):
     """
     return sql_execute(sql_req).fetchall()
 
+def get_course_variant(course_id):
+    sql_req = f"""
+            SELECT
+                course_variant.variant_id
+            FROM
+                course_variant
+            WHERE
+                course_variant.course_id = {course_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
 def insert_variant(variant_id, variant_name, variant_description, author_id):
     sql_req = f"""
             INSERT INTO
