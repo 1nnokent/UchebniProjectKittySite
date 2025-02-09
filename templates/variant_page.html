@@ -64,9 +64,9 @@
 <body>
     {% include 'header.html' %}
     
-    {% set show_answers = true %}
-    {% set show_problems = true %}
-    {% set show_statistics = true %}
+    {% set show_answers = display_mode > 2 %}
+    {% set show_problems = display_mode > 1 %}
+    {% set show_statistics = display_mode > 0 %}
     <form method="post" enctype="multipart/form-data">
         <div class="container">
             {% if show_statistics and request.method == 'POST' %}

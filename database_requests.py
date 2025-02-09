@@ -268,12 +268,13 @@ def variant_page_default_kwargs(variant_id):
         ret.append(tmp)
 
     answers_default = ((-1, -2)) * len(problems)
+    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""")
     kwargs = dict()
     kwargs['problems'] = ret
-    print(ret)
     kwargs['answers'] = answers_default
     kwargs['show_answers'] = False
     kwargs['amount_right'] = -1
+    kwargs['display_mode'] = display_mode
 
     return kwargs
 
@@ -322,10 +323,13 @@ def variant_page_feedback_kwargs(variant_id):
             answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
     answers = tuple(answers)
+    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""")
+
     kwargs['problems'] = ret
     kwargs['answers'] = answers
     kwargs['show_answers'] = tmp['show_answers']
     kwargs['amount_right'] = 0
+    kwargs['display_mode'] = display_mode
     for elem in answers:
         if elem[1] == 1:
             kwargs['amount_right'] += 1
@@ -349,6 +353,13 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
 
     sql_execute(sql_req_1)
     connect.commit()
+
+
+def change_variant_display_mode(variant_id, mode):
+    sql_req = f"""UPDATE variants SET variant_display_mode = {mode} WHERE variant_id = {variant_id}"""
+    sql_execute(sql_req)
+    cursor.commit()
+
 
 def get_discussions():
     sql_req = f"""
