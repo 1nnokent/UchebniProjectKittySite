@@ -62,45 +62,82 @@
 
 <body>
     {% include 'header.html' %}
+    
+    {% set show_answers = true %}
+    {% set show_problems = true %}
+    {% set show_statistics = true %}
     <form method="post" enctype="multipart/form-data">
         <div class="container">
-            {% if amount_right != -1 %}
+
+
+            {% if show_statistics and request.method == 'POST' %}
                 <p class="problem-question">Решено правильно: {{amount_right}}/{{problems | length}}</p>
+            {% elif amount_right != -1  %}
+                <p class="problem-question">Ваши ответы сохранены и отправлены на проверку</p>
             {% endif %}
-            {% for i in range(problems | length) %}
-            <div class="problem-card
-                        {% if answers[i][1] == 0 %}incorrect
-                        {% elif answers[i][1] == 1 %}correct
-                        {% elif answers[i][1] == -1 %}empty
-                        {% else %}default
-                        {% endif %}">
-                <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
-                <h6 class="problem-author">{{problems[i][2]}}</h6>
-                <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
-
-
-                <div class="input-group">
-                    {% if answers[i][0] == -1 %}
-                        <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">
-                    {% else %}
-                        <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" value="{{answers[i][0]}}" name="{{problems[i][0]}}">
-                    {% endif %}
-                    {% if show_answers %}
-                        <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][4]}}</p>
-                    {% endif %}
+            
+            {% if request.method == 'GET' or show_problems %}
+                {% for i in range(problems | length) %}
+                <div class="problem-card
+                            {% if answers[i][1] == 0 %}incorrect
+                            {% elif answers[i][1] == 1 %}correct
+                            {% elif answers[i][1] == -1 %}empty
+                            {% else %}default
+                            {% endif %}">
+                    <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
+                    <h6 class="problem-author">{{problems[i][2]}}</h6>
+                    <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
+                    {% for image_name in problem[6] %}
+                        <img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}"
+                             alt="Изображение к задаче {{ problem[0] + 1 }}"
+                             onerror="this.style.display='none'">
+                    {% endfor %}
+                    
+                    {% for file_name in problem[7] %}
+                        <p>
+                            <a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}"
+                               download
+                               class="file-link">
+                                Скачать Excel: {{ file_name }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                    
+                    {% for file_name in problem[8] %}
+                        <p>
+                            <a href="{{ url_for('static', filename='text-files/' ~ file_name) }}"
+                               download
+                               class="file-link">
+                                Скачать TXT: {{ file_name }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                    <div class="input-group">
+                        {% if answers[i][0] == -1 %}
+                            <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">
+                        {% else %}
+                            <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" value="{{answers[i][0]}}" name="{{problems[i][0]}}">
+                        {% endif %}                    
+                        {% if show_answers and request.method == 'POST' %}
+                            <p class="problem-question" style="position: absolute; left: 33%; top: 10%;">Ответ: {{problems[i][4]}}</p>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="button-container">
-            <input id="checkbox1" type="checkbox" name="show_answers" value="true">
-            <label for="checkbox1" style="white-space: pre;"> Показать правильные ответы</label>
-        </div>
-        <div class="button-container">
-            <button type="submit" class="btn-primary">Завершить работу</button>
+            {% if amount_right == -1 %}
+                <button type="submit" class="btn-primary">Завершить работу</button>
+            {% else %}
+            <a href="/" class="btn-primary">Вернуться на главную страницу</a>
+            {% endif %}
+
+
         </div>
     </form>
+
 </body>
 
 </html>
