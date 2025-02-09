@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Кошьки inc.</title>
+    <title>Тестирование</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
+
 
     <!-- Favicons -->
     <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
@@ -68,8 +69,6 @@
     {% set show_statistics = true %}
     <form method="post" enctype="multipart/form-data">
         <div class="container">
-
-
             {% if show_statistics and request.method == 'POST' %}
                 <p class="problem-question">Решено правильно: {{amount_right}}/{{problems | length}}</p>
             {% elif amount_right != -1  %}
@@ -87,31 +86,7 @@
                     <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
                     <h6 class="problem-author">{{problems[i][2]}}</h6>
                     <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
-                    {% for image_name in problem[6] %}
-                        <img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}"
-                             alt="Изображение к задаче {{ problem[0] + 1 }}"
-                             onerror="this.style.display='none'">
-                    {% endfor %}
-                    
-                    {% for file_name in problem[7] %}
-                        <p>
-                            <a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}"
-                               download
-                               class="file-link">
-                                Скачать Excel: {{ file_name }}
-                            </a>
-                        </p>
-                    {% endfor %}
-                    
-                    {% for file_name in problem[8] %}
-                        <p>
-                            <a href="{{ url_for('static', filename='text-files/' ~ file_name) }}"
-                               download
-                               class="file-link">
-                                Скачать TXT: {{ file_name }}
-                            </a>
-                        </p>
-                    {% endfor %}
+
                     <div class="input-group">
                         {% if answers[i][0] == -1 %}
                             <input class="form-control" style="width: 30%; max-width: 30%;" placeholder="Введите ответ" name="{{problems[i][0]}}">

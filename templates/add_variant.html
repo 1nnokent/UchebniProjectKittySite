@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Кошьки inc.</title>
+  <title>Добавление варианта</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -47,7 +47,7 @@
       width: 100%; /* Ширина 100% от родителя */
     }
 
-    .form-control, .form-control-file {
+    .form-control {
       margin-bottom: 15px; /* Отступы между полями */
     }
   </style>
@@ -72,7 +72,8 @@
   </div>
 
   <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 
 </html>

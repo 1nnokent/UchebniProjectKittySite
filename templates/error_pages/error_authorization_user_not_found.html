@@ -33,23 +33,6 @@
       overflow-y: scroll; /* Добавить полосу прокрутки для устранения сдвига */
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh; /* Заполнение всей высоты окна */
-    }
-
-    .login_form {
-      max-width: 600px; /* Максимальная ширина формы */
-      width: 100%; /* Ширина 100% от родителя */
-    }
-
-    .form-control, .form-control-file {
-      margin-bottom: 15px; /* Отступы между полями */
-    }
-
     h1 {
       margin-bottom: 40px; /* Увеличенный отступ между заголовком и кнопкой */
     }
@@ -57,26 +40,7 @@
 </head>
 
 <body>
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <a href="/" class="logo d-flex align-items-center">
-        <h1 class="sitename">Кошьки.</h1>
-      </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="/">Домой</a></li>
-          <li><a href="/problems/all">Задачи</a></li>
-          <li class="dropdown"><a href="#"><span>Личный кабинет</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="/registration">Зарегистрироваться</a></li>
-              <li><a href="/authorization">Авторизоваться</a></li>
-            </ul>
-          </li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-    </div>
-  </header>
+  {% include 'header.html' %}
 
   <div class="container">
     <h1>Ошибка: Пользователь не найден!</h1>

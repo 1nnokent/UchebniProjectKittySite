@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Кошьки inc.</title>
+  <title>Профиль</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
+
 
   <!-- Favicons -->
   <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
@@ -75,11 +76,6 @@
 
     .info-list li {
       margin: 5px 0; /* Отступы для элементов списка */
-    }
-
-    .about-section {
-      text-align: center; /* Центрируем текст */
-      margin-top: 20px; /* Отступ сверху */
     }
 
     table .col-green {
@@ -153,7 +149,8 @@
   </div>
 
   <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 
 </html>

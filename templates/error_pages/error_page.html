@@ -30,7 +30,7 @@
   <style>
     body {
       background-color: #f8f9fa; /* Цвет фона для страницы */
-      overflow-y: scroll;
+      overflow-y: scroll; /* Добавить полосу прокрутки для устранения сдвига */
     }
 
     .container {
@@ -39,16 +39,10 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh; /* Заполнение всей высоты окна */
-      margin-top: 60px; /* Отступ под фиксированной плашкой */
     }
 
-    .login_form {
-      max-width: 600px; /* Максимальная ширина формы */
-      width: 100%; /* Ширина 100% от родителя */
-    }
-
-    .form-control, .form-control-file {
-      margin-bottom: 15px; /* Отступы между полями */
+    h1 {
+      margin-bottom: 40px; /* Увеличенный отступ между заголовком и кнопкой */
     }
   </style>
 </head>
@@ -56,8 +50,11 @@
 <body>
   {% include 'header.html' %}
 
-  <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
+  <div class="container">
+    <h1>Что-то пошло не так...</h1>
+    <a href="/" class="a-primary">На главную страницу</a>
+  </div>
 
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
 </html>

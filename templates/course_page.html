@@ -26,7 +26,7 @@
 
     <!-- Main CSS File -->
     <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
-    <title>Страница Лекций</title>
+    <title>Страница курса</title>
     <style>
         body {
             background-color: #f8f9fa;
@@ -51,14 +51,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             word-wrap: break-word;
-            position: relative; /* Для позиционирования метки */
+            position: relative;
         }
-
         .problem-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
         .problem-title {
             margin-bottom: 10px;
             color: #333;
@@ -66,29 +64,25 @@
             border-bottom: 2px solid #ddd;
             padding-bottom: 10px;
         }
-
         .problem-question {
             color: #555;
             font-size: 0.95em;
             line-height: 1.4;
             margin: 10px 0;
         }
-
         .card-label {
-            position:absolute;
-            bottom:10px;
-            left:10px;
-            color:rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
-            font-size:12px; /* Размер шрифта для метки */
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 12px;
         }
-
         .tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             margin-top: 30px;
         }
-
         .tab-button {
             padding: 10px 20px;
             margin: 0 10px;
@@ -98,29 +92,24 @@
             border-radius: 1px;
             transition: background-color 0.3s ease;
         }
-
         .tab-button.active {
             background-color: #19bca3;
             color: white;
         }
-
         .tab-button.active:hover {
             color: black;
         }
-
         .tab-button:hover {
             background-color: #ddd;
         }
-
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             background-color: #f8f9fa;
             display: block;
         }
-
+    </style>
     </style>
 </head>
 <body>

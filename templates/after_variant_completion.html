@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Кошьки inc.</title>
+  <title>Вариант сдан</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -41,15 +41,6 @@
       min-height: 100vh; /* Заполнение всей высоты окна */
       margin-top: 60px; /* Отступ под фиксированной плашкой */
     }
-
-    .login_form {
-      max-width: 600px; /* Максимальная ширина формы */
-      width: 100%; /* Ширина 100% от родителя */
-    }
-
-    .form-control, .form-control-file {
-      margin-bottom: 15px; /* Отступы между полями */
-    }
   </style>
 </head>
 
@@ -62,7 +53,8 @@
   </div>
 
   <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 
 </html>

@@ -36,7 +36,8 @@
 <body>
   {% include 'header.html' %}
   <!-- JS Files -->
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 
 </html>

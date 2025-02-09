@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Кошьки inc.</title>
+  <title>Авторизация</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -27,33 +27,29 @@
   <!-- Main CSS File -->
   <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
 
-  <style>
-    body {
-      background-color: #f8f9fa; /* Цвет фона для страницы */
-      overflow-y: scroll; /* Добавить полосу прокрутки для устранения сдвига */
-    }
+<style>
+  body {
+    background-color: #f8f9fa; /* Цвет фона для страницы */
+    overflow-y: scroll; /* Добавить полосу прокрутки для устранения сдвига */
+  }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh; /* Заполнение всей высоты окна */
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Заполнение всей высоты окна */
+  }
 
-    .login_form {
-      max-width: 600px; /* Максимальная ширина формы */
-      width: 100%; /* Ширина 100% от родителя */
-    }
+  .login_form {
+    max-width: 600px; /* Максимальная ширина формы */
+    width: 100%; /* Ширина 100% от родителя */
+  }
 
-    .form-control, .form-control-file {
-      margin-bottom: 15px; /* Отступы между полями */
-    }
-
-    h1 {
-      margin-bottom: 40px; /* Увеличенный отступ между заголовком и кнопкой */
-    }
-  </style>
+  .form-control {
+    margin-bottom: 15px; /* Отступы между полями */
+  }
+</style>
 </head>
 
 <body>

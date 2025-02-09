@@ -72,43 +72,18 @@
             border-bottom: 2px solid #ddd;
             padding-bottom: 10px;
         }
-        .video-player {
-            margin-top: 15px;
-            height: calc(100% - 50px); /* Высота для видео-плеера с учетом отступов */
+        .lecture-card p {
+            color: #555;
+            font-size: 0.85em; /* Уменьшаем размер шрифта для дополнительного текста */
+            line-height: 1.4;
+            word-wrap: break-word; /* Автоматический перенос слов */
+            overflow-y: auto; /* Прокрутка для текста */
+            max-height: calc(100% - 70px); /* Ограничиваем высоту текста в карточке с учетом отступов */
         }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Aspect ratio */
-            height: 0; /* Collapse the height */
-            overflow: hidden; /* Hide overflow */
+        a {
+            text-decoration: none; /* Убираем подчеркивание у ссылок */
+            color: inherit; /* Наследуем цвет текста от родителя */
         }
-        .video-container iframe {
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: calc(100% - 10px); /* Убираем прокрутку */
-         }
-         .lecture-card p {
-             color: #555;
-             font-size: 0.85em; /* Уменьшаем размер шрифта для дополнительного текста */
-             line-height: 1.4;
-             word-wrap: break-word; /* Автоматический перенос слов */
-             overflow-y:auto; /* Прокрутка для текста */
-             max-height: calc(100% - 70px); /* Ограничиваем высоту текста в карточке с учетом отступов */
-         }
-         /* Полупрозрачный текст в левом нижнем углу */
-         .card-label {
-             position:absolute;
-             bottom:10px;
-             left:10px;
-             color:#rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
-             font-size:12px; /* Размер шрифта для метки */
-         }
-         a {
-             text-decoration: none; /* Убираем подчеркивание у ссылок */
-             color: inherit; /* Наследуем цвет текста от родителя */
-         }
     </style>
 </head>
 <body>
