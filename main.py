@@ -105,11 +105,11 @@ def modify_variant(variant_id):
     if request.method == 'POST':
         info = request.form.to_dict()
         display_mode = request.form['feedbackOption']
+        dr.change_variant_display_mode(variant_id, display_mode)
         
         problem_id = info[list(info.keys())[0]]
         mmax = dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]
         if problem_id == '' or int(problem_id) - 1 >= mmax:
-
             return redirect(url_for('error_page'))
 
         if 'problem_id_add' in info:
@@ -170,11 +170,17 @@ def forum_topic_page(topic_id):
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
-    # for elem in problems:
-    #     if elem[1] == 17:
-    #         print(elem)
     return render_template("problem_list.html", problems=problems)
 
+
+@app.route("/problems/<problem_id>/modify", methods=['GET', 'POST'])
+def modify_problem(problem_id):
+    if request.method == 'GET':
+        problem = dr.sql_execute(f"""SELECT * FROM problems WHERE problem_id = {problem_id}""").fetchall()[0]
+        return render_template('modify_problem.html', problem=problem)
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        pass
 
 @app.route("/problems/add", methods=['POST', 'GET'])
 def add_problem():

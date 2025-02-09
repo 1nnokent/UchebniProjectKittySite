@@ -323,7 +323,7 @@ def variant_page_feedback_kwargs(variant_id):
             answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
     answers = tuple(answers)
-    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""").fetchall()[0][0]
+    display_mode = sql_execute(f"""SELECT display_mode FROM variants WHERE variant_id = {variant_id}""").fetchall()[0][0]
 
     kwargs['problems'] = ret
     kwargs['answers'] = answers
@@ -356,9 +356,9 @@ def insert_variant_answers(answers, variant_id, user_id, assignment_id):
 
 
 def change_variant_display_mode(variant_id, mode):
-    sql_req = f"""UPDATE variants SET variant_display_mode = {mode} WHERE variant_id = {variant_id}"""
+    sql_req = f"""UPDATE variants SET display_mode = {mode} WHERE variant_id = {variant_id}"""
     sql_execute(sql_req)
-    cursor.commit()
+    connect.commit()
 
 
 def get_discussions():
