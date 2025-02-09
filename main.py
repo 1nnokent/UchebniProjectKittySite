@@ -104,14 +104,12 @@ def modify_variant(variant_id):
         return render_template('modify_variant.html', **kwargs)
     if request.method == 'POST':
         info = request.form.to_dict()
-
-        display_mode = -1
-        if 'feedbackOption' in info:
-            dr.change_variant_display_mode(variant_id, info['feedbackOption'])
-
+        display_mode = request.form['feedbackOption']
+        
         problem_id = info[list(info.keys())[0]]
         mmax = dr.sql_execute("SELECT count(*) FROM problems").fetchall()[0][0]
         if problem_id == '' or int(problem_id) - 1 >= mmax:
+
             return redirect(url_for('error_page'))
 
         if 'problem_id_add' in info:
