@@ -97,7 +97,6 @@
     .table {
       width: 100%;
       margin-bottom: 1rem;
-
     }
     .table th,
     .table td {
@@ -109,57 +108,128 @@
     .table tbody + tbody {
       border-top: 2px solid #dee2e6;
     }
-    
   </style>
 </head>
 
+
 <body>
   {% include 'header.html' %}
+  {% set display_mode = request.args.get('display_mode', 'absolute') %}
+  {% set time_range = request.args.get('time_range', 'all') %}
+  {# Тестовый массив: для каждого ученика – массив попыток, каждая попытка – [верных ответов, общее количество] #}
   {% set course_stats = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [10, 20, 30, 40, 50, 60, 70, 80, 90, -1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70],
-    [70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0, 90, 80, 70, 60, -1, 40, 30, 20, 10]
+    [
+      [3,5], [4,5], [5,5], [2,7], [5,6], [3,5], [4,6], [5,7], [5,5], [4,7],
+      [3,8], [5,5], [2,5], [5,6], [3,8], [4,5], [5,7], [5,5], [4,6], [3,7],
+      [5,8], [2,5], [5,6], [3,7], [4,5], [5,8], [5,6]
+    ],
+    [
+      [1,10], [2,10], [3,10], [4,10], [5,10], [3,10], [2,10], [1,10], [4,10], [5,10],
+      [3,10], [4,10], [5,10], [2,10], [3,10], [5,10], [4,10], [3,10], [2,10], [1,10],
+      [4,10], [5,10], [3,10], [2,10], [1,10], [5,10], [4,10]
+    ],
+    [
+      [5,8], [5,6], [4,7], [3,5], [2,9], [1,5], [2,6], [3,7], [4,8], [5,5],
+      [5,6], [4,5], [3,8], [2,7], [1,6], [2,5], [3,7], [4,8], [5,5], [5,7],
+      [4,6], [3,8], [2,9], [1,5], [2,6], [3,7], [4,8]
+    ]
   ] %}
-  <!-- Эмуляция массива заданий для разделов "Теория" и "Тесты" -->
-  {% set learning_materials = [
-      [0, 2, "Основы языков программирования", "Описание теоретического задания: основы языков программирования.", "0", 0],
-      [1, 3, "Алгоритмы", "Описание тестового задания: вопросы по алгоритмам.", "1", 1],
-      [2, 4, "ООП", "Описание теоретического задания: принципы ООП.", "2", 0],
-      [3, 5, "Базы данных", "Описание тестового задания: задачи по базам данных.", "3", 1]
+
+  {# Определяем массив для последних 10 попыток (аналогично предыдущему) #}
+  {% set course_stats_last10 = [
+    [
+      [3,4], [4,5], [5,6], [2,8], [5,7], [3,5], [4,5], [5,6], [5,7], [4,5],
+      [3,5], [5,6], [2,7], [5,5], [3,6], [4,7], [5,8], [5,4], [4,7], [3,6],
+      [5,5], [2,8], [5,7], [3,6], [4,5], [5,8], [5,6]
+    ],
+    [
+      [1,10], [2,10], [3,10], [4,10], [5,10], [3,10], [2,10], [1,10], [4,10], [5,10],
+      [3,10], [4,10], [5,10], [2,10], [3,10], [5,10], [4,10], [3,10], [2,10], [1,10],
+      [4,10], [5,10], [3,10], [2,10], [1,10], [5,10], [4,10]
+    ],
+    [
+      [5,7], [5,4], [4,6], [3,7], [2,5], [1,8], [2,9], [3,5], [4,6], [5,7],
+      [5,5], [4,8], [3,6], [2,7], [1,5], [2,8], [3,7], [4,9], [5,6], [5,4],
+      [4,7], [3,5], [2,8], [1,9], [2,7], [3,6], [4,5]
+    ]
   ] %}
-  
+
   <section class="container my-5">
     <div class="row">
-       <!-- Таблица участников группы с отображением статистики выполненных курсов -->
-      <div class="col-12">       
+      <!-- Таблица участников группы с отображением статитики выполненных курсов -->
+      <div class="col-12">
         <div class="members-list my-4">
           <h2 class="mb-3">Участники группы</h2>
+          <!-- Форма выбора режима отображения и периода статистики -->
+          <form method="get" class="mb-3">
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="btn-group me-2" role="group" aria-label="Режим отображения результатов">
+                <input type="radio" class="btn-check" name="display_mode" id="absolute" value="absolute" {% if display_mode == 'absolute' %}checked{% endif %} onchange="this.form.submit()">
+                <label class="btn btn-outline-primary" for="absolute">Абсолютные</label>
+                <input type="radio" class="btn-check" name="display_mode" id="relative" value="relative" {% if display_mode == 'relative' %}checked{% endif %} onchange="this.form.submit()">
+                <label class="btn btn-outline-primary" for="relative">Относительные</label>
+              </div>
+              <div class="btn-group" role="group" aria-label="Период статистики">
+                <input type="radio" class="btn-check" name="time_range" id="all" value="all" {% if time_range == 'all' %}checked{% endif %} onchange="this.form.submit()">
+                <label class="btn btn-outline-primary" for="all">За всё время</label>
+                <input type="radio" class="btn-check" name="time_range" id="last10" value="last10" {% if time_range == 'last10' %}checked{% endif %} onchange="this.form.submit()">
+                <label class="btn btn-outline-primary" for="last10">Последние 10 попыток</label>
+              </div>
+            </div>
+          </form>
+
+          {% if time_range == 'last10' %}
+            {% set attempts_range = range(1, 28) %}
+          {% else %}
+            {% set attempts_range = range(1, 28) %}
+          {% endif %}
+
+
           <table class="table table-bordered" style="table-layout: fixed; border-collapse: collapse;">
             <thead>
               <tr>
                 <th style="width: 150px; text-align: center;">Имя</th>
-                {% for i in range(1, 28) %}
+                {% for i in attempts_range %}
                 <th class="text-center" style="width: 30px; padding: 3px;">{{ i }}</th>
                 {% endfor %}
               </tr>
-              
             </thead>
             <tbody>
               {% for member in members %}
               <tr>
                 <td class="text-center" style="font-size: 12px;">{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
-                {% set stats = course_stats[loop.index0] %}
-                {% for stat in stats %}
-                  {% if stat == -1 %}
-                    <td class="text-center" style="background-color: rgba(128, 128, 128, 0.5); font-size: 12px;">null</td>
-                  {% elif stat == 100 %}
-                    <td style="background-color: rgba(0, 0, 255, 0.5); font-size: 12px; text-align: center;">100%</td>
-                  {% elif stat < 20 %}
-                    <td class="text-center" style="background-color: rgba(255, 0, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
-                  {% elif stat < 60 %}
-                    <td class="text-center" style="background-color: rgba(255, 255, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
+                {% if time_range == 'last10' %}
+                  {% set stats = course_stats_last10[loop.index0] %}
+                {% else %}
+                  {% set stats = course_stats[loop.index0] %}
+                {% endif %}
+                {% set displayed_stats = stats %}
+                {% for stat in displayed_stats %}
+                  {% if stat[1] > 0 %}
+                    {% set percent = (stat[0] * 100 / stat[1]) | round(0, 'common') | int %}
                   {% else %}
-                    <td class="text-center" style="background-color: rgba(0, 128, 0, 0.5); font-size: 12px;">{{ stat }}%</td>
+                    {% set percent = 0 %}
+                  {% endif %}
+                  {% if display_mode == 'relative' %}
+                    {% if percent == 100 %}
+                      <td class="text-center" style="background-color: rgba(0, 0, 255, 0.5); font-size: 12px;">{{ percent }}%</td>
+                    {% elif percent < 20 %}
+                      <td class="text-center" style="background-color: rgba(255, 0, 0, 0.5); font-size: 12px;">{{ percent }}%</td>
+                    {% elif percent < 60 %}
+                      <td class="text-center" style="background-color: rgba(255, 255, 0, 0.5); font-size: 12px;">{{ percent }}%</td>
+                    {% else %}
+                      <td class="text-center" style="background-color: rgba(0, 128, 0, 0.5); font-size: 12px;">{{ percent }}%</td>
+                    {% endif %}
+                  {% else %}
+                    {% if percent == 100 %}
+                      <td class="text-center" style="background-color: rgba(0, 0, 255, 0.5); font-size: 12px;">{{ stat[0] }}/{{ stat[1] }}</td>
+                    {% elif percent < 20 %}
+                      <td class="text-center" style="background-color: rgba(255, 0, 0, 0.5); font-size: 12px;">{{ stat[0] }}/{{ stat[1] }}</td>
+                    {% elif percent < 60 %}
+                      <td class="text-center" style="background-color: rgba(255, 255, 0, 0.5); font-size: 12px;">{{ stat[0] }}/{{ stat[1] }}</td>
+                    {% else %}
+                      <td class="text-center" style="background-color: rgba(0, 128, 0, 0.5); font-size: 12px;">{{ stat[0] }}/{{ stat[1] }}</td>
+                    {% endif %}
                   {% endif %}
                 {% endfor %}
               </tr>
@@ -168,7 +238,7 @@
           </table>
         </div>
       </div>
-      
+
       <!-- Курсы/Теория -->
       <div class="col-12 mt-4">
         <h2 class="text-center">Курсы/Теория</h2>
@@ -179,13 +249,13 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ material[2] }}</h5>
                   <p class="card-text">{{ material[3]|safe }}</p>
-
                 </div>
               </a>
             </div>
           {% endfor %}
         </div>
       </div>
+
 
       <!-- Тесты -->
       <div class="col-12 mt-4">
@@ -196,7 +266,7 @@
               <a href="/variants/{{ assignment[1] }}" class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title">{{ assignment[2] }}</h5>
-                    <p class="card-text">{{ assignment[3]|safe }}</p>
+                  <p class="card-text">{{ assignment[3]|safe }}</p>
                 </div>
               </a>
             </div>
@@ -204,7 +274,6 @@
         </div>
       </div>
 
-      
     </div>
   </section>
 </body>
