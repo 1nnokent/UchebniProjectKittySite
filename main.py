@@ -183,6 +183,45 @@ def course_page(course_id):
     print(variant_id)
     return render_template("course_page.html", materials=materials, course_id=course_id, variant_id=variant_id[0][0])
 
+@app.route("/courses/add", methods=['GET', 'POST'])
+def add_course():
+    if request.method == 'GET':
+        return render_template('add_course.html')
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        course_id = dr.sql_execute("SELECT count(*) FROM courses").fetchall()[0][0] + 1
+        dr.insert_course(course_id, info['course_name'], info['course_description'])
+        return redirect(url_for('modify_course', course_id=course_id))
+
+@app.route("/courses/<course_id>/modify", methods=['GET', 'POST'])
+def modify_course(course_id):
+    if request.method == 'GET':
+        learning_materials = dr.get_learning_materials_by_course(course_id)
+        return render_template('modify_course.html', learning_materials=learning_materials, course_id=course_id)
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        operation = 'learning_material_id_add' in info
+        learning_material_id = info[list(info.keys())[0]]
+        mmax = dr.sql_execute("SELECT count(*) FROM learning_materials").fetchall()[0][0]
+        if learning_material_id == '' or int(learning_material_id) - 1 >= mmax:
+            return redirect(url_for('error_page'))
+
+        if operation:
+            dr.insert_learning_material_to_course(course_id, int(learning_material_id) - 1)
+        else:
+            dr.remove_learning_material_from_course(course_id, int(learning_material_id))
+        return redirect(url_for('modify_course', course_id=course_id))
+
+@app.route("/courses/<course_id>/modify_variant", methods=['GET', 'POST'])
+def modify_course_variant(course_id):
+    if request.method == 'GET':
+        variant = dr.get_variant_by_course(course_id)
+        return render_template('modify_course_variant.html', variant=variant[0][0], course_id=course_id)
+    if request.method == 'POST':
+        info = request.form.to_dict()
+        dr.change_variant(course_id, int(info['num_var']))
+        return redirect(url_for('modify_course_variant', course_id=course_id))
+    
 @app.route('/groups/all', methods=["POST", "GET"])
 def group_main_page():
     groups = dr.get_groups(0) #user_id

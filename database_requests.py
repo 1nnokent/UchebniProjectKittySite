@@ -214,6 +214,32 @@ def get_problems_by_variant(variant_id):
     """
     return sql_execute(sql_req).fetchall()
 
+def get_learning_materials_by_course(course_id):
+    sql_req = f"""
+            SELECT 
+                learning_materials.material_id, material_type, material_name, material_description, material_statement, material_ege_type
+            FROM
+                learning_materials
+            INNER JOIN
+                course_material
+            ON
+                learning_materials.material_id = course_material.material_id
+            WHERE
+                course_material.course_id = {course_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
+def get_variant_by_course(course_id):
+    sql_req = f"""
+            SELECT 
+                course_variant.variant_id
+            FROM
+                course_variant
+            WHERE
+                course_variant.course_id = {course_id}
+    """
+    return sql_execute(sql_req).fetchall()
+
 def variant_page_default_kwargs(variant_id):
     ret = []
     problems = get_problems_by_variant(variant_id)
@@ -459,12 +485,32 @@ def insert_variant(variant_id, variant_name, variant_description, author_id):
     sql_execute(sql_req)
     connect.commit()
 
+def insert_course(course_id, course_name, course_description):
+    sql_req = f"""
+            INSERT INTO
+                courses
+            VALUES
+                ({course_id}, "{course_name}", "{course_description}")
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
 def insert_problem_to_variant(variant_id, problem_id):
     sql_req = f"""
             INSERT INTO
                 variant_problem
             VALUES
                 ({variant_id}, {problem_id})
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def insert_learning_material_to_course(course_id, learning_material_id):
+    sql_req = f"""
+            INSERT INTO
+                course_material
+            VALUES
+                ({course_id}, {learning_material_id})
     """
     sql_execute(sql_req)
     connect.commit()
@@ -477,6 +523,18 @@ def remove_problem_from_variant(variant_id, problem_id):
                 variant_id = {variant_id}
             AND
                 problem_id = {problem_id}
+    """
+    sql_execute(sql_req)
+    connect.commit()
+
+def remove_learning_material_from_course(course_id, learning_material_id):
+    sql_req = f"""
+            DELETE 
+                FROM course_material
+            WHERE
+                course_id = {course_id}
+            AND
+                material_id = {learning_material_id}
     """
     sql_execute(sql_req)
     connect.commit()
@@ -540,6 +598,15 @@ def get_group_assignments(group_id):
     variants = sql_execute(sql_req).fetchall()
     return variants
 
+def change_variant(course_id, variant_id):
+    sql_req = f"""
+        UPDATE course_variant
+        SET variant_id = {variant_id}
+        WHERE course_id = {course_id}
+    """
+    sql_execute(sql_req)
+    connect.commit()
+    
 def encode_group_code(group_id):
     code = ''
     alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
