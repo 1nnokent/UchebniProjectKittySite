@@ -151,6 +151,38 @@
 </head>
 <body>
      {% include 'header.html' %}
+     <div class="container mt-3">
+         <h4>Настройки варианта</h4>
+         <form id="variant-feedback-settings">
+             <div class="form-check">
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption1" value="1" checked>
+                 <label class="form-check-label" for="feedbackOption1">
+                     Вариант 1: Полный режим (все включено)
+                 </label>
+             </div>
+             <div class="form-check">
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption2" value="2">
+                 <label class="form-check-label" for="feedbackOption2">
+                     Вариант 2: Без показа ответа <!--(show_answers = false)-->
+                 </label>
+             </div>
+             <div class="form-check">
+
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption3" value="3">
+                 <label class="form-check-label" for="feedbackOption3">
+                     Вариант 3: Без показа задания <!--(show_answers = false & show_problems = false)-->
+                 </label>
+             </div>
+             <div class="form-check">
+
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption4" value="4">
+                 <label class="form-check-label" for="feedbackOption4">
+                     Вариант 4: Режим без обратной связи <!--(все отключено)-->
+                 </label>
+             </div>             
+         </form>
+     </div>     
+
 
      <div class="container" id="lectures-container">
          {% for problem in problems %}
