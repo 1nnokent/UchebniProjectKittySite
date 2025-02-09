@@ -83,9 +83,32 @@
                             {% elif answers[i][1] == -1 %}empty
                             {% else %}default
                             {% endif %}">
-                    <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}. Сложность: {{problems[i][5]}}</h5>
-                    <h6 class="problem-author">{{problems[i][2]}}</h6>
+                    <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}.</h5>
+                    <h6 class="problem-author">Сложность: {{problems[i][5]}}. Источник: {{problems[i][2]}}</h6>
                     <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
+
+                    {% for image_name in problems[i][6] %}
+                        <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}"
+                              alt="Изображение к задаче {{i + 1}}"
+                              onerror="this.style.display='none'"
+                              style="max-width: calc(100% - 20px);"></p>
+                    {% endfor %}
+
+                    {% for file_name in problems[i][7] %}
+                        <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}"
+                             download
+                             style="color: blue; text-decoration: underline;">
+                            Скачать файл "{{ file_name }}"
+                        </a></p>
+                    {% endfor %}
+
+                    {% for file_name in problems[i][8] %}
+                        <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}"
+                             download
+                             style="color: blue; text-decoration: underline;">
+                            Скачать файл "{{ file_name }}"
+                        </a></p>
+                    {% endfor %}
 
                     <div class="input-group">
                         {% if answers[i][0] == -1 %}

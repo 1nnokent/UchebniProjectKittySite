@@ -5,10 +5,12 @@ import database_requests as dr
 
 app = Flask(__name__, template_folder="templates")
 
+
 @app.route('/')
 def first_page():
     amount = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0]
     return render_template("yandex.html", amount=amount)
+
 
 @app.route("/registration", methods=["POST", "GET"])
 def registration_page():
@@ -22,6 +24,7 @@ def registration_page():
             return render_template("/error_pages/error_registration_user_exists.html") #если пользователь уже есть
         else:
             pass
+
 
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(failed=False, problem=None):
@@ -42,6 +45,7 @@ def authorization_page(failed=False, problem=None):
             person_id = dr.get_user_id_with_login(info['login'])
             return redirect(url_for('personal_user_page', user_id=person_id))
 
+
 @app.route("/users/<user_id>")
 def personal_user_page(user_id):
     info = dr.get_user_info_with_user_id(user_id)
@@ -51,15 +55,18 @@ def personal_user_page(user_id):
         kwargs = dr.user_select_to_dict(info)
         return render_template("user_account_pages/user.html", **kwargs)
 
+
 @app.route("/test")
 def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
     return render_template("test.html", user=[0, "aowje"])
 
+
 @app.route("/learning-materials/all")
 def learning_materials_page():
     materials = dr.get_learning_materials()
     return render_template('learning_materials.html', materials=materials)
+
 
 @app.route("/learning-materials/<material_id>")
 def learning_material_page(material_id):
@@ -72,9 +79,11 @@ def learning_material_page(material_id):
     if material[1] == 2:
         return render_template('learning_conspect.html', material=material)
 
+
 @app.route("/blank")
 def blank_page():
     return render_template("blank.html")
+
 
 @app.route("/variants/add", methods=['GET', 'POST'])
 def add_variant():
@@ -85,6 +94,7 @@ def add_variant():
         variant_id = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0] + 1
         dr.insert_variant(variant_id, info['variant_name'], info['variant_description'], 0)
         return redirect(url_for('modify_variant', variant_id=variant_id))
+
 
 @app.route("/variants/<variant_id>/modify", methods=['GET', 'POST'])
 def modify_variant(variant_id):
@@ -105,6 +115,7 @@ def modify_variant(variant_id):
             dr.remove_problem_from_variant(variant_id, int(problem_id))
         return redirect(url_for('modify_variant', variant_id=variant_id))
 
+
 @app.route("/variants/<variant_id>", methods=['GET', 'POST'])
 def variant_page(variant_id):
     if request.method == 'GET':
@@ -114,6 +125,7 @@ def variant_page(variant_id):
         kwargs = dr.variant_page_feedback_kwargs(variant_id)
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page.html", **kwargs)
+
 
 @app.route("/variants_fc/<course_id>/<variant_id>", methods=['GET', 'POST'])
 def variant_page_fc(course_id, variant_id):
@@ -125,6 +137,7 @@ def variant_page_fc(course_id, variant_id):
         dr.insert_variant_answers(request.form.to_dict(), variant_id, -1, -1)
         return render_template("variant_page_fc.html", **kwargs, course_id=course_id, variant_id=variant_id)
 
+
 @app.route('/forum/topics/all', methods=['POST', 'GET'])
 def forum_main_page():
     if request.method == 'GET':
@@ -135,6 +148,7 @@ def forum_main_page():
         info = request.form.to_dict()
         topic_id = dr.insert_new_topic(info)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
+
 
 @app.route('/forum/topics/<topic_id>', methods=['POST', 'GET'])
 def forum_topic_page(topic_id):
@@ -149,6 +163,7 @@ def forum_topic_page(topic_id):
         messages = dr.get_topic_messages(topic_id)
         return redirect(url_for('forum_topic_page', topic_id=topic_id))
 
+
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
@@ -156,6 +171,7 @@ def problems_page():
     #     if elem[1] == 17:
     #         print(elem)
     return render_template("problem_list.html", problems=problems)
+
 
 @app.route("/problems/add", methods=['POST', 'GET'])
 def add_problem():
@@ -170,6 +186,7 @@ def add_problem():
                                          info['problem_statement'], info['problem_answer'], int(info['problem_difficulty']))
         return redirect(url_for('add_problem'))
 
+
 @app.route("/courses/all")
 def course_main_page():
     courses = dr.get_courses()
@@ -183,6 +200,7 @@ def course_page(course_id):
     print(variant_id)
     return render_template("course_page.html", materials=materials, course_id=course_id, variant_id=variant_id[0][0])
 
+
 @app.route("/courses/add", methods=['GET', 'POST'])
 def add_course():
     if request.method == 'GET':
@@ -192,6 +210,7 @@ def add_course():
         course_id = dr.sql_execute("SELECT count(*) FROM courses").fetchall()[0][0] + 1
         dr.insert_course(course_id, info['course_name'], info['course_description'])
         return redirect(url_for('modify_course', course_id=course_id))
+
 
 @app.route("/courses/<course_id>/modify", methods=['GET', 'POST'])
 def modify_course(course_id):
@@ -212,6 +231,7 @@ def modify_course(course_id):
             dr.remove_learning_material_from_course(course_id, int(learning_material_id))
         return redirect(url_for('modify_course', course_id=course_id))
 
+
 @app.route("/courses/<course_id>/modify_variant", methods=['GET', 'POST'])
 def modify_course_variant(course_id):
     if request.method == 'GET':
@@ -221,11 +241,13 @@ def modify_course_variant(course_id):
         info = request.form.to_dict()
         dr.change_variant(course_id, int(info['num_var']))
         return redirect(url_for('modify_course_variant', course_id=course_id))
-    
+
+
 @app.route('/groups/all', methods=["POST", "GET"])
 def group_main_page():
     groups = dr.get_groups(0) #user_id
     return render_template("group_main.html", groups=groups)
+
 
 @app.route("/groups/<group_id>", methods=['GET', 'POST'])
 def group_page(group_id):
@@ -237,12 +259,12 @@ def group_page(group_id):
                                courses=courses, assignments=assignments)
     if request.method == 'POST':
         pass
-        
-        
+
 
 @app.route("/error/")
 def error_page():
     return render_template('error_page.html')
+
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
