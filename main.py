@@ -179,7 +179,9 @@ def course_main_page():
 @app.route("/courses/<course_id>")
 def course_page(course_id):
     materials = dr.get_course_materials(course_id)
-    return render_template("course_page.html", materials=materials)
+    variant_id = dr.get_course_variant(course_id)
+    print(variant_id)
+    return render_template("course_page.html", materials=materials, course_id=course_id, variant_id=variant_id[0][0])
 
 @app.route('/groups/all', methods=["POST", "GET"])
 def group_main_page():
