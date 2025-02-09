@@ -268,7 +268,7 @@ def variant_page_default_kwargs(variant_id):
         ret.append(tmp)
 
     answers_default = ((-1, -2)) * len(problems)
-    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""")
+    display_mode = sql_execute(f"""SELECT display_mode FROM variants WHERE variant_id = {variant_id}""").fetchall()[0][0]
     kwargs = dict()
     kwargs['problems'] = ret
     kwargs['answers'] = answers_default
@@ -323,7 +323,7 @@ def variant_page_feedback_kwargs(variant_id):
             answers.append((given_answers[i], int(given_answers[i] == sql_execute(f"""SELECT problem_answer FROM problems 
                 WHERE problem_id = {problems[i][0]}""").fetchall()[0][0])))
     answers = tuple(answers)
-    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""")
+    display_mode = sql_execute(f"""SELECT display_mode FROM variant WHERE variant_id = {variant_id}""").fetchall()[0][0]
 
     kwargs['problems'] = ret
     kwargs['answers'] = answers

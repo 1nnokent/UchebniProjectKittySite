@@ -99,8 +99,9 @@ def add_variant():
 @app.route("/variants/<variant_id>/modify", methods=['GET', 'POST'])
 def modify_variant(variant_id):
     if request.method == 'GET':
-        problems = dr.get_problems_by_variant(variant_id)
-        return render_template('modify_variant.html', problems=problems)
+        kwargs = dr.variant_page_default_kwargs(variant_id)
+        print(kwargs)
+        return render_template('modify_variant.html', **kwargs)
     if request.method == 'POST':
         info = request.form.to_dict()
 
