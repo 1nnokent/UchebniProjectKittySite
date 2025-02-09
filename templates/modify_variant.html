@@ -155,27 +155,27 @@
          <h4>Настройки варианта</h4>
          <form id="variant-feedback-settings">
              <div class="form-check">
-                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption1" value="3" {% if mode == 3 %}checked {% endif %}>
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption1" value="3" {% if display_mode == 3 %}checked {% endif %}>
                  <label class="form-check-label" for="feedbackOption1">
                      Вариант 1: Полный режим (все включено)
                  </label>
              </div>
              <div class="form-check">
-                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption2" value="2">
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption2" value="2" {% if display_mode == 2 %}checked {% endif %}>
                  <label class="form-check-label" for="feedbackOption2">
                      Вариант 2: Без показа ответа <!--(show_answers = false)-->
                  </label>
              </div>
              <div class="form-check">
 
-                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption3" value="1">
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption3" value="1" {% if display_mode == 1 %}checked {% endif %}>
                  <label class="form-check-label" for="feedbackOption3">
                      Вариант 3: Без показа задания <!--(show_answers = false & show_problems = false)-->
                  </label>
              </div>
              <div class="form-check">
 
-                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption4" value="0">
+                 <input class="form-check-input" type="radio" name="feedbackOption" id="feedbackOption4" value="0" {% if display_mode == 0 %}checked {% endif %}>
                  <label class="form-check-label" for="feedbackOption4">
                      Вариант 4: Режим без обратной связи <!--(все отключено)-->
                  </label>
@@ -196,6 +196,28 @@
                  <h5 class="problem-title">Задание {{problem[0] + 1}}. Тип {{problem[1]}}. Сложность: {{problem[5]}}</h5>
                  <h6 class="problem-author">{{problem[2]}}</h6>
                  <p class="problem-question">{{problem[3]|safe}}</p>
+                 {% for image_name in problem[6] %}
+                    <p><img src="{{ url_for('static', filename='img/problem-pictures/' ~ image_name) }}"
+                          alt="Изображение к задаче {{problem[0] + 1}}"
+                          onerror="this.style.display='none'"
+                          style="max-width: calc(100% - 20px);"></p>
+                {% endfor %}
+
+                {% for file_name in problem[7] %}
+                    <p><a href="{{ url_for('static', filename='excel-tables/' ~ file_name) }}"
+                         download
+                         style="color: blue; text-decoration: underline;">
+                        Скачать файл "{{ file_name }}"
+                    </a></p>
+                {% endfor %}
+
+                {% for file_name in problem[8] %}
+                    <p><a href="{{ url_for('static', filename='text-files/' ~ file_name) }}"
+                         download
+                         style="color: blue; text-decoration: underline;">
+                        Скачать файл "{{ file_name }}"
+                    </a></p>
+                {% endfor %}
                  <div class="answer">
                      <p class="problem-question">Ответ: {{problem[4]}}</p>
                  </div>
