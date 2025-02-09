@@ -5,6 +5,27 @@ import database_requests as dr
 
 app = Flask(__name__, template_folder="templates")
 
+from flask import request, render_template, redirect, url_for
+
+@app.route("/variants/<variant_id>/results/full", methods=['GET'])
+def full_results(variant_id):
+    results = dr.get_full_results(variant_id)
+    return render_template("full_results.html", results=results, variant_id=variant_id)
+
+@app.route("/variants/<variant_id>/results/partial", methods=['GET'])
+def partial_results(variant_id):
+    results = dr.get_partial_results(variant_id)
+    return render_template("partial_results.html", results=results, variant_id=variant_id)
+
+@app.route("/variants/<variant_id>/results/score", methods=['GET'])
+def score_results(variant_id):
+    score = dr.get_score(variant_id)
+    return render_template("score_results.html", score=score, variant_id=variant_id)
+
+@app.route("/variants/<variant_id>/results/no_feedback", methods=['GET'])
+def no_feedback_results(variant_id):
+    return render_template("no_feedback_results.html", variant_id=variant_id)
+
 @app.route('/')
 def first_page():
     amount = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0]

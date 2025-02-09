@@ -9,11 +9,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="добавил данные в бд для course_page.html">
+    <list default="true" id="41c09a71-bb22-465f-8bac-530b0b8f5c94" name="Changes" comment="невнесённые изменения">
+      <change afterPath="$PROJECT_DIR$/full_results.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/no_feedback_results.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/partial_results.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/score_results.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/variant_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MyWonderfulSite1-3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataBase_exp.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase_exp.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +51,18 @@
     &quot;assignee&quot;: &quot;1nnokent&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/1nnokent/UchebniProjectKittySite.git&quot;,
-    &quot;accountId&quot;: &quot;af480dbd-9a0e-42e9-9ffe-51d509e98e68&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/1nnokent/UchebniProjectKittySite",
+    "accountId": "1a1977ed-81f5-4fbb-9ca2-43575a1de492"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2osv7F8bRFeRKqDdfOv7QvDlHH1" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -64,26 +70,26 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.insertIntoDatabase.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/07 - Files - static &amp; url_for &amp; upload &amp; redirect&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.insertIntoDatabase.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/PycharmProjects/07 - Files - static & url_for & upload & redirect",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MyWonderfulSite1-3" />
@@ -94,7 +100,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="SDK_NAME" value="Python 3.9" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -117,7 +123,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-18f935f321a6-38e75241d9cc-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.17181.23" />
+        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
       </set>
     </attachedChunks>
   </component>
@@ -421,31 +427,7 @@
       <option name="project" value="LOCAL" />
       <updated>1738611032535</updated>
     </task>
-    <task id="LOCAL-00037" summary="course_page.html теперь с вариантами">
-      <option name="closed" value="true" />
-      <created>1739027067222</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1739027067222</updated>
-    </task>
-    <task id="LOCAL-00038" summary="course_page.html делаюделаю">
-      <option name="closed" value="true" />
-      <created>1739030116634</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1739030116635</updated>
-    </task>
-    <task id="LOCAL-00039" summary="добавил данные в бд для course_page.html">
-      <option name="closed" value="true" />
-      <created>1739093325005</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1739093325005</updated>
-    </task>
-    <option name="localTasksCounter" value="40" />
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,6 +446,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="-исправлены ошибки отображения страниц /registration и /authorization" />
+    <MESSAGE value="-Добавлена кнопка просмотра правильного ответа на задачу на странице со списком всех задач" />
+    <MESSAGE value="-Добавлен воод ответов на странице /variants/&lt;id&gt; и их проверка с выводом (по нажатию чекбокса) прваильных ответов" />
     <MESSAGE value="+" />
     <MESSAGE value="основная часть завершена; проверить на баги и доработать внешний вид" />
     <MESSAGE value="добавлена вкладка &quot;Учебные материалы&quot; в test.html" />
@@ -486,9 +471,6 @@
     <MESSAGE value="добавлена страница /courses/list, требуется сделать страницу /courses/&lt;course_id&gt;" />
     <MESSAGE value="learning_conspect.html все кроме бд" />
     <MESSAGE value="очередное обновление бд" />
-    <MESSAGE value="course_page.html теперь с вариантами" />
-    <MESSAGE value="course_page.html делаюделаю" />
-    <MESSAGE value="добавил данные в бд для course_page.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавил данные в бд для course_page.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="очередное обновление бд" />
   </component>
 </project>

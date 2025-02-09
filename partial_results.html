@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Partial Results</title>
+</head>
+<body>
+    <h1>Partial Results for Variant {{ variant_id }}</h1>
+    <ul>
+        {% for result in results %}
+        <li>
+            Problem {{ result.problem_id }}:
+            {% if result.is_correct %}
+                Correct
+            {% else %}
+                Incorrect
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
