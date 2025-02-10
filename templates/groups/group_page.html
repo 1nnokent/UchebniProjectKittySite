@@ -91,7 +91,7 @@
   {% set course_stats_last10 = [
     [
       [3,4], [4,5], [5,6], [2,8], [5,7], [3,5], [4,5], [5,6], [5,7], [4,5],
-      [3,5], [5,6], [2,7], [5,5], [3,6], [4,7], [5,8], [5,4], [4,7], [3,6],
+      [3,5], [5,6], [2,7], [5,5], [3,6], [4,7], [5,8], [1,4], [4,7], [3,6],
       [5,5], [2,8], [5,7], [3,6], [4,5], [5,8], [5,6]
     ],
     [
@@ -109,6 +109,7 @@
   <section class="container my-5">
     <div class="row">
       <!-- Таблица участников группы с отображением статитики выполненных курсов -->
+      {% if user[1] %}
       <div class="col-12">
         <div class="members-list my-4">
           <h2 class="mb-3">Участники группы</h2>
@@ -148,7 +149,7 @@
             <tbody>
               {% for member in members %}
               <tr>
-                <td class="text-center" style="font-size: 12px;">{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
+                <td class="text-center" style="font-size: 12px;"> {{ member[2] }} {{ member[0] }} {{ member[1] }}</td>
                 {% if user[1] %}
                 {% if time_range == 'last10' %}
                   {% set stats = course_stats_last10[loop.index0] %}
@@ -191,7 +192,7 @@
           </table>
         </div>
       </div>
-
+      {% endif %}
       <!-- Курсы/Теория -->
       <div class="col-12 mt-4">
         <h2 class="text-center">Курсы/Теория</h2>
@@ -216,12 +217,14 @@
         <div class="row" id="tests-container">
           {% for assignment in assignments %}
             <div class="col-md-4 mb-4">
+              {% if assignment[5] == 12%}
               <a href="/variants/{{ assignment[1] }}" class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title">{{ assignment[2] }}</h5>
                   <p class="card-text">{{ assignment[3]|safe }}</p>
                 </div>
               </a>
+              {% endif %}
             </div>
           {% endfor %}
         </div>
