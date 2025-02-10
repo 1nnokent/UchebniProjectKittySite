@@ -106,7 +106,6 @@ def personal_user_page():
         return render_template("error_pages/authorization_user_not_found_error.html")
     kwargs = dr.user_select_to_dict(info)
     user = dr.get_user_name_role(current_user.id)
-    print(name)
     return render_template("user_account_pages/user.html", **kwargs, user=name)
 
 
@@ -390,6 +389,13 @@ def add_problem():
             int(info["problem_difficulty"])
         )
         return redirect(url_for("add_problem"))
+
+
+@app.route("/logout")
+@login_required
+def logout_page():
+    logout_user()
+    return redirect(url_for('authorization_page'))
 
 
 if __name__ == "__main__":

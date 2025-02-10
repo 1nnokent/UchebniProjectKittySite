@@ -641,3 +641,4 @@ def decode_group_code(encoded_id):
     for i in range(5):
         ret += alph.find(encoded_id[i]) * 26 ** (4 - i)
     return ret
+
