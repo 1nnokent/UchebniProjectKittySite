@@ -83,7 +83,7 @@
                             {% elif answers[i][1] == -1 %}empty
                             {% else %}default
                             {% endif %}">
-                    <h5 class="problem-title">Задание {{i + 1}}. Тип {{problems[i][1]}}.</h5>
+                    <h5 class="problem-title">Задание {{problems[i][0]+1}}. Тип {{problems[i][1]}}.</h5>
                     <h6 class="problem-author">Сложность: {{problems[i][5]}}. Источник: {{problems[i][2]}}</h6>
                     <p class="problem-question" style="white-space: pre-wrap;">{{problems[i][3]|safe}}</p>
 

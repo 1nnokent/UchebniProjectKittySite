@@ -80,8 +80,10 @@ def get_problems():
 
     return ret
 
-def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty):
-    problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+def insert_problem(problem_type, problem_source, problem_statement, problem_answer, problem_difficulty, problem_id=None):
+    if problem_id is None:
+        problem_id = sql_execute("SELECT COUNT (*) FROM problems").fetchall()[0][0]
+    
     pictures = request.files.getlist('photos')
     for elem in pictures:
         if elem.filename == '':
@@ -499,7 +501,7 @@ def insert_variant(variant_id, variant_name, variant_description, author_id):
             INSERT INTO
                 variants
             VALUES
-                ({variant_id}, "{variant_name}", "{variant_description}", {author_id})
+                ({variant_id}, "{variant_name}", "{variant_description}", {author_id}, 3)
     """
     sql_execute(sql_req)
     connect.commit()

@@ -59,7 +59,7 @@ def personal_user_page(user_id):
 @app.route("/test")
 def test_page():
     problems = dr.sql_execute(f"""SELECT * FROM problems""").fetchall()
-    return render_template("test.html", user=[0, dr.get_user_name(0)])
+    return render_template("test.html", user=[0, "aowje"])
 
 
 @app.route("/learning-materials/all")
