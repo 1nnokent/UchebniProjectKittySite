@@ -136,7 +136,6 @@
             {% set attempts_range = range(1, 28) %}
           {% endif %}
 
-
           <table class="table table-bordered" style="table-layout: fixed; border-collapse: collapse;">
             <thead>
               <tr>
@@ -150,6 +149,7 @@
               {% for member in members %}
               <tr>
                 <td class="text-center" style="font-size: 12px;">{{ member[0] }} {{ member[1] }} {{ member[2] }}</td>
+                {% if user[1] %}
                 {% if time_range == 'last10' %}
                   {% set stats = course_stats_last10[loop.index0] %}
                 {% else %}
@@ -184,6 +184,7 @@
                     {% endif %}
                   {% endif %}
                 {% endfor %}
+                {% endif %}
               </tr>
               {% endfor %}
             </tbody>

@@ -15,7 +15,7 @@
                 </li>
                 <li><a href="/groups/all">Мои группы</a></li>
                 <li><a href="/forum/topics/all">Форум</a></li>
-                {% if not user %}
+                {% if not user[0] %}
                 <li class="dropdown"><a href="#"><span>Личный кабинет</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="/registration">Зарегистрироваться</a></li>

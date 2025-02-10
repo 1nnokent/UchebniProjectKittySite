@@ -64,30 +64,38 @@
                             <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Теория</span>
                         </div>
                     </a>
+                    {% if user[1] %}
                     <a href="/variants/add" class="btn btn-warning btn-lg px-4 py-3 shadow-sm">
                         <div class="d-flex flex-column align-items-center">
                             <i class="bi bi-plus-circle" style="font-size: 1.2rem;"></i>
                             <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить вариант</span>
                         </div>
                     </a>
+                    {% endif %}
+                    {% if user[1] %}
                     <a href="/problems/add" class="btn btn-info btn-lg px-4 py-3 shadow-sm">
                         <div class="d-flex flex-column align-items-center">
                             <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
                             <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить задачу</span>
                         </div>
                     </a>
+                    {% endif %}
+                    {% if user[1] %}
                     <a href="/courses/add" class="btn btn-secondary btn-lg px-4 py-3 shadow-sm">
                         <div class="d-flex flex-column align-items-center">
                             <i class="bi bi-mortarboard" style="font-size: 1.2rem;"></i>
                             <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить курс</span>
                         </div>
                     </a>
+                    {% endif %}
+                    {% if user[1] %}
                     <a href="/groups/add" class="btn btn-dark btn-lg px-4 py-3 shadow-sm">
                         <div class="d-flex flex-column align-items-center">
                             <i class="bi bi-people" style="font-size: 1.2rem;"></i>
                             <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Создать группу</span>
                         </div>
                     </a>
+                    {% endif %}
                 </div>
             </div>
 

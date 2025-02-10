@@ -559,6 +559,8 @@ def remove_learning_material_from_course(course_id, learning_material_id):
 
 def get_groups(user_id):
     group_list = sql_execute(f"""SELECT group_id FROM user_group WHERE user_id = {user_id}""").fetchall()
+    if not group_list:
+        return []
     group_list_string = "("
     for elem in group_list:
         group_list_string = group_list_string + str(elem[0]) + ', '

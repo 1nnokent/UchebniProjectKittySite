@@ -121,11 +121,13 @@
 </head>
 <body>
      {% include 'header.html' %}
+     {% if user[1] %}
      <div class="text-center my-4">
          <a href="/courses/add" class="btn btn-success btn-lg">
              Создать новый курс
          </a>
      </div>
+     {% endif %}
 
      <div class="container" id="lectures-container">
          {% for course in courses %}
