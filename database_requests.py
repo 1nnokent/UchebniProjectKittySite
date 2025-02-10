@@ -43,11 +43,12 @@ def user_select_to_dict(tuple_info):
     return dict
 
 
-def get_user_name(user_id):
+def get_user_name_role(user_id):
     sql_req = f"""SELECT first_name, surname FROM users WHERE user_id = {user_id} """
     result = sql_execute(sql_req).fetchall()
     ret = result[0][0] + ' ' + result[0][1]
-    return ret
+    role_id = sql_execute(f"""SELECT role_id FROM users WHERE user_id = {user_id}""").fetchall()[0][0]
+    return [ret, role_id]
 
 
 def get_problems():
@@ -149,12 +150,6 @@ def insert_problem(problem_type, problem_source, problem_statement, problem_answ
 
     sql_execute(sql_req) #|safe
     connect.commit()
-
-
-def insert_problem_file(problem_type, problem_class, problem_source, filename, problem_answer, problem_difficulty):
-    file = open(filename, "r", encoding="UTF-8")
-    file_text = file.read()
-    insert_problem(problem_type, problem_source, problem_class, file_text, problem_answer, problem_difficulty)
 
 def insert_user(info):
     current_id = int(sql_execute("""

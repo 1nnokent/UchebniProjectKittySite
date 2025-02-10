@@ -94,7 +94,7 @@ def personal_user_page():
     if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     kwargs = dr.user_select_to_dict(info)
-    name = dr.get_user_name(current_user.id)
+    user = dr.get_user_name_role(current_user.id)
     print(name)
     return render_template("user_account_pages/user.html", **kwargs, user=name)
 
@@ -107,7 +107,7 @@ def personal_user_page():
 def forum_main_page():
     if request.method == "GET":
         discussions = dr.get_discussions()
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("forum/forum_main_page.html", discussions=discussions, user=name)
     elif request.method == "POST":
         info = request.form.to_dict()
@@ -119,7 +119,7 @@ def forum_main_page():
 @login_required
 def forum_topic_page(topic_id):
     if request.method == "GET":
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return render_template("forum/forum_topic_page.html", topic_name=topic_name, messages=messages, user=name)
@@ -136,7 +136,7 @@ def forum_topic_page(topic_id):
 @login_required
 def group_main_page():
     groups = dr.get_groups(current_user.id)
-    name = dr.get_user_name(current_user.id)
+    name = dr.get_user_name_role(current_user.id)
     return render_template("groups/group_main.html", groups=groups, user=name)
 
 # Страница группы
@@ -147,7 +147,7 @@ def group_page(group_id):
         members = dr.get_group_members(group_id)
         courses = dr.get_group_courses(group_id)
         assignments = dr.get_group_assignments(group_id)
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("groups/group_page.html", members=members, courses=courses, assignments=assignments, user=name)
     elif request.method == "POST":
         pass
@@ -249,7 +249,7 @@ def learning_material_page(material_id):
 @login_required
 def add_variant():
     if request.method == "GET":
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("variants/add_variant.html", user=name)
     elif request.method == "POST":
         info = request.form.to_dict()
@@ -263,7 +263,7 @@ def add_variant():
 def edit_variant(variant_id):
     if request.method == "GET":
         kwargs = dr.variant_page_default_kwargs(variant_id)
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("variants/edit_variant.html", **kwargs, user=name)
     elif request.method == "POST":
         info = request.form.to_dict()
@@ -297,7 +297,7 @@ def variant_page(variant_id):
 @app.route("/problems/all")
 def problems_page():
     problems = dr.get_problems()
-    name = dr.get_user_name(current_user.id)
+    name = dr.get_user_name_role(current_user.id)
     return render_template("problems/problem_list.html", problems=problems, user=name)
 
 # Редактирование задачи
@@ -306,7 +306,7 @@ def problems_page():
 def edit_problem(problem_id):
     if request.method == "GET":
         problem = dr.sql_execute(f"SELECT * FROM problems WHERE problem_id = {problem_id}").fetchall()[0]
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("problems/edit_problem.html", problem=problem, user=name)
     elif request.method == "POST":
         info = request.form.to_dict()
@@ -328,7 +328,7 @@ def edit_problem(problem_id):
 @login_required
 def add_problem():
     if request.method == "GET":
-        name = dr.get_user_name(current_user.id)
+        name = dr.get_user_name_role(current_user.id)
         return render_template("problems/add_problem.html", user=name)
     elif request.method == "POST":
         info = request.form.to_dict()
