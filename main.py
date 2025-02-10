@@ -90,10 +90,7 @@ def registration_page():
 @app.route("/authorization", methods=["POST", "GET"])
 def authorization_page(failed=False, problem=None):
     if request.method == "GET":
-        if current_user.is_authenticated:
-            user = dr.get_user_name_role(current_user.id)
-        else:
-            user = [None, 0]
+        user = [None, 0]
         return render_template("user_account_pages/authorization.html", user=user)
     elif request.method == "POST":
         if failed:
