@@ -1,9 +1,28 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3 as sq
 from config import database
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import database_requests as dr
 
 app = Flask(__name__, template_folder="templates")
+app.secret_key = 'super_secret_key'
+
+# Настройка Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'authorization_page'
+
+class User(UserMixin):
+    def __init__(self, user_id, role):
+        self.id = user_id
+        self.role = role
+
+@login_manager.user_loader
+def load_user(user_id):
+    user_info = dr.get_user_info_with_user_id(user_id)
+    if user_info:
+        return User(user_id=user_info[0], role=user_info[5])
+    return None
 
 
 # Общие страницы
@@ -17,7 +36,6 @@ def first_page():
 # Тестовая страница
 @app.route("/test")
 def test_page():
-
     problems = dr.sql_execute("SELECT * FROM problems").fetchall()
     return render_template("test.html", user=[0, "aowje"])
 
@@ -45,7 +63,7 @@ def registration_page():
         if code == 0:
             return render_template("user_account_pages/registration_end.html")
         elif code == 1:
-            return render_template("error_pages/error_registration_user_exists.html")  # пользователь уже есть
+            return render_template("error_pages/error_registration_user_exists.html")
         else:
             pass
 
@@ -64,16 +82,19 @@ def authorization_page(failed=False, problem=None):
         elif password_input[0][0] != info["Password"]:
             return authorization_page(failed=True, problem="Введен неверный пароль")
         person_id = dr.get_user_id_with_login(info["login"])
-        return redirect(url_for("personal_user_page", user_id=person_id))
+        user = User(user_id=person_id, role=dr.get_user_info_with_user_id(person_id)[5])
+        login_user(user)
+        return redirect(url_for("personal_user_page"))
     
 # Аккаунт пользователя
-@app.route("/users/<user_id>")
-def personal_user_page(user_id):
-    info = dr.get_user_info_with_user_id(user_id)
+@app.route("/users/")
+@login_required
+def personal_user_page():
+    info = dr.get_user_info_with_user_id(current_user.id)
     if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     kwargs = dr.user_select_to_dict(info)
-    return render_template("user_account_pages/user.html", **kwargs)
+    return render_template("user_account_pages/user.html", **kwargs, user=current_user)
 
 
 # Форум
@@ -94,7 +115,6 @@ def forum_main_page():
 @app.route('/forum/topics/<topic_id>', methods=["POST", "GET"])
 def forum_topic_page(topic_id):
     if request.method == "GET":
-
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
         return render_template("forum/forum_topic_page.html", topic_name=topic_name, messages=messages)
@@ -108,20 +128,20 @@ def forum_topic_page(topic_id):
 
 # Главная страница групп
 @app.route('/groups/all', methods=["POST", "GET"])
+@login_required
 def group_main_page():
-
-    groups = dr.get_groups(0)  # идентификатор пользователя
-    return render_template("groups/group_main.html", groups=groups)
+    groups = dr.get_groups(current_user.id)
+    return render_template("groups/group_main.html", groups=groups, user=current_user)
 
 # Страница группы
 @app.route("/groups/<group_id>", methods=["GET", "POST"])
+@login_required
 def group_page(group_id):
     if request.method == "GET":
-
         members = dr.get_group_members(group_id)
         courses = dr.get_group_courses(group_id)
         assignments = dr.get_group_assignments(group_id)
-        return render_template("groups/group_page.html", members=members, courses=courses, assignments=assignments)
+        return render_template("groups/group_page.html", members=members, courses=courses, assignments=assignments, user=current_user)
     elif request.method == "POST":
         pass
 
@@ -176,7 +196,6 @@ def edit_course(course_id):
 @app.route("/courses/<course_id>/edit_variant", methods=["GET", "POST"])
 def edit_course_variant(course_id):
     if request.method == "GET":
-
         variant = dr.get_variant_by_course(course_id)
         return render_template("courses/edit_course_variant.html", variant=variant[0][0], course_id=course_id)
     elif request.method == "POST":
@@ -267,16 +286,18 @@ def variant_page(variant_id):
 
 # Список задач
 @app.route("/problems/all")
+@login_required
 def problems_page():
     problems = dr.get_problems()
-    return render_template("problems/problem_list.html", problems=problems)
+    return render_template("problems/problem_list.html", problems=problems, user=current_user)
 
 # Редактирование задачи
 @app.route("/problems/<problem_id>/edit", methods=["GET", "POST"])
+@login_required
 def edit_problem(problem_id):
     if request.method == "GET":
         problem = dr.sql_execute(f"SELECT * FROM problems WHERE problem_id = {problem_id}").fetchall()[0]
-        return render_template("problems/edit_problem.html", problem=problem)
+        return render_template("problems/edit_problem.html", problem=problem, user=current_user)
     elif request.method == "POST":
         info = request.form.to_dict()
         if info["problem_type"] == "" or not (1 <= int(info["problem_type"]) <= 27):
@@ -294,9 +315,10 @@ def edit_problem(problem_id):
 
 # Добавление задачи
 @app.route("/problems/add", methods=["GET", "POST"])
+@login_required
 def add_problem():
     if request.method == "GET":
-        return render_template("problems/add_problem.html")
+        return render_template("problems/add_problem.html", user=current_user)
     elif request.method == "POST":
         info = request.form.to_dict()
         if info["problem_type"] == "" or not (1 <= int(info["problem_type"]) <= 27):
