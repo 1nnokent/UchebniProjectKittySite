@@ -42,6 +42,14 @@ def user_select_to_dict(tuple_info):
 
     return dict
 
+
+def get_user_name(user_id):
+    sql_req = f"""SELECT first_name, surname FROM users WHERE user_id = {user_id} """
+    result = sql_execute(sql_req).fetchall()
+    ret = result[0][0] + ' ' + result[0][1]
+    return ret
+
+
 def get_problems():
     problems = sql_execute("SELECT * FROM problems").fetchall()
     ret = []
