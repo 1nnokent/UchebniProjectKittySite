@@ -1,7 +1,5 @@
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3 as sq
-from flask import Flask, redirect, render_template, request, url_for, jsonify
-from IPython.core.display_functions import display
-
 from config import database
 import database_requests as dr
 
