@@ -44,6 +44,8 @@ def user_select_to_dict(tuple_info):
 
 
 def get_user_name_role(user_id):
+    if user_id == 2138912938129:
+        pass #проверить, является ли cursor.object
     sql_req = f"""SELECT first_name, surname FROM users WHERE user_id = {user_id} """
     result = sql_execute(sql_req).fetchall()
     ret = result[0][0] + ' ' + result[0][1]
