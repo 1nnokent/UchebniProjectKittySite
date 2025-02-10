@@ -2,77 +2,114 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-      <meta content="width=device-width, initial-scale=1.0" name="viewport">
-      <title>Кошьки inc.</title>
-      <meta name="description" content="">
-      <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошки inc. | Главная</title>
+    <meta name="description" content="Платформа для подготовки к экзаменам по математике">
+    <meta name="keywords" content="математика, задачи, ЕГЭ, варианты, теория">
 
-      <!-- Favicons -->
-      <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
-      <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-      <!-- Fonts -->
-      <link href="https://fonts.googleapis.com" rel="preconnect">
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-      <!-- Vendor CSS Files -->
-      <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-      <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-      <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
-      <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-      <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-      <!-- Main CSS File -->
-<!--      <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">-->
-      <link rel="stylesheet" href="../static/css/style.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <style>
+        /* Сбрасываем отступы у body, чтобы изображение могло прижаться к верху */
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        /* Если изображение имеет фиксированную высоту, можно задать отступ для остального контента.
+           Здесь пример со значением 300px – подберите нужное вам */
+        main {
+            margin-top: 0px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
+
 
     {% include 'header.html' %}
-    <div class="conr">
-        <h1>     </h1>
-    </div>
-    <div style="text-align: center;">
-        <img src="../static/img/cat_for_main.png">
-    </div>
-    <div class="conr">
-        <div class="row">
-            {% set tasks_way1 = "/problems/all " %}
-            {% set tasks_way2 = "/learning-materials/all " %}
-            <a style="display:block; width:200px" href="{{ tasks_way1 }}">
-                <div class="number" style="width:100%; height:100%;">
-                    <h4 style="margin-top:7px" >Задачи</h4>
+
+    <main class="container pt-0 pb-5">
+        <section class="text-center mb-5">
+            <div class="position-relative mb-5">
+                <img src="{{ url_for('static', filename='img/cat_for_main.png') }}" 
+                     alt="Главное изображение" 
+                     class="img-fluid rounded shadow-lg">
+                <div class="d-flex justify-content-center gap-3" style="position: absolute; left: 50%; bottom: 0; transform: translate(-50%, -20%);">
+                    <a href="/problems/all" class="btn btn-primary btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-journal-text" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Задачи</span>
+                        </div>
+                    </a>
+                    <a href="/learning-materials/all" class="btn btn-success btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-book" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Теория</span>
+                        </div>
+                    </a>
+                    <a href="/variants/add" class="btn btn-warning btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-plus-circle" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить вариант</span>
+                        </div>
+                    </a>
+                    <a href="/problems/add" class="btn btn-info btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить задачу</span>
+                        </div>
+                    </a>
+                    <a href="/courses/add" class="btn btn-secondary btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-mortarboard" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Добавить курс</span>
+                        </div>
+                    </a>
+                    <a href="/groups/add" class="btn btn-dark btn-lg px-4 py-3 shadow-sm">
+                        <div class="d-flex flex-column align-items-center">
+                            <i class="bi bi-people" style="font-size: 1.2rem;"></i>
+                            <span class="fw-semibold mt-2" style="font-size: 0.9rem;">Создать группу</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a style="display:block; width:200px" href="{{ tasks_way2 }}" >
-                <div class="number" style="width:100%; height:100%;">
-                    <h4 style="margin-top:7px">Теория</h4>
-                </div>
-            </a>
-            <a style="display:block; width:300px" href="/variants/add">
-                <div class="number" style="width:100%; height:100%;">
-                    <h4 style="margin-top:7px" >Добавить вариант</h4>
-                </div>
-            </a>
-            <a style="display:block; width:300px" href="/problems/add">
-                <div class="number" style="width:100%; height:100%;">
-                    <h4 style="margin-top:7px" >Добавить задачу</h4>
-                </div>
-            </a>
-        </div>
-        <h2> Варианты </h2>
-        <div class="row">
-            <div style="display: flex; flex-wrap: wrap;">
+            </div>
+
+        <section class="mb-5">
+            <h2 class="text-center mb-4 fw-bold text-primary">Доступные варианты</h2>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
                 {% for i in range(amount) %}
-                <a style="display:block; width:50px; text-align:center; margin: 5px;" href="/variants/{{ i + 1 }}">
-                    <div class="number" style="width:100%; height:100%;">
-                        <h4 style="margin-top:7px" >{{ i + 1 }}</h4>
-                    </div>
+                <a href="/variants/{{ i + 1 }}" 
+                   class="btn btn-outline-primary rounded-pill px-3 py-2 position-relative"
+                   data-aos="zoom-in"
+                   data-aos-delay="{{ 50 * loop.index }}">
+                    <span class="fw-medium">Вариант</span>
+                    <span class="badge bg-primary ms-2">{{ i + 1 }}</span>
                 </a>
                 {% endfor %}
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+    <script>AOS.init();</script>
 </body>
 </html>

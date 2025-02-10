@@ -87,28 +87,25 @@ def authorization_page(failed=False, problem=None):
         return redirect(url_for("personal_user_page"))
     
 # Аккаунт пользователя
-@app.route("/user/profile")
+@app.route("/users/")
 @login_required
 def personal_user_page():
     info = dr.get_user_info_with_user_id(current_user.id)
     if not info:
         return render_template("error_pages/authorization_user_not_found_error.html")
     kwargs = dr.user_select_to_dict(info)
-    user = dr.get_user_name_role(current_user.id)
-    print(name)
-    return render_template("user_account_pages/user.html", **kwargs, user=name)
+    return render_template("user_account_pages/user.html", **kwargs, user=current_user)
 
 
 # Форум
 
 # Список тем
 @app.route('/forum/topics/all', methods=["POST", "GET"])
-@login_required
 def forum_main_page():
     if request.method == "GET":
         discussions = dr.get_discussions()
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("forum/forum_main_page.html", discussions=discussions, user=name)
+        print(discussions)
+        return render_template("forum/forum_main_page.html", discussions=discussions)
     elif request.method == "POST":
         info = request.form.to_dict()
         topic_id = dr.insert_new_topic(info)
@@ -116,13 +113,11 @@ def forum_main_page():
 
 # Конкретная тема
 @app.route('/forum/topics/<topic_id>', methods=["POST", "GET"])
-@login_required
 def forum_topic_page(topic_id):
     if request.method == "GET":
-        name = dr.get_user_name_role(current_user.id)
         topic_name = dr.get_topic_name(topic_id)
         messages = dr.get_topic_messages(topic_id)
-        return render_template("forum/forum_topic_page.html", topic_name=topic_name, messages=messages, user=name)
+        return render_template("forum/forum_topic_page.html", topic_name=topic_name, messages=messages)
     elif request.method == "POST":
         info = request.form.to_dict()
         dr.insert_topic_message(topic_id, info)
@@ -136,8 +131,7 @@ def forum_topic_page(topic_id):
 @login_required
 def group_main_page():
     groups = dr.get_groups(current_user.id)
-    name = dr.get_user_name_role(current_user.id)
-    return render_template("groups/group_main.html", groups=groups, user=name)
+    return render_template("groups/group_main.html", groups=groups, user=current_user)
 
 # Страница группы
 @app.route("/groups/<group_id>", methods=["GET", "POST"])
@@ -147,10 +141,20 @@ def group_page(group_id):
         members = dr.get_group_members(group_id)
         courses = dr.get_group_courses(group_id)
         assignments = dr.get_group_assignments(group_id)
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("groups/group_page.html", members=members, courses=courses, assignments=assignments, user=name)
+        return render_template("groups/group_page.html", members=members, courses=courses, assignments=assignments, user=current_user)
     elif request.method == "POST":
         pass
+
+@app.route("/groups/add", methods=["GET", "POST"])
+@login_required
+def add_group():
+    if request.method == "GET":
+        return render_template("groups/add_group.html")
+    elif request.method == "POST":
+        info = request.form.to_dict()
+        group_id = dr.sql_execute("SELECT count(*) FROM groups").fetchall()[0][0] + 1
+        dr.insert_group(group_id, info["group_name"], info["group_description"], current_user.id)
+        return redirect(url_for("group_page", group_id=group_id))
 
 
 # Курсы
@@ -166,6 +170,7 @@ def course_main_page():
 def course_page(course_id):
     materials = dr.get_course_materials(course_id)
     variant = dr.get_course_variant(course_id)
+    print(variant)
     return render_template("courses/course_page.html", materials=materials, course_id=course_id, variant_id=variant[0][0])
 
 # Добавление курса
@@ -246,11 +251,9 @@ def learning_material_page(material_id):
 
 # Добавление варианта
 @app.route("/variants/add", methods=["GET", "POST"])
-@login_required
 def add_variant():
     if request.method == "GET":
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("variants/add_variant.html", user=name)
+        return render_template("variants/add_variant.html")
     elif request.method == "POST":
         info = request.form.to_dict()
         variant_id = dr.sql_execute("SELECT count(*) FROM variants").fetchall()[0][0] + 1
@@ -259,12 +262,11 @@ def add_variant():
 
 # Редактирование варианта
 @app.route("/variants/<variant_id>/edit", methods=["GET", "POST"])
-@login_required
 def edit_variant(variant_id):
     if request.method == "GET":
         kwargs = dr.variant_page_default_kwargs(variant_id)
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("variants/edit_variant.html", **kwargs, user=name)
+        print(kwargs)
+        return render_template("variants/edit_variant.html", **kwargs)
     elif request.method == "POST":
         info = request.form.to_dict()
         display_mode = request.form["feedbackOption"]
@@ -295,10 +297,10 @@ def variant_page(variant_id):
 
 # Список задач
 @app.route("/problems/all")
+@login_required
 def problems_page():
     problems = dr.get_problems()
-    name = dr.get_user_name_role(current_user.id)
-    return render_template("problems/problem_list.html", problems=problems, user=name)
+    return render_template("problems/problem_list.html", problems=problems, user=current_user)
 
 # Редактирование задачи
 @app.route("/problems/<problem_id>/edit", methods=["GET", "POST"])
@@ -306,8 +308,7 @@ def problems_page():
 def edit_problem(problem_id):
     if request.method == "GET":
         problem = dr.sql_execute(f"SELECT * FROM problems WHERE problem_id = {problem_id}").fetchall()[0]
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("problems/edit_problem.html", problem=problem, user=name)
+        return render_template("problems/edit_problem.html", problem=problem, user=current_user)
     elif request.method == "POST":
         info = request.form.to_dict()
         if info["problem_type"] == "" or not (1 <= int(info["problem_type"]) <= 27):
@@ -328,8 +329,7 @@ def edit_problem(problem_id):
 @login_required
 def add_problem():
     if request.method == "GET":
-        name = dr.get_user_name_role(current_user.id)
-        return render_template("problems/add_problem.html", user=name)
+        return render_template("problems/add_problem.html", user=current_user)
     elif request.method == "POST":
         info = request.form.to_dict()
         if info["problem_type"] == "" or not (1 <= int(info["problem_type"]) <= 27):
@@ -342,6 +342,7 @@ def add_problem():
             int(info["problem_difficulty"])
         )
         return redirect(url_for("add_problem"))
+
 
 
 if __name__ == "__main__":

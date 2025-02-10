@@ -105,7 +105,7 @@
     <!-- Основной контент-->
     <div class="lectures-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
         {% for problem in problems %}
-            <div class="problem-card default" data-type="{{ problem[1] }}" data-difficulty="{{ problem[5] }}" style="margin: 10px;">
+            <div class="problem-card default" data-type="{{ problem[1] }}" data-difficulty="{{ problem[5] }}" style="margin: 10px; position: relative;">
                 <h5 class="problem-title">№ {{ problem[0] + 1 }}. Тип {{ problem[1] }}</h5>
                 <h6 class="problem-author">Сложность: {{ problem[5] }}. Источник: {{ problem[2] }}</h6>
                 <p class="problem-question">{{ problem[3]|safe }}</p>
@@ -125,6 +125,7 @@
                         <p class="problem-question">Ответ: {{ problem[4] }}</p>
                     </div>
                 </div>
+                <a href="{{ url_for('edit_problem', problem_id=problem[0]) }}" class="btn btn-primary btn-sm" style="position: absolute; bottom: 10px; right: 10px;">Редактировать</a>
             </div>
         {% endfor %}
     </div>
